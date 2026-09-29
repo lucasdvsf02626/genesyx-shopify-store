@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "withings-ph-hero",
+      "settings": {
+        "eyebrow": "Genesyx app",
+        "title": "Eat for the phase you're in",
+        "subtitle": "Genesyx turns your cycle into simple food guidance — focus foods and gentle swaps matched to today's phase, not a generic plan.",
+        "poster": "shopify://shop_images/hero-ph-tracking-poster.jpg",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": ""
+      }
+    },
+    "value": {
+      "type": "withings-ph-value",
+      "settings": {
+        "eyebrow": "Why it works",
+        "heading": "Nutrition that follows your cycle"
+      },
+      "blocks": {
+        "v1": { "type": "prop", "settings": { "icon": "icon-heart.svg", "title": "Foods for today's phase", "body": "See what supports you now — energy, recovery or balance." } },
+        "v2": { "type": "prop", "settings": { "icon": "icon-bottle.svg", "title": "Gentle, doable swaps", "body": "Small suggestions you can actually act on, not a strict diet." } },
+        "v3": { "type": "prop", "settings": { "icon": "icon-lightning-bolt.svg", "title": "Tuned to your rhythm", "body": "Guidance shifts as your phase changes, cycle after cycle." } }
+      },
+      "block_order": ["v1", "v2", "v3"]
+    },
+    "feature": {
+      "type": "withings-ph-feature",
+      "settings": {
+        "eyebrow": "The nutrition screen",
+        "heading": "Your focus foods, matched to your phase",
+        "body": "Open the app to see what to lean into today — no meal plans to follow.",
+        "screenshot": "shopify://shop_images/Screenshot_20260708_223259.png"
+      },
+      "blocks": {
+        "c1": { "type": "callout", "settings": { "title": "Focus foods this phase", "body": "A short list tuned to where you are.", "x": 2, "y": 6 } },
+        "c2": { "type": "callout", "settings": { "title": "Why these foods", "body": "A quick note on what each one supports.", "x": 68, "y": 20 } },
+        "c3": { "type": "callout", "settings": { "title": "Gentle swaps", "body": "Easy nudges, not strict rules.", "x": 0, "y": 62 } },
+        "c4": { "type": "callout", "settings": { "title": "Shifts with your cycle", "body": "Guidance updates as your phase changes.", "x": 70, "y": 66 } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"]
+    },
+    "data": {
+      "type": "withings-ph-data",
+      "settings": {
+        "eyebrow": "See the effect",
+        "heading": "Watch nutrition and balance line up",
+        "body": "Log your meals and readings and the trend shows how food moves your baseline over 30 days.",
+        "poster": "shopify://shop_images/ph-tracking-data.jpg"
+      }
+    },
+    "gallery": {
+      "type": "withings-ph-gallery",
+      "settings": {
+        "eyebrow": "In everyday life",
+        "heading": "A habit that fits your morning",
+        "image_1": "shopify://shop_images/ph-tracking-lifestyle.jpg",
+        "alt_1": "Checking today's focus foods on the Genesyx app",
+        "image_2": "shopify://shop_images/ph-tracking-flatlay.jpg",
+        "alt_2": "pH test strip and water beside the phone",
+        "image_3": "shopify://shop_images/hf_20260715_121207_677589ec-ea68-4ed0-9c6d-f8f26f5ced78.png",
+        "alt_3": "The Genesyx app on a table with a pH strip and water"
+      }
+    },
+    "social": {
+      "type": "withings-ph-social",
+      "settings": {
+        "rating": "4.8",
+        "rating_label": "4.8 average · App Store & Google Play",
+        "heading": "People are eating with their cycle in mind"
+      },
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "quote": "Placeholder quote — food guidance that changes with my phase actually makes sense.", "author": "Reviewer name" } },
+        "t2": { "type": "testimonial", "settings": { "quote": "Placeholder quote — the swaps are small enough that I actually do them.", "author": "Reviewer name" } },
+        "t3": { "type": "testimonial", "settings": { "quote": "Placeholder quote — no rigid meal plan, just what to lean into today.", "author": "Reviewer name" } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "cta": {
+      "type": "withings-ph-cta",
+      "settings": {
+        "eyebrow": "Start today",
+        "heading": "Eat for your phase from tomorrow",
+        "body": "Free to download. Your first reading takes under a minute.",
+        "qr_caption": "Scan to download",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": ""
+      }
+    }
+  },
+  "order": ["hero", "value", "feature", "data", "gallery", "social", "cta"]
+}

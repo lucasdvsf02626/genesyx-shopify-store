@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "withings-ph-hero",
+      "settings": {
+        "eyebrow": "Genesyx app",
+        "title": "Know exactly where you are in your cycle",
+        "subtitle": "Genesyx reads your daily signals and shows your current phase in plain language — so every day makes sense, not just the calendar.",
+        "poster": "shopify://shop_images/hf_20260708_143612_14c9f939-dc19-4920-8017-1b735d225e9e.png",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": ""
+      }
+    },
+    "value": {
+      "type": "withings-ph-value",
+      "settings": {
+        "eyebrow": "Why it matters",
+        "heading": "Your cycle, finally legible"
+      },
+      "blocks": {
+        "v1": { "type": "prop", "settings": { "icon": "icon-heart.svg", "title": "Today's phase, named", "body": "Follicular, ovulatory or luteal — see the phase you are in and what your body is doing right now." } },
+        "v2": { "type": "prop", "settings": { "icon": "icon-lightning-bolt.svg", "title": "Patterns you can trust", "body": "Genesyx learns your rhythm over cycles, so the picture gets sharper the more you log." } },
+        "v3": { "type": "prop", "settings": { "icon": "icon-bottle.svg", "title": "Signals, not guesswork", "body": "Hydration, pH and symptoms combine into one clear read on where your cycle stands." } }
+      },
+      "block_order": ["v1", "v2", "v3"]
+    },
+    "feature": {
+      "type": "withings-ph-feature",
+      "settings": {
+        "eyebrow": "The phase screen",
+        "heading": "Your current phase, at a glance",
+        "body": "Open the app to see today's phase and what to expect next — no charts to decode.",
+        "screenshot": "shopify://shop_images/ph-tracking-screen.png"
+      },
+      "blocks": {
+        "c1": { "type": "callout", "settings": { "title": "Phase, front and centre", "body": "The home screen names your phase the moment you open it.", "x": 2, "y": 6 } },
+        "c2": { "type": "callout", "settings": { "title": "What to expect", "body": "A short note on energy, mood and needs for this phase.", "x": 68, "y": 20 } },
+        "c3": { "type": "callout", "settings": { "title": "Days to the next phase", "body": "A simple countdown keeps the shift in view.", "x": 0, "y": 62 } },
+        "c4": { "type": "callout", "settings": { "title": "Backed by your logs", "body": "Every reading refines the prediction.", "x": 70, "y": 66 } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"]
+    },
+    "data": {
+      "type": "withings-ph-data",
+      "settings": {
+        "eyebrow": "See the rhythm",
+        "heading": "Every cycle sharpens the picture",
+        "body": "Log a little each day and Genesyx maps your phases over time — the pattern gets clearer with every cycle.",
+        "poster": "shopify://shop_images/screen10_0a3cf236-8d86-4d6c-a661-0b45ee7c0320.png"
+      }
+    },
+    "gallery": {
+      "type": "withings-ph-gallery",
+      "settings": {
+        "eyebrow": "In everyday life",
+        "heading": "A habit that fits your morning",
+        "image_1": "shopify://shop_images/ph-tracking-lifestyle.jpg",
+        "alt_1": "Checking today's cycle phase on the Genesyx app",
+        "image_2": "shopify://shop_images/hf_20260715_121207_677589ec-ea68-4ed0-9c6d-f8f26f5ced78.png",
+        "alt_2": "The Genesyx app on a table with a pH strip and water",
+        "image_3": "shopify://shop_images/ph-tracking-data.jpg",
+        "alt_3": "A daily reading logged in the app"
+      }
+    },
+    "social": {
+      "type": "withings-ph-social",
+      "settings": {
+        "rating": "4.8",
+        "rating_label": "4.8 average · App Store & Google Play",
+        "heading": "People are getting to know their cycle"
+      },
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "quote": "Placeholder quote — seeing my phase named each morning made the whole cycle click.", "author": "Reviewer name" } },
+        "t2": { "type": "testimonial", "settings": { "quote": "Placeholder quote — the predictions got noticeably sharper after a couple of cycles.", "author": "Reviewer name" } },
+        "t3": { "type": "testimonial", "settings": { "quote": "Placeholder quote — finally a clear read on where I am without a spreadsheet.", "author": "Reviewer name" } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "cta": {
+      "type": "withings-ph-cta",
+      "settings": {
+        "eyebrow": "Start today",
+        "heading": "Understand your cycle from tomorrow",
+        "body": "Free to download. Your first reading takes under a minute.",
+        "qr_caption": "Scan to download",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": ""
+      }
+    }
+  },
+  "order": ["hero", "value", "feature", "data", "gallery", "social", "cta"]
+}

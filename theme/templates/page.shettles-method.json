@@ -1,0 +1,82 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "shettles-method-page",
+      "blocks": {
+        "simcock": {
+          "type": "publication",
+          "settings": {
+            "anchor": "pub-simcock",
+            "title": "Sons and daughters—a sex preselection study",
+            "publication_type": "Peer-reviewed publication",
+            "authors": "B. W. Simcock",
+            "journal": "Medical Journal of Australia, pp. 541–542",
+            "year": "1985",
+            "doi": "10.5694/j.1326-5377.1985.tb113487.x",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/3857429/",
+            "summary": "A study of a modified Shettles technique involving 73 women. It did not show a statistically significant difference from sex ratios associated with uncontrolled intercourse."
+          }
+        },
+        "gray": {
+          "type": "publication",
+          "settings": {
+            "anchor": "pub-gray",
+            "title": "Natural family planning and sex selection: fact or fiction?",
+            "publication_type": "Meta-analysis",
+            "authors": "R. H. Gray",
+            "journal": "American Journal of Obstetrics and Gynecology",
+            "year": "1991",
+            "doi": "10.1016/S0002-9378(11)90558-4",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/1836712/",
+            "summary": "A meta-analysis examining whether intercourse timing around ovulation could affect offspring sex. It did not support a reliable practical method of sex selection through timing intercourse."
+          }
+        },
+        "rai": {
+          "type": "publication",
+          "settings": {
+            "anchor": "pub-rai",
+            "title": "Global sex selection techniques for family planning: a narrative review",
+            "publication_type": "Narrative review",
+            "authors": "Pragya Rai, Abhijit Ganguli, Sarala Balachandran, Rakesh Gupta and Sutapa B. Neogi",
+            "journal": "Journal of Reproductive and Infant Psychology, 36(5), 548–560",
+            "year": "2018",
+            "doi": "10.1080/02646838.2018.1508871",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/30152706/",
+            "summary": "A review of sex-selection approaches that includes the Shettles technique among natural methods and discusses scientific, social, ethical and medical concerns."
+          }
+        }
+      },
+      "block_order": [
+        "simcock",
+        "gray",
+        "rai"
+      ],
+      "settings": {
+        "eyebrow": "Genesyx evidence library",
+        "hero_title": "The Shettles Method: Research, Claims and Evidence",
+        "hero_text": "An evidence-based overview of the theory, its historical development, and what published research has found.",
+        "disclaimer": "This page is for educational purposes and is not medical advice.",
+        "research_cta": "Explore the Research",
+        "publications_cta": "View Publications",
+        "footer_disclaimer": "This educational page does not provide medical advice, diagnosis, or treatment. Always consult an appropriately qualified healthcare professional for personal medical guidance.",
+        "background": "#fffefb",
+        "surface": "#ffffff",
+        "text_color": "#252238",
+        "accent": "#6650c7",
+        "section_spacing": 96
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

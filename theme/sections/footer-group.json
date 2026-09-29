@@ -1,0 +1,57 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "withings-footer": {
+      "type": "withings-footer",
+      "blocks": {
+        "experience": {
+          "type": "column",
+          "settings": {
+            "heading": "Experience",
+            "links": "Private & secure | /pages/privacy-policy\nDownload Genesyx | /pages/download"
+          }
+        },
+        "company": {
+          "type": "column",
+          "settings": {
+            "heading": "Company",
+            "links": "Blog | /blogs/news\nhello@genesyx.co.uk | mailto:hello@genesyx.co.uk"
+          }
+        },
+        "support": {
+          "type": "column",
+          "settings": {
+            "heading": "Support",
+            "links": "hello@genesyx.co.uk | mailto:hello@genesyx.co.uk\nDelete your data | /pages/delete-account\nManage your account | /account"
+          }
+        }
+      },
+      "block_order": [
+        "experience",
+        "company",
+        "support"
+      ],
+      "settings": {
+        "country_label": "Region",
+        "country_value": "United Kingdom · English",
+        "copyright_name": "Genesyx",
+        "legal_links": "Terms of use | /pages/terms-of-use\nPrivacy policy | /pages/privacy-policy\nCookie policy | /pages/cookie-policy\nDelete your data | /pages/delete-account",
+        "appstore_link": "https://apps.apple.com/us/app/genesyx/id6787682466",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app"
+      }
+    }
+  },
+  "order": [
+    "withings-footer"
+  ]
+}

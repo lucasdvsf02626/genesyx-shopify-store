@@ -1,0 +1,96 @@
+{%- comment -%} Withings U-Scan Nutrio intro bento grid {%- endcomment -%}
+<style>
+  {%- comment -%} Desktop-only image sizing. Mobile (<768px) untouched. {%- endcomment -%}
+  @media (min-width: 768px) {
+    #wi-bento-{{ section.id }} .wi-d-img { max-height: {{ section.settings.d_image_max_height | default: 300 }}px; width: auto; }
+    #wi-bento-{{ section.id }} .wi-b-img { height: {{ section.settings.b_image_height | default: 200 }}px; min-height: 0; }
+  }
+</style>
+<section id="wi-bento-{{ section.id }}" class="wi-scope bg-background py-20 md:py-28">
+  <div class="wi-container">
+    <div class="wi-reveal">
+      <h2 class="mx-auto max-w-3xl text-center text-[30px] leading-[1.08] tracking-[-0.02em] sm:text-[40px] md:text-[48px]">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">
+      {%- comment -%} Seamless experience — tall left {%- endcomment -%}
+      <div class="wi-reveal group relative overflow-hidden rounded-2xl bg-card md:row-span-2">
+        <div class="flex h-full flex-col">
+          <div class="p-8">
+            <p class="text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ section.settings.a_eyebrow }}</p>
+            <p class="mt-2 max-w-xs text-[22px] leading-snug">{{ section.settings.a_text }}</p>
+          </div>
+          {% render 'wi-image', image: section.settings.a_image, fallback: 'genesyx-bento-quiz.jpg', alt: section.settings.a_eyebrow, class: 'mt-auto h-full w-full object-cover' %}
+        </div>
+      </div>
+
+      {%- comment -%} 20+ tests {%- endcomment -%}
+      <div class="wi-reveal group relative overflow-hidden rounded-2xl bg-card md:col-span-1" data-reveal-delay="80">
+        <div class="flex h-full flex-col">
+          <div class="p-8">
+            <p class="text-[40px] leading-none tracking-[-0.02em]">{{ section.settings.b_stat }}</p>
+            <p class="mt-1 text-[16px] text-ink-soft">{{ section.settings.b_text }}</p>
+          </div>
+          {% render 'wi-image', image: section.settings.b_image, fallback: 'genesyx-bento-log.jpg', alt: section.settings.b_text, class: 'wi-b-img mt-auto h-full min-h-[11rem] w-full object-cover' %}
+        </div>
+      </div>
+
+      {%- comment -%} Complimentary Withings+ {%- endcomment -%}
+      <div class="wi-reveal group relative overflow-hidden rounded-2xl bg-card" data-reveal-delay="160">
+        <div class="flex h-full flex-col">
+          <div class="p-8">
+            <p class="text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ section.settings.c_eyebrow }}</p>
+            <p class="mt-2 text-[18px] leading-snug">{{ section.settings.c_text }}</p>
+          </div>
+          {% render 'wi-image', image: section.settings.c_image, fallback: 'genesyx-bento-cycle.jpg', alt: section.settings.c_eyebrow, class: 'mt-auto h-full min-h-[10rem] w-full object-cover' %}
+        </div>
+      </div>
+
+      {%- comment -%} Personalized nutrition strategy — wide bottom {%- endcomment -%}
+      <div class="wi-reveal group relative overflow-hidden rounded-2xl bg-greige md:col-span-2" data-reveal-delay="120">
+        <div class="flex h-full flex-col justify-between gap-6 p-8 sm:flex-row sm:items-center">
+          <div>
+            <p class="text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ section.settings.d_eyebrow }}</p>
+            <p class="mt-2 max-w-sm text-[20px] leading-snug">{{ section.settings.d_text }}</p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              {%- assign params = section.settings.d_params | split: ',' -%}
+              {%- for p in params -%}
+                <span class="rounded-full border border-border-soft bg-card px-3 py-1 text-[13px]">{{ p | strip }}</span>
+              {%- endfor -%}
+            </div>
+          </div>
+          {% render 'wi-image', image: section.settings.d_image, fallback: 'genesyx-bento-nutrition.jpg', alt: section.settings.d_eyebrow, class: 'wi-d-img w-full self-center rounded-xl object-contain sm:w-1/2' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Withings intro bento",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "U-Scan Nutrio brings precise urine analysis home" },
+    { "type": "header", "content": "Tile A (tall, left)" },
+    { "type": "text", "id": "a_eyebrow", "label": "A · Eyebrow", "default": "Seamless experience" },
+    { "type": "textarea", "id": "a_text", "label": "A · Text", "default": "Plugs discreetly into your toilet and reads automatically." },
+    { "type": "image_picker", "id": "a_image", "label": "A · Image" },
+    { "type": "header", "content": "Tile B (stat)" },
+    { "type": "text", "id": "b_stat", "label": "B · Stat", "default": "20+" },
+    { "type": "text", "id": "b_text", "label": "B · Text", "default": "tests per cartridge" },
+    { "type": "image_picker", "id": "b_image", "label": "B · Image" },
+    { "type": "range", "id": "b_image_height", "min": 120, "max": 500, "step": 10, "unit": "px", "label": "B · Image height (desktop)", "default": 200 },
+    { "type": "header", "content": "Tile C" },
+    { "type": "text", "id": "c_eyebrow", "label": "C · Eyebrow", "default": "Complimentary Withings+" },
+    { "type": "textarea", "id": "c_text", "label": "C · Text", "default": "Premium insights included with your subscription." },
+    { "type": "image_picker", "id": "c_image", "label": "C · Image" },
+    { "type": "header", "content": "Tile D (wide, bottom)" },
+    { "type": "text", "id": "d_eyebrow", "label": "D · Eyebrow", "default": "Personalized nutrition strategy" },
+    { "type": "textarea", "id": "d_text", "label": "D · Text", "default": "Track four key parameters and schedule your measurements." },
+    { "type": "text", "id": "d_params", "label": "D · Parameters (comma-separated)", "default": "HydroStatus, Ketone levels, Vitamin C levels, Bio-Acidity" },
+    { "type": "image_picker", "id": "d_image", "label": "D · Image" },
+    { "type": "range", "id": "d_image_max_height", "min": 120, "max": 500, "step": 10, "unit": "px", "label": "D · Image max height (desktop)", "default": 300 }
+  ],
+  "presets": [{ "name": "Withings intro bento" }]
+}
+{% endschema %}

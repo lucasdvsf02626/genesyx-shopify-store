@@ -1,0 +1,590 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "withings-hero",
+      "custom_css": [],
+      "settings": {
+        "eyebrow": "Step into the future of fertility",
+        "title": "",
+        "subtitle": "A premium, gently guided companion blending cycle awareness, nutrition and supplement support",
+        "cta_label": "Get started",
+        "cta_link": "shopify://pages/download",
+        "background_color": "#ffffff",
+        "logo": "shopify://shop_images/sp1.png",
+        "logo_alt": "Genesyx",
+        "logo_width": 240,
+        "poster": "shopify://shop_images/genesyx-hero-fg6.png",
+        "hero_image_url": "",
+        "image_alt": "A smiling woman using the Genesyx app on her phone",
+        "focal_x": 50,
+        "focal_y": 45
+      }
+    },
+    "intro-bento": {
+      "type": "withings-intro-bento",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "heading": "Everything you need for a calm conception journey",
+        "a_eyebrow": "Personalised quiz",
+        "a_text": "A short onboarding quiz tailors the whole experience to your cycle and goals.",
+        "b_stat": "",
+        "b_text": "Log your day",
+        "b_image": "shopify://shop_images/Screenshot_20260708_150457.png",
+        "b_image_height": 200,
+        "c_eyebrow": "Cycle awareness",
+        "c_text": "See your current phase at a glance, with gentle guidance for each stage.",
+        "c_image": "shopify://shop_images/videoframe_7552.png",
+        "d_eyebrow": "Cycle-aware nutrition",
+        "d_text": "Focus foods and supplement suggestions matched to your phase.",
+        "d_params": "Menstrual, Follicular, Ovulatory, Luteal",
+        "d_image": "shopify://shop_images/Simulator_Screenshot_-_iPhone_17_Pro_Max_-_2026-07-08_at_20.14.37.png",
+        "d_image_max_height": 350
+      }
+    },
+    "slow-card-marquee": {
+      "type": "genesyx-slow-marquee",
+      "blocks": {
+        "marquee-morning": {
+          "type": "card",
+          "settings": {
+            "visual_style": "photo",
+            "external_image_url": "https://cdn.shopify.com/s/files/1/1027/6516/6922/files/genesyx-daily-wellbeing-insights.png?v=1785334606",
+            "image_alt": "A phone displaying Genesyx cycle and symptom insights beside a notebook and mug",
+            "label": "Daily wellbeing",
+            "title": "Begin with context, not pressure",
+            "link": "shopify://pages/daily-tracking"
+          }
+        },
+        "marquee-log": {
+          "type": "card",
+          "settings": {
+            "visual_style": "photo",
+            "external_image_url": "https://cdn.shopify.com/s/files/1/1027/6516/6922/files/genesyx-simple-tracking-p1.png?v=1785334072",
+            "image_alt": "A person holding a phone showing the Genesyx daily tracking screen",
+            "label": "Simple tracking",
+            "title": "A check-in that takes seconds",
+            "link": "shopify://pages/daily-tracking"
+          }
+        },
+        "marquee-ph": {
+          "type": "card",
+          "settings": {
+            "visual_style": "photo",
+            "external_image_url": "https://cdn.shopify.com/s/files/1/1027/6516/6922/files/genesyx-ph-awareness-window.png?v=1785334485",
+            "image_alt": "A woman standing quietly beside a bright window",
+            "label": "pH awareness",
+            "title": "One signal, shown in context",
+            "link": "shopify://pages/ph-tracking"
+          }
+        },
+        "marquee-nutrition": {
+          "type": "card",
+          "settings": {
+            "visual_style": "photo",
+            "external_image_url": "https://cdn.shopify.com/s/files/1/1027/6516/6922/files/genesyx-cycle-aware-nutrition-p2.png?v=1785334318",
+            "image_alt": "A person carrying a woven basket filled with leafy greens and vegetables",
+            "label": "Cycle-aware nutrition",
+            "title": "Food-first guidance for your phase",
+            "link": "shopify://pages/cycle-aware-nutrition"
+          }
+        },
+        "marquee-insights": {
+          "type": "card",
+          "settings": {
+            "visual_style": "photo",
+            "external_image_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3CiE0dpc5yRHLrqtZoz7h6B2IQN/hf_20260728_212808_f88979e4-5e66-4331-a673-9a1cce8e8c88.png",
+            "image_alt": "A woman winding down and reflecting on her wellbeing",
+            "label": "Personal insights",
+            "title": "Notice patterns at your own pace",
+            "link": "shopify://pages/tailored-insights"
+          }
+        },
+        "marquee-shettles": {
+          "type": "card",
+          "settings": {
+            "visual_style": "research_photo",
+            "external_image_url": "",
+            "image_alt": "Research papers, a tablet with scientific charts and reading glasses on a warm desk",
+            "label": "Research & evidence",
+            "title": "Explore the Shettles Method",
+            "link": "shopify://pages/shettles-method-research-evidence"
+          }
+        }
+      },
+      "block_order": [
+        "marquee-morning",
+        "marquee-log",
+        "marquee-ph",
+        "marquee-nutrition",
+        "marquee-insights",
+        "marquee-shettles"
+      ],
+      "settings": {
+        "carousel_label": "Explore the Genesyx experience",
+        "heading": "Support that moves with you",
+        "speed": 120,
+        "previous_label": "Previous cards",
+        "next_label": "Next cards",
+        "background": "#ffffff",
+        "text_color": "#292522"
+      }
+    },
+    "experience-tabs": {
+      "type": "genesyx-experience-tabs",
+      "blocks": {
+        "experience-cycle": {
+          "type": "scenario",
+          "settings": {
+            "title": "Cycle",
+            "lifestyle_image": "shopify://shop_images/ChatGPT_Image_Jul_29_2026_08_28_43_PM.png",
+            "lifestyle_url": "",
+            "lifestyle_alt": "A woman holding a warm drink beside a window with a journal",
+            "screens_label": "Cycle phase and fertile window views in the Genesyx app",
+            "screen_1": "shopify://shop_images/ChatGPT_Image_Jul_29_2026_08_26_24_PM.png",
+            "screen_1_alt": "Genesyx cycle view showing day 22, luteal phase and the predicted fertile window",
+            "screen_2": "shopify://shop_images/ChatGPT_Image_Jul_29_2026_09_28_14_PM.png",
+            "screen_2_alt": "Genesyx fertile window card with cycle day markers",
+            "note_heading": "Every day sits in a phase",
+            "note_body": "Genesyx shows where you are in your cycle, what tends to shift in that phase, and what usually helps.",
+            "note_label": "Cycle awareness"
+          }
+        },
+        "experience-ovulation": {
+          "type": "scenario",
+          "settings": {
+            "title": "Ovulation",
+            "lifestyle_image": "shopify://shop_images/gx-tab-ovulation-photo.jpg",
+            "lifestyle_url": "",
+            "lifestyle_alt": "Stretching in morning sunlight beside a window",
+            "screens_label": "Fertile window and cycle phase views in the Genesyx app",
+            "screen_1": "shopify://shop_images/gx-tab-ovulation-a.png",
+            "screen_1_alt": "Genesyx fertile window card with cycle day markers",
+            "screen_2": "shopify://shop_images/gx-tab-ovulation-b.png",
+            "screen_2_alt": "Genesyx cycle phase card showing day 22 of the luteal phase",
+            "note_heading": "Your fertile window, in plain sight",
+            "note_body": "Genesyx marks the days your own cycle data points to, so you can plan around them instead of guessing.",
+            "note_label": "Fertile window"
+          }
+        },
+        "experience-ph": {
+          "type": "scenario",
+          "settings": {
+            "title": "Vaginal pH",
+            "lifestyle_image": "shopify://shop_images/gx-tab-ph-photo.jpg",
+            "lifestyle_url": "",
+            "lifestyle_alt": "Flat lay with a glass of water, sage, rosemary and lavender on linen",
+            "screens_label": "Vaginal pH education and logging views in the Genesyx app",
+            "screen_1": "shopify://shop_images/gx-tab-ph-a.png",
+            "screen_1_alt": "Genesyx explainer card on why vaginal pH matters",
+            "screen_2": "shopify://shop_images/gx-tab-ph-b.png",
+            "screen_2_alt": "Genesyx vaginal pH log showing a reading of 4.2 marked healthy",
+            "note_heading": "A number you can actually read",
+            "note_body": "Log a strip in seconds and see it against the typical 3.8 to 4.5 range. Genesyx is educational and does not diagnose or treat conditions.",
+            "note_label": "Vaginal pH"
+          }
+        },
+        "experience-hydration": {
+          "type": "scenario",
+          "settings": {
+            "title": "Hydration",
+            "lifestyle_image": "shopify://shop_images/gx-tab-hydration-photo.jpg",
+            "lifestyle_url": "",
+            "lifestyle_alt": "Pouring a glass of water at a kitchen counter",
+            "screens_label": "Hydration daily and weekly views in the Genesyx app",
+            "screen_1": "shopify://shop_images/gx-tab-hydration-a.png",
+            "screen_1_alt": "Genesyx hydration daily totals for the past seven days",
+            "screen_2": "shopify://shop_images/gx-tab-hydration-b.png",
+            "screen_2_alt": "Genesyx hydration week view with daily bars and average",
+            "note_heading": "Small inputs, visible pattern",
+            "note_body": "Log a glass at a time. The week view shows what you actually drank, and leaves the days you skipped blank rather than guessing.",
+            "note_label": "Hydration"
+          }
+        },
+        "experience-sleep": {
+          "type": "scenario",
+          "settings": {
+            "title": "Sleep",
+            "lifestyle_image": "shopify://shop_images/gx-tab-sleep-photo.jpg",
+            "lifestyle_url": "",
+            "lifestyle_alt": "Linen bedding in soft morning light",
+            "screens_label": "Sleep logging and weekly views in the Genesyx app",
+            "screen_1": "shopify://shop_images/gx-tab-sleep-a.png",
+            "screen_1_alt": "Genesyx sleep log for last night showing eight hours",
+            "screen_2": "shopify://shop_images/gx-tab-sleep-b.png",
+            "screen_2_alt": "Genesyx sleep week view with nightly average",
+            "note_heading": "Last night, in one tap",
+            "note_body": "Hours and minutes, saved and synced. An unlogged night stays empty  never a zero-hour night.",
+            "note_label": "Sleep"
+          }
+        }
+      },
+      "block_order": [
+        "experience-cycle",
+        "experience-ovulation",
+        "experience-ph",
+        "experience-hydration",
+        "experience-sleep"
+      ],
+      "settings": {
+        "eyebrow": "Inside the app",
+        "heading": "Genesyx, screen by screen",
+        "body": "<p>Cycle context, your fertile window, vaginal pH, hydration and sleep every view here is the real app.</p>",
+        "link_label": "How Genesyx works",
+        "link": "shopify://pages/daily-tracking",
+        "tabs_label": "Genesyx features",
+        "mobile_navigation_label": "Browse Genesyx features",
+        "previous_label": "Previous feature",
+        "next_label": "Next feature",
+        "background_color": "#ffffff",
+        "autoplay": true,
+        "autoplay_seconds": 7
+      }
+    },
+    "how-it-works": {
+      "type": "withings-how-it-works",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Personalised quiz",
+            "title": "Start with a short quiz",
+            "body": "A quick onboarding quiz tailors the whole experience to your cycle and your goals."
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Daily tracking",
+            "title": "Log your day in seconds",
+            "body": "Record mood, energy, symptoms and pH readings quickly — then watch patterns emerge in My Logs."
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "Tailored insights",
+            "title": "Calm, personal observations",
+            "body": "Gentle insights based on what you track — never generic advice, never judgement."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "disabled": true,
+      "settings": {
+        "eyebrow": "Genesyx",
+        "heading": "A gentle space for cycle awareness",
+        "body": "Genesyx blends cycle awareness, nutrition and daily tracking into one calm, private space — helping you feel informed, supported and ready, without pressure or judgement.",
+        "video_link": "https://genesyx.co.uk",
+        "video_caption": "",
+        "video_url": ""
+      }
+    },
+    "key-insights": {
+      "type": "withings-key-insights",
+      "blocks": {
+        "i1": {
+          "type": "insight",
+          "disabled": true,
+          "settings": {
+            "image": "genesyx-tile-cycle.png",
+            "label": "Cycle awareness",
+            "title": "Know your phase at a glance",
+            "body": "See where you are in your cycle today, with gentle guidance for each phase.",
+            "cta": "Follow your cycle"
+          }
+        },
+        "i2": {
+          "type": "insight",
+          "disabled": true,
+          "settings": {
+            "image": "genesyx-tile-hydration.png",
+            "label": "Nutrition & hydration",
+            "title": "Focus foods & hydration",
+            "body": "Phase-aware focus foods and a daily 2.4 L hydration target, tracked in seconds.",
+            "cta": "Track your intake"
+          }
+        },
+        "i3": {
+          "type": "insight",
+          "disabled": true,
+          "settings": {
+            "image": "genesyx-tile-ph.png",
+            "label": "pH readings",
+            "title": "A simple daily signal",
+            "body": "Log urine pH alongside your check-in — an optimal window of 6.0–7.5, all in one place.",
+            "cta": "Log your readings"
+          }
+        },
+        "i4": {
+          "type": "insight",
+          "disabled": true,
+          "settings": {
+            "image": "genesyx-tile-insights.png",
+            "label": "Insights",
+            "title": "Patterns become visible",
+            "body": "Cycle regularity, symptom patterns and consistency — surfaced gently over time.",
+            "cta": "View your insights"
+          }
+        }
+      },
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4"
+      ],
+      "settings": {
+        "eyebrow": "What you'll track",
+        "heading": "Small daily signals, gently surfaced",
+        "body": "Genesyx turns your everyday check-ins into calm, phase-aware observations so patterns become visible over time.",
+        "video_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3CiE0dpc5yRHLrqtZoz7h6B2IQN/hf_20260708_111935_09baf721-dc09-447c-9eb9-bad4dcf480f3.mp4"
+      }
+    },
+    "withings-plus": {
+      "type": "withings-plus",
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "icon": "spark-wp.svg",
+            "title": "Daily pH readings",
+            "desc": "See how your levels shift across your cycle."
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "icon": "vitality.svg",
+            "title": "Acid or alkaline",
+            "desc": "Know which way your balance leans."
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "icon": "his-wp.svg",
+            "title": "Cycle-aware context",
+            "desc": "pH shown alongside your phase and symptoms."
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "icon": "checkup-wp.svg",
+            "title": "Food-first guidance",
+            "desc": "Gentle, everyday suggestions to support balance."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
+      "settings": {
+        "eyebrow": "Genesyx",
+        "badge": "Included",
+        "heading": "Understand your vaginal pH",
+        "cta_label": "Explore the app",
+        "cta_link": "https://play.google.com/store/apps/details?id=com.genesyx.app&hl=en-US&ah=JvxGFnLUIpjUDQ_Oy6G-Ny0JVwU",
+        "video_url": "https://cdn.shopify.com/videos/c/vp/b1bd2427c5e24da2b4bbd4ea1a48ad3b/b1bd2427c5e24da2b4bbd4ea1a48ad3b.HD-1080p-7.2Mbps-90251800.mp4",
+        "media_max_height": 620,
+        "footnote": "Genesyx is an educational wellness tool. It doesn't provide medical advice, diagnosis or treatment."
+      }
+    },
+    "package-compare": {
+      "type": "withings-package-compare",
+      "blocks": {
+        "free": {
+          "type": "package",
+          "settings": {
+            "name": "Free",
+            "image": "",
+            "tagline": "Everything you need to begin",
+            "price": "£0",
+            "accent": true,
+            "cta_label": "Get started",
+            "cta_link": "",
+            "row1_label": "Personalised quiz",
+            "row1_value": "Included",
+            "row2_label": "Cycle awareness",
+            "row2_value": "Included",
+            "row3_label": "Daily tracking & My Logs",
+            "row3_value": "Included",
+            "row4_label": "Cycle-aware nutrition",
+            "row4_value": "Included",
+            "row5_label": "Light & dark mode",
+            "row5_value": "Included",
+            "initial": "Free to download",
+            "renewal": "No card required."
+          }
+        },
+        "premium": {
+          "type": "package",
+          "settings": {
+            "name": "Premium",
+            "image": "",
+            "tagline": "Deeper, tailored guidance",
+            "price": "£4.99/month",
+            "accent": false,
+            "cta_label": "Go Premium",
+            "cta_link": "",
+            "row1_label": "Everything in Free",
+            "row1_value": "Included",
+            "row2_label": "Tailored insights",
+            "row2_value": "Advanced",
+            "row3_label": "Nutrition focus",
+            "row3_value": "Full library",
+            "row4_label": "History & trends",
+            "row4_value": "Unlimited",
+            "row5_label": "Priority support",
+            "row5_value": "Included",
+            "initial": "£4.99/month",
+            "renewal": "Cancel any time, in-app."
+          }
+        }
+      },
+      "block_order": [
+        "free",
+        "premium"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Which plan is right for you?",
+        "quiz_text": "Not sure where to start?",
+        "quiz_label": "Take the quiz",
+        "quiz_link": "https://genesyx.co.uk"
+      }
+    },
+    "page_Per3nA": {
+      "type": "genesyx-research-feature",
+      "name": "Research & evidence feature",
+      "settings": {
+        "eyebrow": "Research & evidence",
+        "heading": "Explore the Shettles Method",
+        "link_label": "View the live Shettles Method Research page",
+        "link": "shopify://pages/shettles-method-research-evidence",
+        "image_alt": "Research papers, scientific charts and reading glasses on a warm desk",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "feature-highlights": {
+      "type": "withings-feature-highlights",
+      "blocks": {
+        "h1": {
+          "type": "feature",
+          "settings": {
+            "icon": "lock",
+            "title": "Private and in your control",
+            "desc": "Sign in with Google or email. Your data is encrypted in transit, and you can delete it any time."
+          }
+        },
+        "h2": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "Cycle-aware nutrition",
+            "desc": "Focus foods and supplement suggestions matched to your current phase."
+          }
+        },
+        "h3": {
+          "type": "feature",
+          "settings": {
+            "icon": "moon",
+            "title": "Light & dark mode",
+            "desc": "Follows your system theme, or set your own for a calmer experience."
+          }
+        },
+        "h4": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "title": "Gentle and judgement-free",
+            "desc": "Supportive guidance for your journey, without pressure or diagnosis."
+          }
+        }
+      },
+      "block_order": [
+        "h1",
+        "h2",
+        "h3",
+        "h4"
+      ],
+      "settings": {}
+    },
+    "shop": {
+      "type": "withings-shop-configurator",
+      "settings": {
+        "heading": "Genesyx XY Formula is coming soon",
+        "body": "One private space for cycle context, your fertile window, vaginal pH, hydration and sleep  with gentle daily guidance based on what you choose to track.",
+        "left_text": "<p>Join the early-access list to receive launch updates and be among the first to experience Genesyx.</p><p>No pressure and no scores just the context to understand your own patterns, day by day.</p>",
+        "product_name": "",
+        "badge": "Coming soon",
+        "gallery_1": "shopify://shop_images/2.png",
+        "p1_name": "",
+        "p1_freq": "",
+        "p1_price": "",
+        "p1_cartridge": "",
+        "p2_name": "",
+        "p2_freq": "",
+        "p2_price": "",
+        "p2_cartridge": "",
+        "wplus_title": "",
+        "wplus_desc": "",
+        "wplus_badge": "",
+        "summary_reader": "",
+        "summary_station": "",
+        "included_label": "Included",
+        "total_label": "",
+        "email_placeholder": "Enter your email",
+        "cta_label": "Join the early-access list",
+        "added_label": "You're on the list",
+        "trust_1": "No payment today",
+        "trust_2": "Unsubscribe anytime",
+        "trust_3": "Private by design",
+        "disclaimer": "Genesyx is an educational wellness tool — it doesn't provide medical advice, diagnosis or treatment. Features and availability may change before launch."
+      }
+    },
+    "newsletter": {
+      "type": "withings-newsletter",
+      "disabled": true,
+      "settings": {
+        "heading": "Start your Genesyx journey",
+        "body": "Sign up for gentle guidance, product updates and cycle-wellness tips — calm, private and never pushy.",
+        "placeholder": "Enter your email",
+        "button_label": "Sign up",
+        "finetext": "By signing up you agree to receive emails from Genesyx. You can unsubscribe at any time. Genesyx is an educational wellness tool and doesn't provide medical advice."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "intro-bento",
+    "slow-card-marquee",
+    "experience-tabs",
+    "how-it-works",
+    "key-insights",
+    "withings-plus",
+    "package-compare",
+    "page_Per3nA",
+    "feature-highlights",
+    "shop",
+    "newsletter"
+  ]
+}

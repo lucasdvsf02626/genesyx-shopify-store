@@ -1,0 +1,59 @@
+{%- comment -%} Withings U-Scan Nutrio feature highlights (tech specs) {%- endcomment -%}
+<section id="tech-specs" class="wi-scope scroll-mt-32 bg-background py-20 md:py-24">
+  <div class="wi-container">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      {%- for block in section.blocks -%}
+        <div class="wi-reveal" data-reveal-delay="{{ forloop.index0 | times: 70 }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon_image != blank -%}
+            {{ block.settings.icon_image | image_url: width: 96 | image_tag: class: 'h-8 w-8 object-contain', loading: 'lazy', alt: block.settings.title }}
+          {%- else -%}
+            {% render 'wi-icon', name: block.settings.icon, class: 'h-8 w-8 text-periwinkle' %}
+          {%- endif -%}
+          <h3 class="mt-5 text-[18px] leading-snug">{{ block.settings.title }}</h3>
+          <p class="mt-2 text-[14px] text-ink-soft">{{ block.settings.desc }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feature highlights",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "image_picker", "id": "icon_image", "label": "Custom icon image" },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "spark",
+          "options": [
+            { "value": "spark", "label": "Spark" },
+            { "value": "renew", "label": "Cycle" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "moon", "label": "Moon" },
+            { "value": "wifi", "label": "Wi-Fi" },
+            { "value": "battery", "label": "Battery" }
+          ] },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "desc", "label": "Description" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Withings feature highlights",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "wifi", "title": "Automatic Wi-Fi sync", "desc": "Each reader syncs your data seamlessly over Wi-Fi or Bluetooth." } },
+        { "type": "feature", "settings": { "icon": "battery", "title": "3-month battery life", "desc": "The U-Scan reader lasts up to three months between charges." } },
+        { "type": "feature", "settings": { "icon": "spark", "title": "Withings+ included", "desc": "Unlock Withings Intelligence and AI-powered nutritional insights." } },
+        { "type": "feature", "settings": { "icon": "renew", "title": "Automatic cartridge renewal", "desc": "A fresh cartridge ships automatically before you run out." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

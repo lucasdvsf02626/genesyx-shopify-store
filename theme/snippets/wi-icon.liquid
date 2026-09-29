@@ -1,0 +1,40 @@
+{%- comment -%}
+  Withings inline SVG icons (ported from icons.tsx).
+  Usage: {% render 'wi-icon', name: 'cart', class: 'h-6 w-6' %}
+  Accepts: name (required), class (optional CSS classes)
+{%- endcomment -%}
+{%- liquid
+  assign c = class | default: ''
+-%}
+{%- case name -%}
+  {%- when 'account' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="{{ c }}"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="10" r="3.25"/><path d="M5.7 19.2a6.6 6.6 0 0 1 12.6 0"/></svg>
+  {%- when 'cart' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="{{ c }}"><path d="M4 8h16l-1.2 11a1.5 1.5 0 0 1-1.5 1.35H6.7A1.5 1.5 0 0 1 5.2 19L4 8Z"/><path d="M8.5 8V6.5a3.5 3.5 0 0 1 7 0V8"/></svg>
+  {%- when 'chevron-down' -%}
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" class="{{ c }}"><path d="m4 6 4 4 4-4"/></svg>
+  {%- when 'arrow-up-right' -%}
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" class="{{ c }}"><path d="M5 11 11 5M6 5h5v5"/></svg>
+  {%- when 'arrow-right' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="{{ c }}"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  {%- when 'check' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="{{ c }}"><path d="m5 12.5 4.5 4.5L19 7"/></svg>
+  {%- when 'play' -%}
+    <svg viewBox="0 0 24 24" fill="currentColor" class="{{ c }}"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg>
+  {%- when 'wifi' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="{{ c }}"><path d="M2.5 8.5a15 15 0 0 1 19 0M5.5 12a10.5 10.5 0 0 1 13 0M8.5 15.5a6 6 0 0 1 7 0"/><circle cx="12" cy="19" r="1.2" fill="currentColor" stroke="none"/></svg>
+  {%- when 'battery' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="{{ c }}"><rect x="2.5" y="8" width="16" height="8" rx="2"/><path d="M21 11v2"/><path d="M6 10.5v3M9 10.5v3"/></svg>
+  {%- when 'spark' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="{{ c }}"><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/><path d="M12 9a3 3 0 0 0 3 3 3 3 0 0 0-3 3 3 3 0 0 0-3-3 3 3 0 0 0 3-3Z"/></svg>
+  {%- when 'renew' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="{{ c }}"><path d="M20 11a8 8 0 0 0-14.3-4.9M4 5v3h3"/><path d="M4 13a8 8 0 0 0 14.3 4.9M20 19v-3h-3"/></svg>
+  {%- when 'lock' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="{{ c }}"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><circle cx="12" cy="15.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+  {%- when 'moon' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="{{ c }}"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>
+  {%- when 'leaf' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="{{ c }}"><path d="M5 19c0-8 5-13 14-13 0 9-5 14-13 14a5 5 0 0 1-1-1Z"/><path d="M8 16c3-3 6-5 9-6"/></svg>
+  {%- when 'heart' -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="{{ c }}"><path d="M12 20s-7-4.5-9.3-9A5 5 0 0 1 12 6.5 5 5 0 0 1 21.3 11C19 15.5 12 20 12 20Z"/></svg>
+{%- endcase -%}

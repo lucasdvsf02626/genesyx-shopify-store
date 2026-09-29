@@ -1,0 +1,66 @@
+{%- comment -%}
+  pH-tracking landing — Data band. Surfaces the 30-day trend animation next to a short data story.
+  Media defaults to the theme asset ph-log-animation.mp4 (poster ph-tracking-data.jpg); both overridable in the editor.
+  Layout mirrors the hero but reverses columns (media leads on desktop) for visual rhythm.
+{%- endcomment -%}
+<section id="phdata-{{ section.id }}" class="wi-scope w-full bg-greige py-16 md:py-24">
+  {%- assign ph_data_poster = section.settings.poster -%}
+  {%- if ph_data_poster != blank -%}
+    {%- assign ph_data_poster_url = ph_data_poster | image_url: width: 1600 -%}
+  {%- else -%}
+    {%- assign ph_data_poster_url = 'ph-tracking-data.jpg' | asset_url -%}
+  {%- endif -%}
+  {%- assign ph_data_video = section.settings.video_url | strip -%}
+  {%- if ph_data_video == blank -%}
+    {%- assign ph_data_video = 'ph-log-animation.mp4' | asset_url -%}
+  {%- endif -%}
+
+  <div class="wi-container">
+    <div class="phdata-grid items-center gap-10">
+      {%- comment -%} Media column {%- endcomment -%}
+      <div class="phdata-media wi-reveal overflow-hidden rounded-2xl bg-background">
+        {%- if ph_data_video != blank -%}
+          <video class="js-inview-video h-full w-full object-cover" autoplay muted loop playsinline preload="none" poster="{{ ph_data_poster_url }}">
+            <source src="{{ ph_data_video }}" type="video/mp4">
+          </video>
+        {%- else -%}
+          <img src="{{ ph_data_poster_url }}" alt="{{ section.settings.heading | escape }}" class="h-full w-full object-cover" width="1600" height="1200">
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Copy column {%- endcomment -%}
+      <div class="wi-reveal text-left" data-reveal-delay="60">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="mb-3 text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="text-[28px] leading-[1.08] tracking-[-0.02em] sm:text-[36px] md:text-[40px]">{{ section.settings.heading }}</h2>
+        {%- if section.settings.body != blank -%}
+          <p class="mt-5 max-w-xl text-[17px] text-ink-soft">{{ section.settings.body }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #phdata-{{ section.id }} .phdata-grid { display: grid; grid-template-columns: 1fr; }
+    #phdata-{{ section.id }} .phdata-media { aspect-ratio: 4 / 3; width: 100%; }
+    @media (min-width: 768px) {
+      #phdata-{{ section.id }} .phdata-grid { grid-template-columns: 0.95fr 1.05fr; }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "pH landing · Data band",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "See the trend" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every reading builds your 30-day picture" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Log in seconds and watch the graph fill in — the trend line shows how hydration and diet move your baseline over time." },
+    { "type": "header", "content": "Media" },
+    { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "Shown before the video plays. Recommended 1600×1200 (4:3)." },
+    { "type": "text", "id": "video_url", "label": "Video URL (mp4/webm)", "info": "Optional. Overrides the default data animation." }
+  ],
+  "presets": [{ "name": "pH landing · Data band" }]
+}
+{% endschema %}

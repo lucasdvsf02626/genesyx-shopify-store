@@ -1,0 +1,97 @@
+{%- comment -%}
+  pH-tracking landing — Hero. Single goal: drive app downloads.
+  Above the fold: headline + subhead + App Store / Google Play badges + hero media.
+  Hero media is the LCP candidate, so it is eager + preloaded; no lazy-load here.
+{%- endcomment -%}
+<section id="phhero-{{ section.id }}" class="wi-scope w-full bg-background" style="background-color:#F4F4F2">
+  {%- comment -%} IMAGE: hero-ph-tracking-poster.jpg — LCP still (1600x1200, 4:3). Swap for a video via the "Hero video URL" setting. {%- endcomment -%}
+  {%- assign ph_poster = section.settings.poster -%}
+  {%- if ph_poster != blank -%}
+    {%- assign ph_poster_url = ph_poster | image_url: width: 1600 -%}
+  {%- else -%}
+    {%- assign ph_poster_url = 'ph-tracking-flatlay.jpg' | asset_url -%}
+  {%- endif -%}
+  {%- assign ph_video_src = section.settings.video_url | strip | default: 'https://cdn.shopify.com/videos/c/vp/4b652339c4f344c29b05bdd0770ea717/4b652339c4f344c29b05bdd0770ea717.HD-1080p-7.2Mbps-89207204.mp4' -%}
+  <link rel="preload" as="image" href="{{ ph_poster_url }}" fetchpriority="high">
+
+  <div class="wi-container py-14 md:py-24">
+    <div class="phhero-grid items-center gap-10">
+      {%- comment -%} Copy column {%- endcomment -%}
+      <div class="text-left">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="mb-4 text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="text-[40px] font-normal leading-[1.02] tracking-[-0.02em] sm:text-[52px] md:text-[64px]">{{ section.settings.title }}</h1>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="mt-5 max-w-xl text-[18px] leading-snug text-ink-soft sm:text-[20px]">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+
+        {%- comment -%} App-store badges — above the fold {%- endcomment -%}
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          {%- assign gp_link = section.settings.googleplay_link | strip | default: 'https://play.google.com/store/apps/details?id=com.genesyx.app' -%}
+          <a href="{{ gp_link }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+            {% render 'wi-image', image: section.settings.googleplay_image, fallback: 'google-play.png', alt: 'Get it on Google Play', class: 'h-12 w-auto', eager: true %}
+          </a>
+          {%- assign apple_link = section.settings.apple_link | strip -%}
+          {%- if apple_link != blank and apple_link != '#' -%}
+            <a href="{{ apple_link }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
+              {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store', class: 'h-12 w-auto', eager: true %}
+            </a>
+          {%- else -%}
+            <div class="flex flex-col items-start">
+              <span class="pointer-events-none" style="opacity:.45">
+                {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store — coming soon', class: 'h-12 w-auto', eager: true %}
+              </span>
+              <span class="mt-2 text-[13px] text-ink-soft">Coming soon</span>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Media column — reserved 4:3 box prevents layout shift {%- endcomment -%}
+      <div class="phhero-media overflow-hidden rounded-2xl bg-greige">
+        {%- if ph_video_src != blank -%}
+          {%- comment -%} VIDEO: hero-ph-tracking.mp4 — 1600x1200 (4:3). Plays only while in view. {%- endcomment -%}
+          <video class="js-inview-video h-full w-full object-cover" autoplay muted loop playsinline preload="none"
+            poster="{{ ph_poster_url }}">
+            <source src="{{ ph_video_src }}" type="video/mp4">
+          </video>
+        {%- else -%}
+          <img src="{{ ph_poster_url }}" alt="{{ section.settings.title | escape }}" class="h-full w-full object-cover" width="1600" height="1200">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #phhero-{{ section.id }} .phhero-grid { display: grid; grid-template-columns: 1fr; }
+    #phhero-{{ section.id }} .phhero-media { aspect-ratio: 4 / 3; width: 100%; }
+    @media (max-width: 767px) {
+      #phhero-{{ section.id }} .phhero-media { order: -1; }
+    }
+    @media (min-width: 768px) {
+      #phhero-{{ section.id }} .phhero-grid { grid-template-columns: 1.05fr 0.95fr; }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "pH landing · Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Genesyx app" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Track your body's pH in real time" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Genesyx turns a daily urine pH reading into a clear signal for hydration and balance — logged in seconds, right from your phone." },
+    { "type": "header", "content": "Hero media" },
+    { "type": "image_picker", "id": "poster", "label": "Hero poster image", "info": "LCP image. Recommended 1600×1200 (4:3)." },
+    { "type": "text", "id": "video_url", "label": "Hero video URL (mp4/webm)", "info": "Optional. Overrides the poster with an in-view autoplay video." },
+    { "type": "header", "content": "Google Play" },
+    { "type": "text", "id": "googleplay_link", "label": "Google Play link", "default": "https://play.google.com/store/apps/details?id=com.genesyx.app" },
+    { "type": "image_picker", "id": "googleplay_image", "label": "Google Play badge (optional override)" },
+    { "type": "header", "content": "Apple App Store" },
+    { "type": "text", "id": "apple_link", "label": "App Store link — leave blank to show ‘Coming soon’" },
+    { "type": "image_picker", "id": "appstore_image", "label": "App Store badge (optional override)" }
+  ],
+  "presets": [{ "name": "pH landing · Hero" }]
+}
+{% endschema %}

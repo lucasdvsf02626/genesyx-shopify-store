@@ -1,0 +1,37 @@
+{%- comment -%}
+  wi-image — render an image_picker value with graceful fallback.
+  Params:
+    image    — image_picker object (block/section setting)
+    fallback — bundled asset filename to use when no image is picked (optional)
+    class    — CSS classes for the <img> / placeholder
+    alt      — alt text
+    width    — target width for image_url (default 1200)
+    sizes    — responsive sizes attribute (default '(min-width: 1024px) 50vw, 100vw')
+    eager    — pass true to disable lazy loading
+    priority — pass true to add fetchpriority="high" (use for LCP images only)
+{%- endcomment -%}
+{%- liquid
+  assign w = width | default: 1200
+  assign img_sizes = sizes | default: '(min-width: 1024px) 50vw, 100vw'
+  assign loading = 'lazy'
+  if eager
+    assign loading = 'eager'
+  endif
+-%}
+{%- if image != blank -%}
+  <img
+    src="{{ image | image_url: width: w }}"
+    srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1200 }} 1200w, {{ image | image_url: width: 1600 }} 1600w"
+    sizes="{{ img_sizes }}"
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+    alt="{{ alt | escape }}"
+    loading="{{ loading }}"
+    decoding="async"
+    {% if priority %}fetchpriority="high"{% endif %}
+    class="{{ class }}">
+{%- elsif fallback != blank -%}
+  <img src="{{ fallback | asset_url }}" alt="{{ alt | escape }}" loading="{{ loading }}" decoding="async"{% if priority %} fetchpriority="high"{% endif %} class="{{ class }}">
+{%- else -%}
+  {{ 'image' | placeholder_svg_tag: class }}
+{%- endif -%}

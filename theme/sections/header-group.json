@@ -1,0 +1,177 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "withings-header": {
+      "type": "withings-header",
+      "blocks": {
+        "features": {
+          "type": "nav_group",
+          "settings": {
+            "label": "Features",
+            "link": "#tech-specs",
+            "p1_name": "Personalised quiz",
+            "p1_link": "shopify://pages/personalise-your-conception-journey",
+            "p1_img": "",
+            "p1_tag": "",
+            "p1_desc": "A short quiz tailors the whole experience to you.",
+            "p2_name": "Cycle awareness",
+            "p2_link": "shopify://pages/cycle-awareness",
+            "p2_img": "",
+            "p2_tag": "",
+            "p2_desc": "See your current phase at a glance.",
+            "p3_name": "Daily tracking",
+            "p3_link": "shopify://pages/daily-tracking",
+            "p3_img": "",
+            "p3_tag": "",
+            "p3_desc": "Log mood, energy, symptoms and pH in seconds.",
+            "p4_name": "My Logs",
+            "p4_link": "shopify://pages/my-logs",
+            "p4_img": "",
+            "p4_tag": "",
+            "p4_desc": "Your full history, organised newest-first.",
+            "p5_name": "Cycle-aware nutrition",
+            "p5_link": "shopify://pages/cycle-aware-nutrition",
+            "p5_img": "",
+            "p5_tag": "Popular",
+            "p5_desc": "",
+            "p6_name": "Tailored insights",
+            "p6_link": "shopify://pages/tailored-insights",
+            "p6_img": "",
+            "p6_tag": "",
+            "p7_name": "Light & dark mode",
+            "p7_link": "",
+            "p7_img": "",
+            "p7_tag": "",
+            "p8_name": "Private & in your control",
+            "p8_link": "",
+            "p8_img": "",
+            "p8_tag": ""
+          }
+        },
+        "how-it-works": {
+          "type": "nav_link",
+          "settings": {
+            "label": "How it works",
+            "link": "#tech-specs",
+            "accent": false,
+            "external": false
+          }
+        },
+        "nutrition": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Nutrition",
+            "link": "#tech-specs",
+            "accent": false,
+            "external": false
+          }
+        },
+        "pricing": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Pricing",
+            "link": "#shop",
+            "accent": false,
+            "external": false
+          }
+        },
+        "premium": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Premium",
+            "link": "#shop",
+            "accent": true,
+            "external": false
+          }
+        },
+        "support": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Support",
+            "link": "https://genesyx.co.uk",
+            "accent": false,
+            "external": true
+          }
+        }
+      },
+      "block_order": [
+        "features",
+        "how-it-works",
+        "nutrition",
+        "pricing",
+        "premium",
+        "support"
+      ],
+      "disabled": true,
+      "settings": {
+        "logo_alt": "Genesyx",
+        "logo_height": 38
+      }
+    },
+    "withings-order-bar": {
+      "type": "withings-order-bar",
+      "disabled": true,
+      "settings": {
+        "product_name": "",
+        "price_label": "Free to download",
+        "badge": "iOS & Android",
+        "specs_label": "Features",
+        "cta_label": ""
+      }
+    },
+    "178881255435eef135": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_ffe8d02_GNTRiE": {
+          "type": "ai_gen_block_ffe8d02",
+          "disabled": true,
+          "settings": {
+            "logo": "shopify://shop_images/sp1.png",
+            "logo_width": 190,
+            "mobile_logo_width": 120,
+            "menu": "main-menu",
+            "alignment": "flex-end",
+            "mobile_alignment": "center",
+            "desktop_width_percent": 100,
+            "background_color": "#FFFFFF",
+            "link_color": "#121212",
+            "link_hover_color": "#334FB4",
+            "link_hover_bg": "rgba(0,0,0,0)",
+            "active_link_color": "#334FB4",
+            "active_link_bg": "rgba(0,0,0,0)",
+            "font_size": 16,
+            "mobile_font_size": 16,
+            "font_weight": "400",
+            "padding_vertical": 20,
+            "padding_horizontal": 20,
+            "item_spacing": 30,
+            "mobile_item_spacing": 15,
+            "link_padding_vertical": 8,
+            "link_padding_horizontal": 12,
+            "link_border_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_ffe8d02_GNTRiE"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "withings-header",
+    "withings-order-bar",
+    "178881255435eef135"
+  ]
+}

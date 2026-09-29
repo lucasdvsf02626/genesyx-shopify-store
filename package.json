@@ -1,0 +1,16 @@
+{
+  "name": "genesyx-shopify-export",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "export": "tsx export-files.ts",
+    "export:images": "tsx export-files.ts --images-only",
+    "seo:plan": "tsx apply-seo-fixes.ts",
+    "seo:apply": "tsx apply-seo-fixes.ts --apply"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "withings-ph-hero",
+      "settings": {
+        "eyebrow": "Genesyx app",
+        "title": "Insights made just for you",
+        "subtitle": "Genesyx turns your daily logs into personal patterns — pH, cycle regularity and symptoms, read together so the signal is clear.",
+        "poster": "shopify://shop_images/ph-tracking-data.jpg",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": ""
+      }
+    },
+    "value": {
+      "type": "withings-ph-value",
+      "settings": {
+        "eyebrow": "Why insights",
+        "heading": "Your data, made meaningful"
+      },
+      "blocks": {
+        "v1": { "type": "prop", "settings": { "icon": "icon-lightning-bolt.svg", "title": "Patterns, not numbers", "body": "Genesyx connects the dots across pH, cycle and symptoms." } },
+        "v2": { "type": "prop", "settings": { "icon": "icon-heart.svg", "title": "Personal to you", "body": "Insights are built from your logs, not population averages." } },
+        "v3": { "type": "prop", "settings": { "icon": "icon-bottle.svg", "title": "Clearer over time", "body": "The more you track, the sharper the picture becomes." } }
+      },
+      "block_order": ["v1", "v2", "v3"]
+    },
+    "feature": {
+      "type": "withings-ph-feature",
+      "settings": {
+        "eyebrow": "The insights screen",
+        "heading": "Your patterns, decoded",
+        "body": "See how pH, cycle and symptoms move together — in plain graphs, not raw data.",
+        "screenshot": "shopify://shop_images/Screenshot_20260708_150501.png"
+      },
+      "blocks": {
+        "c1": { "type": "callout", "settings": { "title": "Symptom patterns", "body": "Spot what tends to show up, and when.", "x": 2, "y": 6 } },
+        "c2": { "type": "callout", "settings": { "title": "pH over time", "body": "Your baseline and the optimal window, side by side.", "x": 68, "y": 20 } },
+        "c3": { "type": "callout", "settings": { "title": "Cycle regularity", "body": "See how steady your rhythm really is.", "x": 0, "y": 62 } },
+        "c4": { "type": "callout", "settings": { "title": "Nutrition consistency", "body": "How closely your habits track your goals.", "x": 70, "y": 66 } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"]
+    },
+    "data": {
+      "type": "withings-ph-data",
+      "settings": {
+        "eyebrow": "See it all connect",
+        "heading": "Every reading sharpens your insights",
+        "body": "Log a little each day and the graphs fill in — 30 days turns single readings into a clear trend.",
+        "poster": "shopify://shop_images/Screenshot_20260708_150457.png"
+      }
+    },
+    "gallery": {
+      "type": "withings-ph-gallery",
+      "settings": {
+        "eyebrow": "In everyday life",
+        "heading": "A habit that fits your morning",
+        "image_1": "shopify://shop_images/ph-tracking-lifestyle.jpg",
+        "alt_1": "Reviewing personal insights on the Genesyx app",
+        "image_2": "shopify://shop_images/ph-tracking-flatlay.jpg",
+        "alt_2": "pH test strip and water beside the phone",
+        "image_3": "shopify://shop_images/hf_20260715_121207_677589ec-ea68-4ed0-9c6d-f8f26f5ced78.png",
+        "alt_3": "The Genesyx app on a table with a pH strip and water"
+      }
+    },
+    "social": {
+      "type": "withings-ph-social",
+      "settings": {
+        "rating": "4.8",
+        "rating_label": "4.8 average · App Store & Google Play",
+        "heading": "People are seeing their own patterns"
+      },
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "quote": "Placeholder quote — seeing my own patterns instead of generic advice changed everything.", "author": "Reviewer name" } },
+        "t2": { "type": "testimonial", "settings": { "quote": "Placeholder quote — the graphs finally made my symptoms make sense.", "author": "Reviewer name" } },
+        "t3": { "type": "testimonial", "settings": { "quote": "Placeholder quote — it gets sharper the more I log, which keeps me going.", "author": "Reviewer name" } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "cta": {
+      "type": "withings-ph-cta",
+      "settings": {
+        "eyebrow": "Start today",
+        "heading": "See your insights from tomorrow",
+        "body": "Free to download. Your first reading takes under a minute.",
+        "qr_caption": "Scan to download",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": ""
+      }
+    }
+  },
+  "order": ["hero", "value", "feature", "data", "gallery", "social", "cta"]
+}

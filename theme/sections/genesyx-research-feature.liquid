@@ -1,0 +1,168 @@
+<section
+  id="genesyx-research-feature-{{ section.id }}"
+  class="genesyx-research-feature"
+  style="--research-padding-top: {{ section.settings.padding_top }}px; --research-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="page-width">
+    <a class="genesyx-research-feature__link" href="{{ section.settings.link }}">
+      <img
+        class="genesyx-research-feature__image"
+        src="{{ 'genesyx-shettles-research-card.jpg' | asset_url }}"
+        alt="{{ section.settings.image_alt | escape }}"
+        width="868"
+        height="1812"
+        loading="lazy"
+      >
+      <span class="genesyx-research-feature__shade" aria-hidden="true"></span>
+      <span class="genesyx-research-feature__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="genesyx-research-feature__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <span class="genesyx-research-feature__heading">{{ section.settings.heading }}</span>
+        {%- endif -%}
+        {%- if section.settings.link_label != blank -%}
+          <span class="genesyx-research-feature__cta">
+            {{ section.settings.link_label }}
+            <span aria-hidden="true">→</span>
+          </span>
+        {%- endif -%}
+      </span>
+    </a>
+  </div>
+</section>
+
+{% stylesheet %}
+  .genesyx-research-feature {
+    padding-block: var(--research-padding-top) var(--research-padding-bottom);
+  }
+
+  .genesyx-research-feature__link {
+    position: relative;
+    display: block;
+    min-height: clamp(440px, 56vw, 720px);
+    overflow: hidden;
+    border-radius: clamp(18px, 2vw, 30px);
+    color: #fff;
+    background: #4b4038;
+    text-decoration: none;
+    isolation: isolate;
+  }
+
+  .genesyx-research-feature__image,
+  .genesyx-research-feature__shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .genesyx-research-feature__image {
+    object-fit: cover;
+    object-position: center 57%;
+    transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .genesyx-research-feature__shade {
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(25, 20, 17, 0.82) 0%, rgba(25, 20, 17, 0.38) 48%, rgba(25, 20, 17, 0.06) 100%);
+  }
+
+  .genesyx-research-feature__content {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    display: flex;
+    max-width: 680px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: clamp(1.5rem, 5vw, 4.5rem);
+  }
+
+  .genesyx-research-feature__eyebrow {
+    margin-bottom: 1rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .genesyx-research-feature__heading {
+    max-width: 12ch;
+    font-size: clamp(2.5rem, 5vw, 5.6rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .genesyx-research-feature__cta {
+    display: inline-flex;
+    min-height: 52px;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+    padding: 0.9rem 1.35rem;
+    border-radius: 999px;
+    color: #2f2925;
+    background: #fff;
+    font-size: 0.95rem;
+    line-height: 1.25;
+  }
+
+  .genesyx-research-feature__link:hover .genesyx-research-feature__image,
+  .genesyx-research-feature__link:focus-visible .genesyx-research-feature__image {
+    transform: scale(1.025);
+  }
+
+  .genesyx-research-feature__link:focus-visible {
+    outline: 3px solid #4f46b8;
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 749px) {
+    .genesyx-research-feature {
+      padding-block: calc(var(--research-padding-top) * 0.75) calc(var(--research-padding-bottom) * 0.75);
+    }
+
+    .genesyx-research-feature__link {
+      min-height: 560px;
+    }
+
+    .genesyx-research-feature__image {
+      object-position: center;
+    }
+
+    .genesyx-research-feature__shade {
+      background: linear-gradient(180deg, rgba(25, 20, 17, 0.1) 15%, rgba(25, 20, 17, 0.82) 100%);
+    }
+
+    .genesyx-research-feature__heading {
+      font-size: clamp(2.4rem, 12vw, 4rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .genesyx-research-feature__image {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Research feature",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Research & evidence" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Explore the Shettles Method" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "View the research" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Research papers, scientific charts and reading glasses on a warm desk" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 48 }
+  ],
+  "presets": [{ "name": "Research feature" }]
+}
+{% endschema %}

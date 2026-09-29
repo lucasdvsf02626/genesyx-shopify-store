@@ -1,0 +1,102 @@
+{%- comment -%} Withings+ feature section — picked video, then video URL, then app screenshot {%- endcomment -%}
+{%- assign wi_plus_id = 'wi-plus-' | append: section.id -%}
+<style>
+  {%- comment -%} Scoped media sizing. The height cap is merchant-editable, and Tailwind arbitrary
+    values aren't compiled into this theme, so it lives here rather than in a utility class. {%- endcomment -%}
+  #{{ wi_plus_id }} .wi-plus-mediaframe { width: fit-content; max-width: 100%; margin-left: auto; margin-right: auto; }
+  #{{ wi_plus_id }} .wi-plus-media { display: block; width: auto; height: auto; max-width: 100%; max-height: {{ section.settings.media_max_height }}px; border-radius: 0.75rem; }
+</style>
+<section id="{{ wi_plus_id }}" class="wi-scope bg-background py-20 md:py-28">
+  <div class="wi-container">
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <div class="wi-reveal">
+        <div class="flex items-center gap-2 text-[13px] font-medium uppercase tracking-wide text-ink-soft">
+          <span>{{ section.settings.eyebrow }}</span>
+          <span class="rounded-full bg-periwinkle px-2.5 py-0.5 text-white">{{ section.settings.badge }}</span>
+        </div>
+        <h2 class="mt-4 max-w-md text-[32px] leading-[1.06] tracking-[-0.02em] sm:text-[42px] md:text-[52px]">{{ section.settings.heading }}</h2>
+
+        <ul class="mt-10 space-y-6">
+          {%- for block in section.blocks -%}
+            <li class="flex items-start gap-4" {{ block.shopify_attributes }}>
+              {% render 'wi-image', image: block.settings.icon_pick, fallback: block.settings.icon, alt: block.settings.title, class: 'h-9 w-9 shrink-0' %}
+              <div>
+                <p class="text-[17px] font-medium">{{ block.settings.title }}</p>
+                <p class="text-[15px] text-ink-soft">{{ block.settings.desc }}</p>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <a href="{{ section.settings.cta_link | default: '#' }}" target="_blank" rel="noopener" class="mt-10 inline-flex items-center gap-2 rounded-lg bg-periwinkle px-6 py-3 text-[15px] font-medium text-white transition hover:bg-periwinkle-hover">
+          {{ section.settings.cta_label }}
+          {% render 'wi-icon', name: 'arrow-right', class: 'h-4 w-4' %}
+        </a>
+        {%- if section.settings.footnote != blank -%}
+          <p class="mt-6 max-w-md text-[12px] leading-relaxed text-ink-soft">{{ section.settings.footnote }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="wi-reveal" data-reveal-delay="100">
+        {%- if section.settings.screen_video != blank -%}
+          <div class="wi-plus-mediaframe overflow-hidden rounded-2xl bg-card p-2">
+            {{ section.settings.screen_video | video_tag: class: 'wi-plus-media', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+          </div>
+        {%- elsif section.settings.video_url != blank -%}
+          <div class="wi-plus-mediaframe overflow-hidden rounded-2xl bg-card p-2">
+            <video class="wi-plus-media" autoplay loop muted playsinline preload="metadata" aria-label="{{ section.settings.heading | escape }}">
+              <source src="{{ section.settings.video_url }}" type="video/mp4">
+            </video>
+          </div>
+        {%- else -%}
+          <div class="overflow-hidden rounded-2xl bg-card p-2">
+            {% render 'wi-image', image: section.settings.screen_image, fallback: 'genesyx-plus-insights.jpg', alt: section.settings.heading, class: 'w-full rounded-xl object-cover' %}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Withings+ section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Withings+" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Included" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Powering your journey to longevity" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Discover Withings+" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "header", "content": "Media", "info": "First one that is filled in wins: picked video, then video URL, then screenshot." },
+    { "type": "video", "id": "screen_video", "label": "App video (Shopify files)" },
+    { "type": "text", "id": "video_url", "label": "…or a direct MP4 URL", "default": "https://cdn.shopify.com/videos/c/vp/b1bd2427c5e24da2b4bbd4ea1a48ad3b/b1bd2427c5e24da2b4bbd4ea1a48ad3b.HD-1080p-7.2Mbps-90251800.mp4", "info": "Paste a .mp4 link, e.g. the CDN URL of a file in Shopify Files." },
+    { "type": "range", "id": "media_max_height", "label": "Media max height", "min": 360, "max": 760, "step": 20, "unit": "px", "default": 620, "info": "Caps the height of the video. Vertical clips need a lower value than landscape ones." },
+    { "type": "image_picker", "id": "screen_image", "label": "App screenshot", "info": "Used only when no video is set." },
+    { "type": "textarea", "id": "footnote", "label": "Footnote", "default": "*Compatible with any Withings or third-party device with ECG capability. Availability may vary by region." }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "image_picker", "id": "icon_pick", "label": "Icon (upload)" },
+        { "type": "text", "id": "icon", "label": "…or bundled icon filename" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "desc", "label": "Description" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Withings+ section",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "vitality.svg", "title": "Readiness Indicator", "desc": "Stay energized. Spot early signals." } },
+        { "type": "feature", "settings": { "icon": "his-wp.svg", "title": "Health Improvement Score", "desc": "Your health, simplified." } },
+        { "type": "feature", "settings": { "icon": "checkup-wp.svg", "title": "Cardio Check-Up*", "desc": "ECG-powered cardiologist review." } },
+        { "type": "feature", "settings": { "icon": "spark-wp.svg", "title": "Withings Intelligence", "desc": "AI-powered personalized insights & correlations." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

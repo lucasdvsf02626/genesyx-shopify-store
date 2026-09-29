@@ -1,0 +1,34 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "genesyx-why",
+      "blocks": {
+        "listen": { "type": "milestone", "settings": { "label": "Listen first", "title": "Start with the person, not the metric", "body": "<p>Genesyx begins with a personalised onboarding experience and gives you control over what you track. The aim is useful context without pressure.</p>", "image": "shopify://shop_images/genesyx-why-app-listen.jpg", "image_alt": "The Genesyx home screen showing a personalised tracker list for cycle, hydration, pH, sleep, symptoms and nutrition" } },
+        "connect": { "type": "milestone", "settings": { "label": "Bring signals together", "title": "See more of the whole picture", "body": "<p>Cycle awareness, daily check-ins, nutrition, hydration and pH can be viewed in one experience, making it easier to reflect on what changes over time.</p>", "image": "shopify://shop_images/genesyx-why-app-connect.jpg", "image_alt": "The Genesyx pH tracker on a phone, laid out with a glass of water, a pH test strip and fresh greens" } },
+        "learn": { "type": "milestone", "settings": { "label": "Learn over time", "title": "Let patterns emerge honestly", "body": "<p>Insights are grounded in what you actually record. When there is not enough information, Genesyx keeps the experience honest rather than filling the space with assumptions.</p>", "image": "shopify://shop_images/genesyx-why-app-learn.jpg", "image_alt": "The Genesyx insights screen on a phone on a desk, showing cycle, symptom and nutrition patterns over time" } },
+        "calm": { "type": "principle", "settings": { "title": "Calm over noise", "body": "Clear language and gentle prompts help make daily tracking feel manageable." } },
+        "context": { "type": "principle", "settings": { "title": "Context over judgement", "body": "Your signals are shown alongside your cycle and check-ins, without reducing wellbeing to a single score." } },
+        "privacy": { "type": "principle", "settings": { "title": "Privacy and control", "body": "You decide what to record and remain in control of your account and data." } },
+        "honesty": { "type": "principle", "settings": { "title": "Honest guidance", "body": "Genesyx supports awareness and education without presenting itself as diagnosis or treatment." } }
+      },
+      "block_order": ["listen", "connect", "learn", "calm", "context", "privacy", "honesty"],
+      "settings": {
+        "background_color": "#ffffff",
+        "accent_color": "#6555c7",
+        "cta_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "hero_image": "shopify://shop_images/genesyx-why-app-hero.jpg",
+        "hero_alt": "The Genesyx app open on a phone resting on a pale oak table in a calm, sunlit living room"
+      }
+    }
+  },
+  "order": ["main"]
+}

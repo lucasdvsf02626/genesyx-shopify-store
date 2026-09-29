@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "genesyx-desktop",
+      "settings": {
+        "eyebrow": "Desktop version",
+        "heading": "Genesyx on the big screen",
+        "body": "Prefer to explore on your computer? Launch the full Genesyx journey guide in your browser — the same calm, gently-guided experience, sized for desktop.",
+        "button_label": "Launch the journey guide",
+        "button_link": "/pages/journey-guide",
+        "footnote": "Genesyx is an educational wellness tool. It doesn't provide medical advice, diagnosis or treatment."
+      }
+    }
+  },
+  "order": ["main"]
+}

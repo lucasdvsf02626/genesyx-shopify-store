@@ -1,0 +1,8 @@
+.env
+node_modules/
+exports/
+*.part
+backups/
+.claude/
+graft/
+.DS_Store

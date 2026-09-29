@@ -1,0 +1,29 @@
+{%- comment -%} Withings U-Scan Nutrio sticky order bar {%- endcomment -%}
+<div class="wi-scope sticky top-16 z-40 border-b border-border-soft bg-white">
+  <div class="wi-container flex h-[59px] items-center justify-between gap-4">
+    <div class="flex items-baseline gap-3">
+      <span class="text-[17px] font-medium text-ink">{{ section.settings.product_name }}</span>
+      <span class="text-[14px] text-ink-soft">{{ section.settings.price_label }}</span>
+      {%- if section.settings.badge != blank -%}
+        <span class="hidden rounded-full bg-[#eef1ff] px-2.5 py-1 text-[12px] font-medium text-periwinkle sm:inline">{{ section.settings.badge }}</span>
+      {%- endif -%}
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="#tech-specs" class="hidden text-[14px] text-ink hover:text-ink/60 sm:inline">{{ section.settings.specs_label }}</a>
+      <a href="#shop" class="wi-cta !px-5 !py-2 !text-[14px]">{{ section.settings.cta_label }}</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Withings order bar",
+  "settings": [
+    { "type": "text", "id": "product_name", "label": "Product name", "default": "U-Scan Nutrio" },
+    { "type": "text", "id": "price_label", "label": "Price label", "default": "From £319.95" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Free delivery" },
+    { "type": "text", "id": "specs_label", "label": "Specs link label", "default": "Tech specs" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Buy now" }
+  ]
+}
+{% endschema %}

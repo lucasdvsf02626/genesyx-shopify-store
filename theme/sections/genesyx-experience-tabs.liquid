@@ -1,0 +1,558 @@
+<genesyx-experience-tabs
+  id="GenesyxExperience-{{ section.id }}"
+  class="gx-experience"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-interval="{{ section.settings.autoplay_seconds | times: 1000 }}"
+  style="--gx-surface: {{ section.settings.background_color }};"
+>
+  <div class="gx-experience__inner">
+    <div class="gx-experience__intro">
+      {% if section.settings.eyebrow != blank %}
+        <p class="gx-experience__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+      <h2 class="gx-experience__heading">{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.body != blank %}
+        <div class="gx-experience__body">{{ section.settings.body }}</div>
+      {% endif %}
+      {% if section.settings.link_label != blank and section.settings.link != blank %}
+        <a class="gx-experience__link" href="{{ section.settings.link }}">{{ section.settings.link_label | escape }}</a>
+      {% endif %}
+    </div>
+
+    <div class="gx-experience__tabs-wrap">
+      <div class="gx-experience__tabs" role="tablist" aria-label="{{ section.settings.tabs_label | escape }}">
+        {% for block in section.blocks %}
+          <button
+            id="ExperienceTab-{{ section.id }}-{{ block.id }}"
+            class="gx-experience__tab"
+            type="button"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-controls="ExperiencePanel-{{ section.id }}-{{ block.id }}"
+            tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
+            data-tab-index="{{ forloop.index0 }}"
+          >
+            {{ block.settings.title | escape }}
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="gx-experience__mobile-nav" aria-label="{{ section.settings.mobile_navigation_label | escape }}">
+      <button class="gx-experience__arrow" type="button" data-experience-previous aria-label="{{ section.settings.previous_label | escape }}">
+        <svg viewBox="0 0 56 28" aria-hidden="true"><path d="M17 4 5 14l12 10M6 14h45"/></svg>
+      </button>
+      <span class="gx-experience__position" data-experience-position aria-live="polite">1 / {{ section.blocks.size }}</span>
+      <button class="gx-experience__arrow" type="button" data-experience-next aria-label="{{ section.settings.next_label | escape }}">
+        <svg viewBox="0 0 56 28" aria-hidden="true"><path d="m39 4 12 10-12 10M50 14H5"/></svg>
+      </button>
+    </div>
+
+    <div class="gx-experience__panels">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign panel_loading = 'lazy'
+          if forloop.first
+            assign panel_loading = 'eager'
+          endif
+        -%}
+        <div
+          id="ExperiencePanel-{{ section.id }}-{{ block.id }}"
+          class="gx-experience__panel"
+          role="tabpanel"
+          aria-labelledby="ExperienceTab-{{ section.id }}-{{ block.id }}"
+          data-panel-index="{{ forloop.index0 }}"
+          {% unless forloop.first %}hidden{% endunless %}
+          {{ block.shopify_attributes }}
+        >
+          <figure class="gx-experience__lifestyle">
+            {% if block.settings.lifestyle_video != blank %}
+              {{ block.settings.lifestyle_video | video_tag: class: 'gx-experience__media', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+            {% elsif block.settings.lifestyle_image != blank %}
+              {{ block.settings.lifestyle_image | image_url: width: 1600 | image_tag: loading: panel_loading, widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 990px) 46vw, 100vw', alt: block.settings.lifestyle_alt }}
+            {% elsif block.settings.lifestyle_url != blank %}
+              <img
+                src="{{ block.settings.lifestyle_url | escape }}"
+                alt="{{ block.settings.lifestyle_alt | escape }}"
+                loading="{{ panel_loading }}"
+                width="1200"
+                height="1600"
+              >
+            {% else %}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'gx-experience__placeholder' }}
+            {% endif %}
+          </figure>
+
+          <div class="gx-experience__screens" aria-label="{{ block.settings.screens_label | escape }}">
+            {% if block.settings.screen_1_video != blank %}
+              <figure class="gx-experience__screen gx-experience__screen--wide">
+                {{ block.settings.screen_1_video | video_tag: class: 'gx-experience__media', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+              </figure>
+            {% elsif block.settings.screen_1 != blank %}
+              <figure class="gx-experience__screen gx-experience__screen--wide">
+                {{ block.settings.screen_1 | image_url: width: 1200 | image_tag: loading: panel_loading, widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 990px) 25vw, 100vw', alt: block.settings.screen_1_alt }}
+              </figure>
+            {% endif %}
+            {% if block.settings.screen_2_video != blank %}
+              <figure class="gx-experience__screen gx-experience__screen--tall">
+                {{ block.settings.screen_2_video | video_tag: class: 'gx-experience__media', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+              </figure>
+            {% elsif block.settings.screen_2 != blank %}
+              <figure class="gx-experience__screen gx-experience__screen--tall">
+                {{ block.settings.screen_2 | image_url: width: 1200 | image_tag: loading: panel_loading, widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 990px) 25vw, 100vw', alt: block.settings.screen_2_alt }}
+              </figure>
+            {% endif %}
+          </div>
+
+          {% if block.settings.note_heading != blank or block.settings.note_body != blank %}
+            <aside class="gx-experience__note">
+              <span class="gx-experience__quote-mark" aria-hidden="true">“</span>
+              {% if block.settings.note_heading != blank %}
+                <h3>{{ block.settings.note_heading | escape }}</h3>
+              {% endif %}
+              {% if block.settings.note_body != blank %}
+                <p>{{ block.settings.note_body | escape }}</p>
+              {% endif %}
+              {% if block.settings.note_label != blank %}
+                <span>{{ block.settings.note_label | escape }}</span>
+              {% endif %}
+            </aside>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</genesyx-experience-tabs>
+
+{% stylesheet %}
+  .gx-experience {
+    --gx-ink: #17161c;
+    --gx-muted: #5f5d69;
+    --gx-line: rgba(36, 33, 49, 0.18);
+    --gx-card: rgba(255, 255, 255, 0.48);
+    display: block;
+    color: var(--gx-ink);
+    background: var(--gx-surface);
+  }
+
+  .gx-experience__inner {
+    width: min(100%, 1600px);
+    margin: 0 auto;
+    padding: clamp(72px, 8vw, 132px) clamp(20px, 5vw, 80px);
+  }
+
+  .gx-experience__media { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .gx-experience__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 24px clamp(32px, 8vw, 132px);
+    align-items: end;
+    margin-bottom: clamp(52px, 7vw, 104px);
+  }
+
+  .gx-experience__eyebrow {
+    grid-column: 1 / -1;
+    margin: 0 0 -4px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .gx-experience__heading {
+    margin: 0;
+    max-width: 720px;
+    font-size: clamp(38px, 5.2vw, 78px);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .gx-experience__body {
+    max-width: 680px;
+    font-size: clamp(17px, 1.5vw, 23px);
+    line-height: 1.5;
+    color: var(--gx-muted);
+  }
+
+  .gx-experience__body p { margin: 0; }
+
+  .gx-experience__link {
+    grid-column: 2;
+    width: fit-content;
+    margin-top: 2px;
+    color: var(--gx-ink);
+    font-size: 15px;
+    text-underline-offset: 6px;
+  }
+
+  .gx-experience__tabs-wrap {
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--gx-line);
+  }
+
+  .gx-experience__tabs-wrap::-webkit-scrollbar { display: none; }
+
+  .gx-experience__mobile-nav { display: none; }
+
+  .gx-experience__tabs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+    min-width: 820px;
+  }
+
+  .gx-experience__tab {
+    position: relative;
+    min-height: 118px;
+    padding: 18px 18px 30px;
+    border: 0;
+    color: rgba(23, 22, 28, 0.68);
+    background: transparent;
+    font: inherit;
+    font-size: clamp(17px, 1.35vw, 24px);
+    line-height: 1.25;
+    cursor: pointer;
+  }
+
+  .gx-experience__tab::after {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 4px;
+    background: var(--gx-ink);
+    content: '';
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gx-experience__tab[aria-selected='true'] {
+    color: var(--gx-ink);
+  }
+
+  .gx-experience__tab[aria-selected='true']::after { transform: scaleX(1); }
+
+  .gx-experience__tab:focus-visible {
+    outline: 2px solid var(--gx-ink);
+    outline-offset: -6px;
+  }
+
+  .gx-experience__panels { margin-top: clamp(36px, 5vw, 72px); }
+
+  .gx-experience__panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.98fr) minmax(250px, 0.98fr);
+    gap: clamp(16px, 2vw, 32px);
+    align-items: stretch;
+    animation: gx-panel-in 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .gx-experience__panel[hidden] { display: none; }
+
+  .gx-experience__lifestyle,
+  .gx-experience__screen,
+  .gx-experience__note {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 18px;
+  }
+
+  .gx-experience__lifestyle {
+    min-height: clamp(480px, 52vw, 760px);
+    background: #ded7e4;
+  }
+
+  .gx-experience__lifestyle img,
+  .gx-experience__placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gx-experience__screens {
+    display: grid;
+    grid-template-rows: minmax(0, 0.72fr) minmax(0, 1fr);
+    gap: clamp(16px, 2vw, 32px);
+  }
+
+  .gx-experience__screen {
+    min-height: 0;
+    background: #f3f1f6;
+  }
+
+  .gx-experience__screen img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .gx-experience__note {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    padding: clamp(30px, 4vw, 66px);
+    border: 1px solid var(--gx-line);
+    background: var(--gx-card);
+  }
+
+  .gx-experience__quote-mark {
+    margin-bottom: 28px;
+    color: #58556d;
+    font-family: Georgia, serif;
+    font-size: 48px;
+    line-height: 0.6;
+  }
+
+  .gx-experience__note h3 {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(30px, 3vw, 54px);
+    font-weight: 400;
+    line-height: 1.16;
+    letter-spacing: -0.035em;
+  }
+
+  .gx-experience__note p {
+    margin: 24px 0 0;
+    color: var(--gx-muted);
+    font-size: clamp(16px, 1.25vw, 20px);
+    line-height: 1.5;
+  }
+
+  .gx-experience__note > span:last-child:not(.gx-experience__quote-mark) {
+    margin-top: auto;
+    padding-top: 34px;
+    color: var(--gx-muted);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+
+  @keyframes gx-panel-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 989px) {
+    .gx-experience__intro { grid-template-columns: 1fr; }
+    .gx-experience__link { grid-column: 1; }
+    .gx-experience__panel { grid-template-columns: 1.25fr 0.9fr; }
+    .gx-experience__note { grid-column: 1 / -1; min-height: 340px; }
+  }
+
+  @media (max-width: 749px) {
+    .gx-experience__inner { padding-inline: 16px; }
+    .gx-experience__intro { margin-bottom: 42px; }
+    .gx-experience__tabs-wrap { margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; overscroll-behavior-inline: contain; }
+    .gx-experience__tabs { grid-template-columns: repeat(5, minmax(132px, 1fr)); min-width: 700px; }
+    .gx-experience__tab { display: flex; min-height: 92px; padding: 12px 12px 20px; align-items: center; text-align: left; font-size: 16px; }
+    .gx-experience__mobile-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
+    .gx-experience__arrow { display: grid; width: 56px; height: 48px; padding: 0; place-items: center; border: 0; background: transparent; color: var(--gx-ink); cursor: pointer; }
+    .gx-experience__arrow svg { width: 42px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .gx-experience__arrow:active { transform: scale(.96); }
+    .gx-experience__arrow:focus-visible { outline: 2px solid var(--gx-ink); outline-offset: 3px; }
+    .gx-experience__position { color: var(--gx-muted); font-size: 13px; font-variant-numeric: tabular-nums; letter-spacing: .1em; }
+    .gx-experience__panels { margin-top: 24px; touch-action: pan-y; }
+    .gx-experience__panel { grid-template-columns: 1fr; }
+    .gx-experience__lifestyle { min-height: 0; aspect-ratio: 3 / 4; }
+    .gx-experience__screens { grid-template-columns: 1fr 1fr; grid-template-rows: none; align-items: start; }
+    .gx-experience__screen { min-height: 0; }
+    .gx-experience__screen img { height: auto; }
+    .gx-experience__note { grid-column: auto; min-height: 320px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gx-experience__tab::after { transition: none; }
+    .gx-experience__panel { animation: none; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('genesyx-experience-tabs')) {
+    customElements.define('genesyx-experience-tabs', class extends HTMLElement {
+      connectedCallback() {
+        if (this.dataset.ready === 'true') return;
+        this.dataset.ready = 'true';
+        this.tabs = Array.from(this.querySelectorAll('[role="tab"]'));
+        this.panels = Array.from(this.querySelectorAll('[role="tabpanel"]'));
+        this.tabsWrap = this.querySelector('.gx-experience__tabs-wrap');
+        this.panelsContainer = this.querySelector('.gx-experience__panels');
+        this.previousButton = this.querySelector('[data-experience-previous]');
+        this.nextButton = this.querySelector('[data-experience-next]');
+        this.position = this.querySelector('[data-experience-position]');
+        this.interval = Number(this.dataset.interval) || 7000;
+        this.autoplay = this.dataset.autoplay === 'true' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.tabs.forEach((tab, index) => {
+          tab.addEventListener('click', () => {
+            this.setActive(index, false);
+            this.restart();
+          });
+          tab.addEventListener('keydown', (event) => this.onKeydown(event, index));
+        });
+        this.previousButton?.addEventListener('click', () => this.move(-1));
+        this.nextButton?.addEventListener('click', () => this.move(1));
+        this.panelsContainer?.addEventListener('pointerdown', (event) => this.onPointerDown(event));
+        this.panelsContainer?.addEventListener('pointerup', (event) => this.onPointerUp(event));
+        this.panelsContainer?.addEventListener('pointercancel', () => { this.swipeStart = null; });
+        this.addEventListener('mouseenter', () => this.stop());
+        this.addEventListener('mouseleave', () => this.start());
+        this.addEventListener('focusin', () => this.stop());
+        this.addEventListener('focusout', (event) => {
+          if (!this.contains(event.relatedTarget)) this.start();
+        });
+        this.addEventListener('shopify:block:select', (event) => {
+          const panel = event.target.closest('[data-panel-index]');
+          if (panel) this.setActive(Number(panel.dataset.panelIndex), false);
+        });
+        this.warmMedia();
+        this.start();
+      }
+
+      disconnectedCallback() {
+        this.stop();
+      }
+
+      // Lazy images inside hidden panels never enter the viewport, so tabs 2-5 would stay empty forever.
+      // Deliberately not IntersectionObserver-driven: its callbacks do not fire reliably on this page.
+      warmMedia() {
+        const load = () => this.querySelectorAll('img[loading="lazy"]').forEach((image) => { image.loading = 'eager'; });
+        const schedule = () => {
+          if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1500 });
+          else window.setTimeout(load, 200);
+        };
+        if (document.readyState === 'complete') schedule();
+        else window.addEventListener('load', schedule, { once: true });
+      }
+
+      setActive(index, moveFocus) {
+        const safeIndex = (index + this.tabs.length) % this.tabs.length;
+        this.tabs.forEach((tab, tabIndex) => {
+          const active = tabIndex === safeIndex;
+          tab.setAttribute('aria-selected', active ? 'true' : 'false');
+          tab.tabIndex = active ? 0 : -1;
+          this.panels[tabIndex].hidden = !active;
+        });
+        if (this.position) this.position.textContent = `${safeIndex + 1} / ${this.tabs.length}`;
+        if (moveFocus) this.tabs[safeIndex].focus();
+        const activeTab = this.tabs[safeIndex];
+        if (this.tabsWrap && activeTab) {
+          const target = activeTab.offsetLeft - ((this.tabsWrap.clientWidth - activeTab.offsetWidth) / 2);
+          this.tabsWrap.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+        }
+      }
+
+      move(step) {
+        const current = this.tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+        this.setActive(current + step, false);
+        this.restart();
+      }
+
+      onPointerDown(event) {
+        if (event.pointerType === 'mouse') return;
+        this.swipeStart = { x: event.clientX, y: event.clientY, id: event.pointerId };
+      }
+
+      onPointerUp(event) {
+        if (!this.swipeStart || this.swipeStart.id !== event.pointerId) return;
+        const deltaX = event.clientX - this.swipeStart.x;
+        const deltaY = event.clientY - this.swipeStart.y;
+        this.swipeStart = null;
+        if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
+        this.move(deltaX < 0 ? 1 : -1);
+      }
+
+      onKeydown(event, index) {
+        let nextIndex = null;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % this.tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (index - 1 + this.tabs.length) % this.tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = this.tabs.length - 1;
+        if (nextIndex === null) return;
+        event.preventDefault();
+        this.setActive(nextIndex, true);
+        this.restart();
+      }
+
+      start() {
+        if (!this.autoplay || this.timer || this.tabs.length < 2 || document.hidden) return;
+        this.timer = window.setInterval(() => {
+          const current = this.tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+          this.setActive((current + 1) % this.tabs.length, false);
+        }, this.interval);
+      }
+
+      stop() {
+        window.clearInterval(this.timer);
+        this.timer = null;
+      }
+
+      restart() {
+        this.stop();
+        this.start();
+      }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Genesyx experience tabs",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Built for your everyday" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Genesyx, with you through the day" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Use Genesyx for calm daily check-ins, cycle-aware context and patterns grounded in what you choose to track.</p>" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "How Genesyx works" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "text", "id": "tabs_label", "label": "Tabs accessible label", "default": "Ways to use Genesyx" },
+    { "type": "text", "id": "mobile_navigation_label", "label": "Mobile navigation label", "default": "Browse Genesyx experiences" },
+    { "type": "text", "id": "previous_label", "label": "Previous arrow label", "default": "Previous experience" },
+    { "type": "text", "id": "next_label", "label": "Next arrow label", "default": "Next experience" },
+    { "type": "color", "id": "background_color", "label": "Section background", "default": "#ffffff" },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-advance scenarios", "default": true },
+    { "type": "range", "id": "autoplay_seconds", "label": "Seconds per scenario", "min": 5, "max": 12, "step": 1, "default": 7, "unit": "s" }
+  ],
+  "blocks": [
+    {
+      "type": "scenario",
+      "name": "Scenario",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Tab title", "default": "Starting your day" },
+        { "type": "video", "id": "lifestyle_video", "label": "Lifestyle video (Shopify files)" },
+        { "type": "image_picker", "id": "lifestyle_image", "label": "Lifestyle image" },
+        { "type": "url", "id": "lifestyle_url", "label": "Lifestyle image URL" },
+        { "type": "text", "id": "lifestyle_alt", "label": "Lifestyle image alt text", "default": "A calm daily wellbeing moment" },
+        { "type": "text", "id": "screens_label", "label": "App screens accessible label", "default": "Genesyx app views" },
+        { "type": "video", "id": "screen_1_video", "label": "App screen 1 video (Shopify files)" },
+        { "type": "image_picker", "id": "screen_1", "label": "App screen 1" },
+        { "type": "text", "id": "screen_1_alt", "label": "App screen 1 alt text", "default": "Genesyx app view" },
+        { "type": "video", "id": "screen_2_video", "label": "App screen 2 video (Shopify files)" },
+        { "type": "image_picker", "id": "screen_2", "label": "App screen 2" },
+        { "type": "text", "id": "screen_2_alt", "label": "App screen 2 alt text", "default": "Genesyx app view" },
+        { "type": "text", "id": "note_heading", "label": "Context card heading", "default": "A calmer way to notice patterns" },
+        { "type": "textarea", "id": "note_body", "label": "Context card body", "default": "Genesyx brings your cycle, daily signals and gentle guidance into one private space." },
+        { "type": "text", "id": "note_label", "label": "Context card label", "default": "Genesyx experience" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Genesyx experience tabs",
+      "blocks": [
+        { "type": "scenario" },
+        { "type": "scenario" },
+        { "type": "scenario" },
+        { "type": "scenario" },
+        { "type": "scenario" }
+      ]
+    }
+  ]
+}
+{% endschema %}

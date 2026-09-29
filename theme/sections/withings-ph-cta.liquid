@@ -1,0 +1,97 @@
+{%- comment -%}
+  pH-tracking landing — Secondary CTA band. Repeats the app-store badges + a QR code placeholder.
+  Dark band for contrast against the light page.
+{%- endcomment -%}
+<section class="wi-scope bg-ink py-16 text-white md:py-24">
+  <div class="wi-container">
+    <div class="phcta-grid items-center gap-10">
+      <div class="text-left">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="mb-3 text-[13px] font-medium uppercase tracking-wide text-white/60">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="text-[28px] leading-[1.08] tracking-[-0.02em] text-white sm:text-[40px]">{{ section.settings.heading }}</h2>
+        {%- if section.settings.body != blank -%}
+          <p class="mt-4 max-w-xl text-[17px] text-white/60">{{ section.settings.body }}</p>
+        {%- endif -%}
+
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          {%- assign gp_link = section.settings.googleplay_link | strip | default: 'https://play.google.com/store/apps/details?id=com.genesyx.app' -%}
+          <a href="{{ gp_link }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+            {% render 'wi-image', image: section.settings.googleplay_image, fallback: 'google-play.png', alt: 'Get it on Google Play', class: 'h-12 w-auto' %}
+          </a>
+          {%- assign apple_link = section.settings.apple_link | strip -%}
+          {%- if apple_link != blank and apple_link != '#' -%}
+            <a href="{{ apple_link }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
+              {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store', class: 'h-12 w-auto' %}
+            </a>
+          {%- else -%}
+            <div class="flex flex-col items-start">
+              <span class="pointer-events-none" style="opacity:.45">
+                {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store — coming soon', class: 'h-12 w-auto' %}
+              </span>
+              <span class="mt-2 text-[13px] text-white/60">Coming soon</span>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} QR column {%- endcomment -%}
+      <div class="phcta-qr flex flex-col items-center">
+        <div class="phcta-qr-box overflow-hidden rounded-2xl bg-white">
+          {%- comment -%} IMAGE: app-download-qr.png — QR to the app listing, 240×240 (1:1). {%- endcomment -%}
+          {%- if section.settings.qr_image != blank -%}
+            {% render 'wi-image', image: section.settings.qr_image, alt: 'Scan to download the Genesyx app', class: 'h-full w-full object-contain', sizes: '240px' %}
+          {%- else -%}
+            <img
+              src="https://cdn.shopify.com/s/files/1/1027/6516/6922/files/genesyx-app-download-qr.png?v=1784301267"
+              alt="Scan to download the Genesyx app"
+              class="h-full w-full object-contain"
+              width="240"
+              height="240"
+              loading="lazy"
+            >
+          {%- endif -%}
+        </div>
+        {%- if section.settings.qr_caption != blank -%}
+          <p class="mt-3 text-[13px] text-white/60">{{ section.settings.qr_caption }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="mt-10 max-w-3xl text-[13px] italic leading-snug text-white/45">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </div>
+
+  <style>
+    .phcta-grid { display: grid; grid-template-columns: 1fr; }
+    .phcta-qr-box { width: 200px; height: 200px; padding: 12px; }
+    @media (min-width: 768px) {
+      .phcta-grid { grid-template-columns: 1.4fr 0.6fr; }
+      .phcta-qr { align-items: flex-end; }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "pH landing · CTA band",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Start today" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Know your pH from tomorrow morning" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Free to download. Your first reading takes under a minute." },
+    { "type": "header", "content": "QR code" },
+    { "type": "image_picker", "id": "qr_image", "label": "QR code image", "info": "Links to the app listing. Recommended 240×240 (1:1)." },
+    { "type": "text", "id": "qr_caption", "label": "QR caption", "default": "Scan to download" },
+    { "type": "header", "content": "Google Play" },
+    { "type": "text", "id": "googleplay_link", "label": "Google Play link", "default": "https://play.google.com/store/apps/details?id=com.genesyx.app" },
+    { "type": "image_picker", "id": "googleplay_image", "label": "Google Play badge (optional override)" },
+    { "type": "header", "content": "Apple App Store" },
+    { "type": "text", "id": "apple_link", "label": "App Store link — leave blank to show ‘Coming soon’" },
+    { "type": "image_picker", "id": "appstore_image", "label": "App Store badge (optional override)" },
+    { "type": "header", "content": "Legal" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer / fine print", "default": "Genesyx is a wellness tracking tool and does not diagnose, treat, or prevent any medical condition. If you have symptoms or concerns, please speak with a healthcare professional." }
+  ],
+  "presets": [{ "name": "pH landing · CTA band" }]
+}
+{% endschema %}

@@ -1,0 +1,465 @@
+{% doc %}
+  @prompt
+    need to generate the menu of the front page , add the logo in the top left in the menu
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-nav-menu-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: {{ block.settings.padding_vertical }}px {{ block.settings.padding_horizontal }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-nav-menu__wrapper-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .ai-nav-menu__logo-{{ ai_gen_id }} {
+    flex-shrink: 0;
+  }
+
+  .ai-nav-menu__logo-link-{{ ai_gen_id }} {
+    display: block;
+    line-height: 0;
+  }
+
+  .ai-nav-menu__logo-image-{{ ai_gen_id }} {
+    width: {{ block.settings.logo_width }}px;
+    height: auto;
+    display: block;
+  }
+
+  .ai-nav-menu__logo-placeholder-{{ ai_gen_id }} {
+    width: {{ block.settings.logo_width }}px;
+    height: 40px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  }
+
+  .ai-nav-menu__logo-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-nav-menu__container-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: {{ block.settings.alignment }};
+    align-items: center;
+    gap: {{ block.settings.item_spacing }}px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ai-nav-menu__item-{{ ai_gen_id }} {
+    position: relative;
+    list-style: none;
+  }
+
+  .ai-nav-menu__link-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.link_padding_vertical }}px {{ block.settings.link_padding_horizontal }}px;
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: {{ block.settings.font_weight }};
+    transition: color 0.2s ease;
+    border-radius: {{ block.settings.link_border_radius }}px;
+  }
+
+  .ai-nav-menu__link-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.link_hover_color }};
+    background-color: {{ block.settings.link_hover_bg }};
+  }
+
+  .ai-nav-menu__link-{{ ai_gen_id }}--active {
+    color: {{ block.settings.active_link_color }};
+    background-color: {{ block.settings.active_link_bg }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-nav-menu__wrapper-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ai-nav-menu__logo-image-{{ ai_gen_id }} {
+      width: {{ block.settings.mobile_logo_width }}px;
+    }
+
+    .ai-nav-menu__logo-placeholder-{{ ai_gen_id }} {
+      width: {{ block.settings.mobile_logo_width }}px;
+    }
+
+    .ai-nav-menu__container-{{ ai_gen_id }} {
+      flex-direction: column;
+      align-items: {{ block.settings.mobile_alignment }};
+      gap: {{ block.settings.mobile_item_spacing }}px;
+    }
+
+    .ai-nav-menu__link-{{ ai_gen_id }} {
+      font-size: {{ block.settings.mobile_font_size }}px;
+    }
+  }
+{% endstyle %}
+
+<nav-menu-{{ ai_gen_id }} class="ai-nav-menu-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-nav-menu__wrapper-{{ ai_gen_id }}">
+    <div class="ai-nav-menu__logo-{{ ai_gen_id }}">
+      <a href="/" class="ai-nav-menu__logo-link-{{ ai_gen_id }}">
+        {% if block.settings.logo %}
+          <img
+            src="{{ block.settings.logo | image_url: width: 400 }}"
+            alt="{{ shop.name }}"
+            class="ai-nav-menu__logo-image-{{ ai_gen_id }}"
+            width="{{ block.settings.logo.width }}"
+            height="{{ block.settings.logo.height }}"
+            loading="lazy"
+          >
+        {% else %}
+          <div class="ai-nav-menu__logo-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+      </a>
+    </div>
+
+    <ul class="ai-nav-menu__container-{{ ai_gen_id }}">
+      {% if block.settings.menu != blank %}
+        {% for link in block.settings.menu.links %}
+          <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+            <a 
+              href="{{ link.url }}" 
+              class="ai-nav-menu__link-{{ ai_gen_id }} {% if link.active %}ai-nav-menu__link-{{ ai_gen_id }}--active{% endif %}"
+              {% if link.current %}aria-current="page"{% endif %}
+            >
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      {% else %}
+        <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+          <a href="#" class="ai-nav-menu__link-{{ ai_gen_id }}">Home</a>
+        </li>
+        <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+          <a href="#" class="ai-nav-menu__link-{{ ai_gen_id }}">Shop</a>
+        </li>
+        <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+          <a href="#" class="ai-nav-menu__link-{{ ai_gen_id }}">About</a>
+        </li>
+        <li class="ai-nav-menu__item-{{ ai_gen_id }}">
+          <a href="#" class="ai-nav-menu__link-{{ ai_gen_id }}">Contact</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav-menu-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class NavMenu{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.highlightCurrentPage();
+      }
+
+      highlightCurrentPage() {
+        const currentPath = window.location.pathname;
+        const links = this.querySelectorAll('.ai-nav-menu__link-{{ ai_gen_id }}');
+        
+        links.forEach(link => {
+          if (link.getAttribute('href') === currentPath) {
+            link.classList.add('ai-nav-menu__link-{{ ai_gen_id }}--active');
+            link.setAttribute('aria-current', 'page');
+          }
+        });
+      }
+    }
+
+    customElements.define('nav-menu-{{ ai_gen_id }}', NavMenu{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Navigation menu",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "mobile_logo_width",
+      "label": "Mobile logo width",
+      "min": 40,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        },
+        {
+          "value": "space-between",
+          "label": "Space between"
+        }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Mobile alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#334FB4"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_bg",
+      "label": "Link hover background",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "active_link_color",
+      "label": "Active link color",
+      "default": "#334FB4"
+    },
+    {
+      "type": "color",
+      "id": "active_link_bg",
+      "label": "Active link background",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "label": "Mobile font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "label": "Item spacing",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_item_spacing",
+      "label": "Mobile item spacing",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "link_padding_vertical",
+      "label": "Link vertical padding",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "link_padding_horizontal",
+      "label": "Link horizontal padding",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "link_border_radius",
+      "label": "Link border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Navigation menu"
+    }
+  ]
+}
+{% endschema %}

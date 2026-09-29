@@ -1,0 +1,170 @@
+{%- comment -%} Withings U-Scan Nutrio header — sticky nav + hover mega-menu (static marketing markup) {%- endcomment -%}
+<style>
+  {%- comment -%} Dawn's base.css declares `.hidden { display: none !important }`, which beats Tailwind's
+    `lg:flex` no matter the source order — that kept this nav hidden at every width. Scoping the
+    responsive show/hide to its own class avoids the collision entirely. {%- endcomment -%}
+  .wi-header .wi-nav { display: none; }
+  @media (min-width: 64rem) { .wi-header .wi-nav { display: flex; } }
+</style>
+<header class="wi-scope wi-header sticky top-0 z-50 bg-white">
+  <div class="wi-container flex h-16 items-center justify-between gap-6">
+    {%- comment -%} Logo (CSS-mask wordmark, black) {%- endcomment -%}
+    <a href="{{ routes.root_url }}" aria-label="{{ section.settings.logo_alt | default: shop.name | escape }}" class="shrink-0">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ section.settings.logo_alt | default: shop.name | escape }}" class="block w-auto" style="height:{{ section.settings.logo_height | default: 22 }}px">
+      {%- else -%}
+        <img src="{{ 'genesyx-logo.png' | asset_url }}" alt="{{ section.settings.logo_alt | default: shop.name | escape }}" class="block w-auto" style="height:{{ section.settings.logo_height | default: 22 }}px">
+      {%- endif -%}
+    </a>
+
+    {%- comment -%} Primary nav {%- endcomment -%}
+    <nav class="wi-nav items-center gap-7">
+      {%- for item in section.blocks -%}
+        {%- if item.type == 'nav_group' -%}
+          <div class="wi-navitem group flex items-center" {{ item.shopify_attributes }}>
+            <a href="{{ item.settings.link | default: '#' }}" class="flex items-center gap-1 text-[15px] text-ink transition-colors hover:text-ink/60">
+              {{ item.settings.label }}
+            </a>
+            {%- comment -%} Mega panel {%- endcomment -%}
+            <div class="wi-mega pointer-events-none absolute inset-x-0 top-16 origin-top border-t border-border-soft bg-white opacity-0 shadow-[0_24px_40px_-24px_rgba(0,0,0,0.25)] transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
+              <div class="wi-container grid grid-cols-2 gap-x-8 gap-y-6 py-8 md:grid-cols-4">
+                {%- for i in (1..8) -%}
+                  {%- assign name_key = 'p' | append: i | append: '_name' -%}
+                  {%- assign img_key = 'p' | append: i | append: '_img' -%}
+                  {%- assign pick_key = 'p' | append: i | append: '_pick' -%}
+                  {%- assign tag_key = 'p' | append: i | append: '_tag' -%}
+                  {%- assign desc_key = 'p' | append: i | append: '_desc' -%}
+                  {%- assign link_key = 'p' | append: i | append: '_link' -%}
+                  {%- assign p_name = item.settings[name_key] -%}
+                  {%- assign p_img = item.settings[img_key] -%}
+                  {%- assign p_pick = item.settings[pick_key] -%}
+                  {%- assign p_tag = item.settings[tag_key] -%}
+                  {%- assign p_desc = item.settings[desc_key] -%}
+                  {%- assign p_link = item.settings[link_key] -%}
+                  {%- if p_name != blank -%}
+                    <a href="{{ p_link | default: '#' }}" class="group/card flex items-center gap-4 rounded-md p-2 transition-colors hover:bg-greige">
+                      <span class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-md bg-greige">
+                        {%- if p_pick != blank -%}
+                          <img src="{{ p_pick | image_url: width: 128 }}" alt="{{ p_name }}" loading="lazy" class="h-full w-full object-contain">
+                        {%- elsif p_img != blank -%}
+                          <img src="{{ p_img | asset_url }}" alt="{{ p_name }}" width="64" height="64" loading="lazy" class="h-full w-full object-contain">
+                        {%- endif -%}
+                      </span>
+                      <span class="min-w-0">
+                        <span class="flex items-center gap-2">
+                          <span class="text-[15px] font-medium text-ink">{{ p_name }}</span>
+                          {%- if p_tag != blank -%}
+                            <span class="rounded-full bg-[#eef1ff] px-2 py-0.5 text-[11px] font-medium text-periwinkle">{{ p_tag }}</span>
+                          {%- endif -%}
+                        </span>
+                        {%- if p_desc != blank -%}
+                          <span class="mt-1 block text-[13px] leading-snug text-ink-soft">{{ p_desc }}</span>
+                        {%- endif -%}
+                      </span>
+                    </a>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+        {%- else -%}
+          <div class="flex items-center" {{ item.shopify_attributes }}>
+            <a href="{{ item.settings.link | default: '#' }}"
+              class="flex items-center gap-1 text-[15px] transition-colors {% if item.settings.accent %}text-[#a97fd6]{% else %}text-ink hover:text-ink/60{% endif %}"
+              {% if item.settings.external %}target="_blank" rel="noopener"{% endif %}>
+              {{ item.settings.label }}
+              {%- if item.settings.external -%}{% render 'wi-icon', name: 'arrow-up-right', class: 'h-3.5 w-3.5' %}{%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    {%- comment -%} Account / cart {%- endcomment -%}
+    <div class="flex shrink-0 items-center gap-4">
+      <a href="{{ routes.account_url | default: '#' }}" aria-label="Account" class="text-ink hover:text-ink/60">
+        {% render 'wi-icon', name: 'account', class: 'h-6 w-6' %}
+      </a>
+      <a href="{{ routes.cart_url }}" aria-label="Cart" class="text-ink hover:text-ink/60">
+        {% render 'wi-icon', name: 'cart', class: 'h-6 w-6' %}
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Withings header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo image", "info": "Leave blank to use the built-in wordmark." },
+    { "type": "text", "id": "logo_alt", "label": "Logo alt text" },
+    { "type": "range", "id": "logo_height", "label": "Logo height", "min": 16, "max": 48, "step": 2, "unit": "px", "default": 22 }
+  ],
+  "blocks": [
+    {
+      "type": "nav_group",
+      "name": "Nav group (mega-menu)",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "header", "content": "Products (up to 8)", "info": "An entry with no link falls back to #, so it renders but goes nowhere." },
+        { "type": "text", "id": "p1_name", "label": "1 · Name" },
+        { "type": "url", "id": "p1_link", "label": "1 · Link" },
+        { "type": "image_picker", "id": "p1_pick", "label": "1 · Image (upload)" },
+        { "type": "text", "id": "p1_img", "label": "1 · …or bundled filename" },
+        { "type": "text", "id": "p1_tag", "label": "1 · Tag" },
+        { "type": "text", "id": "p1_desc", "label": "1 · Description" },
+        { "type": "text", "id": "p2_name", "label": "2 · Name" },
+        { "type": "url", "id": "p2_link", "label": "2 · Link" },
+        { "type": "image_picker", "id": "p2_pick", "label": "2 · Image (upload)" },
+        { "type": "text", "id": "p2_img", "label": "2 · …or bundled filename" },
+        { "type": "text", "id": "p2_tag", "label": "2 · Tag" },
+        { "type": "text", "id": "p2_desc", "label": "2 · Description" },
+        { "type": "text", "id": "p3_name", "label": "3 · Name" },
+        { "type": "url", "id": "p3_link", "label": "3 · Link" },
+        { "type": "image_picker", "id": "p3_pick", "label": "3 · Image (upload)" },
+        { "type": "text", "id": "p3_img", "label": "3 · …or bundled filename" },
+        { "type": "text", "id": "p3_tag", "label": "3 · Tag" },
+        { "type": "text", "id": "p3_desc", "label": "3 · Description" },
+        { "type": "text", "id": "p4_name", "label": "4 · Name" },
+        { "type": "url", "id": "p4_link", "label": "4 · Link" },
+        { "type": "image_picker", "id": "p4_pick", "label": "4 · Image (upload)" },
+        { "type": "text", "id": "p4_img", "label": "4 · …or bundled filename" },
+        { "type": "text", "id": "p4_tag", "label": "4 · Tag" },
+        { "type": "text", "id": "p4_desc", "label": "4 · Description" },
+        { "type": "text", "id": "p5_name", "label": "5 · Name" },
+        { "type": "url", "id": "p5_link", "label": "5 · Link" },
+        { "type": "image_picker", "id": "p5_pick", "label": "5 · Image (upload)" },
+        { "type": "text", "id": "p5_img", "label": "5 · …or bundled filename" },
+        { "type": "text", "id": "p5_tag", "label": "5 · Tag" },
+        { "type": "text", "id": "p5_desc", "label": "5 · Description" },
+        { "type": "text", "id": "p6_name", "label": "6 · Name" },
+        { "type": "url", "id": "p6_link", "label": "6 · Link" },
+        { "type": "image_picker", "id": "p6_pick", "label": "6 · Image (upload)" },
+        { "type": "text", "id": "p6_img", "label": "6 · …or bundled filename" },
+        { "type": "text", "id": "p6_tag", "label": "6 · Tag" },
+        { "type": "text", "id": "p7_name", "label": "7 · Name" },
+        { "type": "url", "id": "p7_link", "label": "7 · Link" },
+        { "type": "image_picker", "id": "p7_pick", "label": "7 · Image (upload)" },
+        { "type": "text", "id": "p7_img", "label": "7 · …or bundled filename" },
+        { "type": "text", "id": "p7_tag", "label": "7 · Tag" },
+        { "type": "text", "id": "p8_name", "label": "8 · Name" },
+        { "type": "url", "id": "p8_link", "label": "8 · Link" },
+        { "type": "image_picker", "id": "p8_pick", "label": "8 · Image (upload)" },
+        { "type": "text", "id": "p8_img", "label": "8 · …or bundled filename" },
+        { "type": "text", "id": "p8_tag", "label": "8 · Tag" }
+      ]
+    },
+    {
+      "type": "nav_link",
+      "name": "Nav link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "checkbox", "id": "accent", "label": "Accent colour", "default": false },
+        { "type": "checkbox", "id": "external", "label": "External (arrow icon)", "default": false }
+      ]
+    }
+  ]
+}
+{% endschema %}

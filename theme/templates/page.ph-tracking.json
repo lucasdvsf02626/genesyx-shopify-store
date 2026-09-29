@@ -1,0 +1,191 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "withings-ph-hero",
+      "settings": {
+        "eyebrow": "Genesyx app",
+        "title": "Track your vaginal pH at home",
+        "subtitle": "Genesyx turns a simple pH strip reading into a clear signal for intimate balance — logged in seconds, right from your phone.",
+        "video_url": "",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": ""
+      }
+    },
+    "value": {
+      "type": "withings-ph-value",
+      "blocks": {
+        "v1": {
+          "type": "prop",
+          "settings": {
+            "icon": "icon-bottle.svg",
+            "title": "Balance, made visible",
+            "body": "Vaginal pH is a quiet indicator of your intimate health; a quick reading turns it into something you can actually see."
+          }
+        },
+        "v2": {
+          "type": "prop",
+          "settings": {
+            "icon": "icon-heart.svg",
+            "title": "A clear, healthy target",
+            "body": "A typical healthy range of about 3.8–5.0 gives you a simple daily reference point."
+          }
+        },
+        "v3": {
+          "type": "prop",
+          "settings": {
+            "icon": "icon-lightning-bolt.svg",
+            "title": "Patterns over time",
+            "body": "One reading is a snapshot; 30 days is a trend — notice what your cycle and routine really do."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "settings": {
+        "eyebrow": "Why pH",
+        "heading": "A small signal that says a lot"
+      }
+    },
+    "feature": {
+      "type": "withings-ph-feature",
+      "blocks": {
+        "c1": {
+          "type": "callout",
+          "settings": {
+            "title": "Log pH in 2 taps",
+            "body": "Open, tap your strip colour, done — no manual entry.",
+            "x": 2,
+            "y": 6
+          }
+        },
+        "c2": {
+          "type": "callout",
+          "settings": {
+            "title": "Healthy range at a glance",
+            "body": "A clear 3.8–5.0 band shows where today sits.",
+            "x": 68,
+            "y": 20
+          }
+        },
+        "c3": {
+          "type": "callout",
+          "settings": {
+            "title": "30-day trend graph",
+            "body": "Watch how your baseline shifts across your cycle.",
+            "x": 0,
+            "y": 62
+          }
+        },
+        "c4": {
+          "type": "callout",
+          "settings": {
+            "title": "Gentle alerts",
+            "body": "A quiet nudge when readings drift outside your usual range.",
+            "x": 70,
+            "y": 66
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "eyebrow": "The pH screen",
+        "heading": "Your reading, decoded in one tap",
+        "body": "Log, review and understand your pH without leaving the home screen."
+      }
+    },
+    "data": {
+      "type": "withings-ph-data",
+      "settings": {
+        "eyebrow": "See the trend",
+        "heading": "Every reading builds your 30-day picture",
+        "body": "Log in seconds and watch the graph fill in — the trend line shows how your cycle and routine move your baseline over time.",
+        "poster": "shopify://shop_images/hf_20260708_143612_14c9f939-dc19-4920-8017-1b735d225e9e.png",
+        "video_url": ""
+      }
+    },
+    "gallery": {
+      "type": "withings-ph-gallery",
+      "settings": {
+        "eyebrow": "In everyday life",
+        "heading": "A simple habit that fits your morning",
+        "alt_1": "Checking a pH reading on the Genesyx app",
+        "alt_2": "pH test strip and water beside the phone",
+        "alt_3": "The pH reading logged in the app"
+      }
+    },
+    "social": {
+      "type": "withings-ph-social",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The two-tap logging is the only reason I actually stuck with tracking.",
+            "author": "Priya, 29"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Seeing my readings next to the healthy band made the numbers finally make sense.",
+            "author": "Sam, 34"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The 30-day trend helped me spot a pattern I'd never have noticed on my own.",
+            "author": "Leah, 26"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "rating": "4.8",
+        "rating_label": "4.8 average · Google Play",
+        "heading": "People are getting to know their pH"
+      }
+    },
+    "cta": {
+      "type": "withings-ph-cta",
+      "settings": {
+        "eyebrow": "Start today",
+        "heading": "Know your pH from tomorrow morning",
+        "body": "Free to download. Your first reading takes under a minute.",
+        "qr_caption": "Scan to download",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": "",
+        "disclaimer": "Genesyx is a wellness tracking tool and does not diagnose, treat, or prevent any medical condition. If you have symptoms or concerns, please speak with a healthcare professional."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "value",
+    "feature",
+    "data",
+    "gallery",
+    "social",
+    "cta"
+  ]
+}
