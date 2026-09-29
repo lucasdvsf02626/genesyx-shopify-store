@@ -1,0 +1,77 @@
+{%- comment -%}
+  pH-tracking landing — Social proof. Aggregate rating + testimonial quote slots.
+  Stars are inlined SVGs (icon-star.svg) tinted via currentColor.
+{%- endcomment -%}
+<section class="wi-scope bg-background py-16 md:py-24">
+  <div class="wi-container">
+    <div class="wi-reveal mx-auto max-w-2xl text-center">
+      <div class="phsoc-stars flex items-center justify-center gap-1 text-periwinkle" aria-label="Rated {{ section.settings.rating }} out of 5">
+        {%- for i in (1..5) -%}{{ 'icon-star.svg' | inline_asset_content }}{%- endfor -%}
+      </div>
+      {%- if section.settings.rating_label != blank -%}
+        <p class="mt-3 text-[15px] text-ink-soft">{{ section.settings.rating_label }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="mt-4 text-[26px] leading-[1.08] tracking-[-0.02em] sm:text-[36px]">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+      {%- for block in section.blocks -%}
+        <figure class="wi-reveal flex flex-col items-center rounded-2xl bg-card p-8 text-center" data-reveal-delay="{{ forloop.index0 | times: 80 }}" {{ block.shopify_attributes }}>
+          <div class="phsoc-stars flex items-center justify-center gap-1 text-periwinkle" aria-hidden="true">
+            {%- for i in (1..5) -%}{{ 'icon-star.svg' | inline_asset_content }}{%- endfor -%}
+          </div>
+          <blockquote class="mx-auto mt-4 max-w-sm text-[16px] leading-snug text-ink">{{ block.settings.quote }}</blockquote>
+          {%- if block.settings.author != blank and block.settings.author != 'Reviewer name' -%}
+            <figcaption class="mt-5 text-[14px] font-medium text-ink-soft">— {{ block.settings.author }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <style>
+    #shopify-section-{{ section.id }} .phsoc-stars {
+      color: #e7a928;
+    }
+    #shopify-section-{{ section.id }} .phsoc-stars svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      stroke: currentColor;
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "pH landing · Social proof",
+  "settings": [
+    { "type": "text", "id": "rating", "label": "Rating (for accessibility label)", "default": "4.8" },
+    { "type": "text", "id": "rating_label", "label": "Rating label", "default": "4.8 average · App Store & Google Play" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "People are getting to know their pH" }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "author", "label": "Author" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "pH landing · Social proof",
+      "blocks": [
+        { "type": "testimonial", "settings": { "quote": "Placeholder quote — the two-tap logging finally made me stick with tracking.", "author": "Reviewer name" } },
+        { "type": "testimonial", "settings": { "quote": "Placeholder quote — seeing the 30-day trend changed how I hydrate.", "author": "Reviewer name" } },
+        { "type": "testimonial", "settings": { "quote": "Placeholder quote — the optimal-range band makes it obvious at a glance.", "author": "Reviewer name" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

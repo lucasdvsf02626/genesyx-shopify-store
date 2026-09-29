@@ -1,0 +1,245 @@
+{%- comment -%}
+  Evidence-led Shettles Method resource page.
+  PDF source files are bundled with the theme so visitors can open the originals.
+{%- endcomment -%}
+<section
+  class="sm-page"
+  style="--sm-bg: {{ section.settings.background }}; --sm-surface: {{ section.settings.surface }}; --sm-ink: {{ section.settings.text_color }}; --sm-accent: {{ section.settings.accent }}; --sm-space: {{ section.settings.section_spacing }}px;"
+>
+  <header class="sm-hero">
+    <div class="sm-shell sm-hero__grid">
+      <div>
+        <p class="sm-kicker">{{ section.settings.eyebrow }}</p>
+        <h1>{{ section.settings.hero_title }}</h1>
+        <p class="sm-lede">{{ section.settings.hero_text }}</p>
+        <div class="sm-actions" aria-label="Page navigation">
+          <a class="sm-button sm-button--primary" href="#research">{{ section.settings.research_cta }}</a>
+          <a class="sm-button sm-button--secondary" href="#publications">{{ section.settings.publications_cta }}</a>
+        </div>
+      </div>
+      <aside class="sm-notice" aria-label="Important evidence notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5M12 17.2v.1"/></svg>
+        <div>
+          <strong>Important to know</strong>
+          <p>{{ section.settings.disclaimer }}</p>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="sm-shell sm-choices" aria-label="Explore this page">
+    <a class="sm-choice" href="#research">
+      <span class="sm-choice__icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none"><circle cx="16" cy="15" r="6"/><path d="M5 36c1-8 5-12 11-12s10 4 11 12M32 7v13l-7 13h18l-7-13V7M29 13h10"/></svg>
+      </span>
+      <span><strong>Research</strong><small>Understand the theory, later findings and current evidence position.</small></span>
+      <span class="sm-arrow" aria-hidden="true">&#8595;</span>
+    </a>
+    <a class="sm-choice" href="#publications">
+      <span class="sm-choice__icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none"><path d="M10 5h21l7 7v31H10zM31 5v9h7M17 22h14M17 29h14M17 36h9"/><path d="m34 32 8-8 3 3-8 8-5 2z"/></svg>
+      </span>
+      <span><strong>Publications</strong><small>Open the supplied papers and review verified academic sources.</small></span>
+      <span class="sm-arrow" aria-hidden="true">&#8595;</span>
+    </a>
+  </nav>
+
+  <main>
+    <section class="sm-section sm-intro" aria-labelledby="sm-intro-title">
+      <div class="sm-shell sm-reading">
+        <p class="sm-kicker">Overview</p>
+        <h2 id="sm-intro-title">What is the Shettles Method?</h2>
+        <p>The Shettles Method became popular as a natural, preconception approach to sex selection. It proposes that timing intercourse in relation to ovulation, supposed differences between X-bearing and Y-bearing sperm, and conditions in the vaginal environment could influence chromosomal sex.</p>
+        <p>These ideas are historical claims and hypotheses, not established medical facts. Later research has disputed whether intercourse timing can be used reliably in practice. Anyone seeking individual fertility or reproductive-health advice should consult an appropriately qualified healthcare professional.</p>
+      </div>
+    </section>
+
+    <section id="research" class="sm-section sm-section--tint" aria-labelledby="research-title">
+      <div class="sm-shell">
+        <div class="sm-heading">
+          <p class="sm-kicker">Research</p>
+          <h2 id="research-title">Claims, context and evidence</h2>
+          <p>Plain-language summaries designed to keep the original theory separate from what studies have actually established.</p>
+        </div>
+
+        <div class="sm-research-grid">
+          <article class="sm-panel">
+            <span class="sm-number">01</span>
+            <h3>The original theory</h3>
+            <p>Historically, intercourse closer to ovulation was claimed to favour Y-bearing sperm, while intercourse several days beforehand was claimed to favour X-bearing sperm. Popular versions also described differences in sperm speed, durability, size and behaviour, and sometimes included vaginal pH or particular sexual practices.</p>
+            <p class="sm-callout">These are historical claims, not established medical facts.</p>
+          </article>
+          <article class="sm-panel">
+            <span class="sm-number">02</span>
+            <h3>What later studies found</h3>
+            <p>A 1985 study of a modified technique found no statistically significant difference from uncontrolled intercourse. A 1991 meta-analysis did not support timing intercourse as a practical, reliable sex-selection method.</p>
+            <p><a href="#pub-simcock">Read the 1985 source</a> <span aria-hidden="true">&#183;</span> <a href="#pub-gray">Read the 1991 source</a></p>
+          </article>
+          <article class="sm-panel">
+            <span class="sm-number">03</span>
+            <h3>Current evidence position</h3>
+            <p>Current published evidence does not establish that intercourse timing, sexual position, vaginal pH manipulation, or other popular Shettles recommendations can reliably determine the sex of a baby.</p>
+          </article>
+          <article class="sm-panel">
+            <span class="sm-number">04</span>
+            <h3>Safety and medical guidance</h3>
+            <p>The method should not replace professional fertility advice. Avoid unsafe vaginal pH manipulation, douching, restrictive diets or unverified supplements. Discuss fertility, pregnancy and reproductive-health questions with a qualified healthcare professional.</p>
+          </article>
+        </div>
+
+        <div class="sm-library" aria-labelledby="research-library-title">
+          <div class="sm-heading sm-heading--compact">
+            <p class="sm-kicker">PDF library</p>
+            <h3 id="research-library-title">Research summaries</h3>
+            <p>Internal Genesyx reference material. These documents are explanatory summaries, not peer-reviewed publications.</p>
+          </div>
+          <div class="sm-card-grid sm-card-grid--two">
+            <article class="sm-pdf-card">
+              <span class="sm-tag">Internal overview · 3 pages</span>
+              <h4>Shettles Method: Research Overview</h4>
+              <p>Study notes covering timing, diet and laboratory research, with methods, sample sizes and limitations kept attached to individual findings.</p>
+              <div class="sm-link-group">
+                <a class="sm-link-button sm-link-button--primary" href="{{ 'Shettles_Method_Research_Overview.pdf' | asset_url }}" target="_blank" rel="noopener noreferrer">Read full PDF <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </article>
+            <article class="sm-pdf-card">
+              <span class="sm-tag">Internal overview · 1 page</span>
+              <h4>Genesyx and the Shettles Method</h4>
+              <p>A concise explanation of how Genesyx organises cycle observation, timing, nutrition and pH information without claiming that the method is proven.</p>
+              <div class="sm-link-group">
+                <a class="sm-link-button sm-link-button--primary" href="{{ 'Genesyx_and_the_Shettles_Method.pdf' | asset_url }}" target="_blank" rel="noopener noreferrer">Read full PDF <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sm-section" aria-labelledby="evidence-summary-title">
+      <div class="sm-shell">
+        <div class="sm-heading">
+          <p class="sm-kicker">At a glance</p>
+          <h2 id="evidence-summary-title">How to read the evidence</h2>
+        </div>
+        <div class="sm-evidence-grid">
+          <article><span>Historical claim</span><h3>Timing and environment may favour one sperm type</h3><p>The theory proposes predictable differences between X-bearing and Y-bearing sperm.</p></article>
+          <article><span>Research finding</span><h3>Results do not establish a reliable natural method</h3><p>Study designs and questions differ, and controlled evidence has not validated the practical claims.</p></article>
+          <article><span>Practical conclusion</span><h3>Do not present the method as proven</h3><p>The Shettles Method should not be presented as proven, guaranteed, or equivalent to clinically validated reproductive technologies.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications" class="sm-section sm-section--dark" aria-labelledby="publications-title">
+      <div class="sm-shell">
+        <div class="sm-heading">
+          <p class="sm-kicker">Publications</p>
+          <h2 id="publications-title">Supplied academic papers</h2>
+          <p>Open the full PDFs supplied for this resource. Each card states the study design so findings are not mistaken for proof of the wider Shettles Method.</p>
+        </div>
+        <div class="sm-card-grid">
+          <article class="sm-pdf-card sm-pdf-card--dark">
+            <span class="sm-tag">Observational cohort · 2008 · 8 pages</span>
+            <h3>You are what your mother eats: evidence for maternal preconception diet influencing foetal sex in humans</h3>
+            <p><strong>Fiona Mathews, Paul J. Johnson and Andrew Neil</strong><br>Proceedings of the Royal Society B · DOI 10.1098/rspb.2008.0105</p>
+            <p>Observed an association between preconception diet and birth sex in 740 British women. It did not test or establish the Shettles Method as a reliable intervention.</p>
+            <div class="sm-link-group">
+              <a class="sm-link-button sm-link-button--light" href="{{ 'Mathews_2008_Preconception_Diet_and_Foetal_Sex.pdf' | asset_url }}" target="_blank" rel="noopener noreferrer">Read full PDF <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&#8599;</span></a>
+              <a class="sm-link-button sm-link-button--ghost" href="https://pubmed.ncbi.nlm.nih.gov/18430648/" target="_blank" rel="noopener noreferrer">PubMed record <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </article>
+          <article class="sm-pdf-card sm-pdf-card--dark">
+            <span class="sm-tag">Laboratory study · 2017 · 9 pages</span>
+            <h3>Environmental Exposure of Sperm Sex-Chromosomes: A Gender Selection Technique</h3>
+            <p><strong>Ibukun P. Oyeyipo, Michelle van der Linde and Stefan S. du Plessis</strong><br>Toxicological Research · DOI 10.5487/TR.2017.33.4.315</p>
+            <p>Tested 18 semen samples under different laboratory conditions. Its sperm-enrichment findings are not pregnancy outcomes and do not validate at-home pH manipulation.</p>
+            <div class="sm-link-group">
+              <a class="sm-link-button sm-link-button--light" href="{{ 'Oyeyipo_2017_XY_Sperm_and_Environmental_Exposure.pdf' | asset_url }}" target="_blank" rel="noopener noreferrer">Read full PDF <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&#8599;</span></a>
+              <a class="sm-link-button sm-link-button--ghost" href="https://pubmed.ncbi.nlm.nih.gov/29071016/" target="_blank" rel="noopener noreferrer">PubMed record <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </article>
+          <article class="sm-pdf-card sm-pdf-card--dark">
+            <span class="sm-tag">Uncontrolled retrospective report · 2022 · 7 pages</span>
+            <h3>Using Non-Invasive Methods to Choose Gender; Sex Selection with Diet and Determination of Ovulation Time in Iran</h3>
+            <p><strong>Dariush Farhud and colleagues</strong><br>Iranian Journal of Public Health · DOI 10.18502/ijph.v51i8.10275</p>
+            <p>Reported outcomes from a combined diet, timing and lifestyle programme. The uncontrolled retrospective design cannot establish that the intervention caused the reported outcomes.</p>
+            <div class="sm-link-group">
+              <a class="sm-link-button sm-link-button--light" href="{{ 'Farhud_2022_Diet_Ovulation_Timing_and_Sex_Selection.pdf' | asset_url }}" target="_blank" rel="noopener noreferrer">Read full PDF <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&#8599;</span></a>
+              <a class="sm-link-button sm-link-button--ghost" href="https://pubmed.ncbi.nlm.nih.gov/36249107/" target="_blank" rel="noopener noreferrer">PubMed record <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </article>
+        </div>
+
+        <div class="sm-verified" aria-labelledby="verified-title">
+          <div class="sm-heading sm-heading--compact">
+            <p class="sm-kicker">Verified sources</p>
+            <h3 id="verified-title">Research directly assessing sex-selection claims</h3>
+          </div>
+          <div class="sm-source-list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'publication' -%}
+                <article id="{{ block.settings.anchor }}" class="sm-source" {{ block.shopify_attributes }}>
+                  <div><span class="sm-tag">{{ block.settings.publication_type }} · {{ block.settings.year }}</span><h4>{{ block.settings.title }}</h4></div>
+                  <dl><div><dt>Authors</dt><dd>{{ block.settings.authors }}</dd></div><div><dt>Journal</dt><dd>{{ block.settings.journal }}</dd></div><div><dt>DOI</dt><dd>{{ block.settings.doi }}</dd></div></dl>
+                  <p>{{ block.settings.summary }}</p>
+                  <div class="sm-source__actions">
+                    <a class="sm-link-button sm-link-button--light" href="{{ block.settings.url }}" target="_blank" rel="noopener noreferrer">PubMed record <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&#8599;</span></a>
+                    <a class="sm-link-button sm-link-button--ghost" href="https://doi.org/{{ block.settings.doi | strip | escape }}" target="_blank" rel="noopener noreferrer">Open DOI <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&#8599;</span></a>
+                  </div>
+                </article>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sm-section sm-section--tint" aria-labelledby="faq-title">
+      <div class="sm-shell sm-faq-layout">
+        <div class="sm-heading sm-heading--sticky"><p class="sm-kicker">Questions</p><h2 id="faq-title">Frequently asked questions</h2><p>Short answers based on the current evidence position.</p></div>
+        <div class="sm-faq">
+          {% assign questions = "What is the Shettles Method?|Does the Shettles Method work?|Can timing intercourse determine the sex of a baby?|Is the Shettles Method scientifically proven?|Can vaginal pH determine the sex of a baby?|Is the Shettles Method safe?|What should someone do if they have fertility concerns?" | split: "|" %}
+          {% assign answers = "It is a historical natural sex-selection method based mainly on timing intercourse around ovulation and proposed differences between X-bearing and Y-bearing sperm.|Published evidence does not establish it as a reliable way to determine a baby's sex, so it should not be presented as proven or guaranteed.|No reliable practical method has been established using intercourse timing alone.|No. Some studies explore related biological or observational questions, but the complete method has not been scientifically validated as reliable.|Laboratory conditions can affect sperm, but that does not show that manipulating vaginal pH at home can reliably determine a baby's sex. Douching or unsafe pH manipulation should be avoided.|Tracking a cycle is generally low risk, but restrictive diets, unverified supplements, douching and vaginal pH manipulation may be unsafe. Seek individual medical advice.|Speak with an appropriately qualified healthcare professional or fertility specialist for assessment and personal guidance." | split: "|" %}
+          {%- for question in questions -%}<details><summary>{{ question }}<span aria-hidden="true">+</span></summary><p>{{ answers[forloop.index0] }}</p></details>{%- endfor -%}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sm-footer"><div class="sm-shell"><strong>Medical disclaimer</strong><p>{{ section.settings.footer_disclaimer }}</p></div></footer>
+</section>
+
+<style>
+  .sm-page{background:var(--sm-bg);color:var(--sm-ink);font-family:var(--font-body-family,Arial,sans-serif);font-size:16px;line-height:1.65}.sm-page *{box-sizing:border-box}.sm-page h1,.sm-page h2,.sm-page h3,.sm-page h4{color:inherit;font-family:var(--font-heading-family,var(--font-body-family));letter-spacing:-.025em;line-height:1.12;margin:0}.sm-page p{margin:0}.sm-page a{color:inherit}.sm-shell{margin:0 auto;max-width:1240px;padding-left:24px;padding-right:24px}.sm-hero{background:linear-gradient(135deg,#f4f1ff 0%,var(--sm-bg) 52%,#eef8f3 100%);padding:clamp(72px,10vw,142px) 0 72px}.sm-hero__grid{align-items:end;display:grid;gap:48px;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr)}.sm-kicker{color:var(--sm-accent);font-size:12px;font-weight:700;letter-spacing:.14em;margin-bottom:16px!important;text-transform:uppercase}.sm-hero h1{font-size:clamp(42px,6.2vw,82px);max-width:900px}.sm-lede{font-size:clamp(18px,2vw,23px);margin-top:28px!important;max-width:720px}.sm-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}.sm-button{border:1px solid var(--sm-accent);border-radius:999px;font-weight:650;padding:13px 22px;text-decoration:none;transition:background .2s ease,color .2s ease,transform .2s ease}.sm-button:hover{transform:translateY(-2px)}.sm-button--primary{background:var(--sm-accent);color:#fff!important}.sm-button--secondary{background:transparent;color:var(--sm-accent)!important}.sm-notice{align-items:flex-start;background:rgba(255,255,255,.78);border:1px solid rgba(35,31,58,.12);border-radius:18px;display:flex;gap:14px;padding:20px}.sm-notice svg{flex:0 0 22px;height:22px;width:22px}.sm-notice p{font-size:13px;line-height:1.55;margin-top:4px!important}.sm-choices{display:grid;gap:18px;grid-template-columns:repeat(2,1fr);margin-top:-34px;position:relative;z-index:2}.sm-choice{align-items:center;background:#fff;border:1px solid rgba(35,31,58,.12);border-radius:22px;box-shadow:0 18px 45px rgba(35,31,58,.08);display:grid;gap:18px;grid-template-columns:auto 1fr auto;padding:28px;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}.sm-choice:hover{box-shadow:0 22px 55px rgba(35,31,58,.13);transform:translateY(-3px)}.sm-choice__icon{align-items:center;background:#f0ecff;border-radius:16px;display:flex;height:64px;justify-content:center;width:64px}.sm-choice__icon svg{height:38px;stroke:var(--sm-accent);stroke-linecap:round;stroke-linejoin:round;stroke-width:2;width:38px}.sm-choice strong{display:block;font-size:24px}.sm-choice small{display:block;font-size:14px;line-height:1.5;margin-top:5px;opacity:.72}.sm-arrow{font-size:22px}.sm-section{padding:var(--sm-space) 0}.sm-section--tint{background:#f6f6f2}.sm-section--dark{background:#252238;color:#fff}.sm-reading{max-width:880px}.sm-reading h2,.sm-heading h2{font-size:clamp(34px,4.2vw,56px)}.sm-reading>p:not(.sm-kicker){font-size:18px;margin-top:22px}.sm-heading{margin-bottom:42px;max-width:760px}.sm-heading>p:last-child{font-size:18px;margin-top:16px;opacity:.76}.sm-heading--compact{margin-bottom:24px}.sm-heading--compact h3{font-size:32px}.sm-research-grid{display:grid;gap:20px;grid-template-columns:repeat(2,1fr)}.sm-panel{background:var(--sm-surface);border:1px solid rgba(35,31,58,.1);border-radius:20px;padding:30px}.sm-panel h3{font-size:26px;margin:16px 0 14px}.sm-panel p+p{margin-top:16px}.sm-panel a{color:var(--sm-accent);font-weight:700;text-underline-offset:4px}.sm-number{color:var(--sm-accent);font-size:13px;font-weight:700}.sm-callout{border-left:3px solid var(--sm-accent);font-weight:650;padding-left:14px}.sm-library,.sm-verified{margin-top:64px}.sm-card-grid{display:grid;gap:20px;grid-template-columns:repeat(3,1fr)}.sm-card-grid--two{grid-template-columns:repeat(2,1fr)}.sm-pdf-card{background:var(--sm-surface);border:1px solid rgba(35,31,58,.1);border-radius:20px;display:flex;flex-direction:column;padding:28px;transition:border-color .2s ease,transform .2s ease}.sm-pdf-card:hover{border-color:color-mix(in srgb,var(--sm-accent) 45%,transparent);transform:translateY(-3px)}.sm-pdf-card h3,.sm-pdf-card h4{font-size:22px;margin:16px 0}.sm-pdf-card p{font-size:14px;opacity:.8}.sm-pdf-card p+p{margin-top:14px}.sm-pdf-card--dark{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}.sm-tag{color:var(--sm-accent);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}.sm-section--dark .sm-tag{color:#c8bbff}.sm-link-group{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:26px}.sm-link-button{align-items:center;border:1px solid currentColor;border-radius:999px;display:inline-flex;font-size:13px;font-weight:750;gap:7px;justify-content:center;line-height:1.2;min-height:42px;padding:10px 15px;text-decoration:none;transition:background .2s ease,color .2s ease,transform .2s ease}.sm-link-button:hover{transform:translateY(-2px)}.sm-link-button--primary{background:var(--sm-accent);border-color:var(--sm-accent);color:#fff!important}.sm-link-button--primary:hover{background:color-mix(in srgb,var(--sm-accent) 86%,#000)}.sm-link-button--light{background:#fff;border-color:#fff;color:#252238!important}.sm-link-button--light:hover{background:#eee9ff;border-color:#eee9ff}.sm-link-button--ghost{background:transparent;border-color:rgba(255,255,255,.42);color:#fff!important}.sm-link-button--ghost:hover{background:rgba(255,255,255,.1);border-color:#fff}.sm-evidence-grid{display:grid;gap:1px;grid-template-columns:repeat(3,1fr)}.sm-evidence-grid article{background:#f2efff;padding:30px}.sm-evidence-grid article:first-child{border-radius:20px 0 0 20px}.sm-evidence-grid article:last-child{border-radius:0 20px 20px 0}.sm-evidence-grid span{color:var(--sm-accent);font-size:12px;font-weight:700;text-transform:uppercase}.sm-evidence-grid h3{font-size:23px;margin:15px 0}.sm-source-list{border-top:1px solid rgba(255,255,255,.18)}.sm-source{display:grid;gap:24px;grid-template-columns:1.15fr .9fr 1.25fr auto;padding:30px 0;border-bottom:1px solid rgba(255,255,255,.18)}.sm-source h4{font-size:20px;margin-top:10px}.sm-source dl{font-size:13px;margin:0}.sm-source dl div+div{margin-top:8px}.sm-source dt{font-weight:700}.sm-source dd{margin:0;opacity:.75}.sm-source>p{font-size:14px;opacity:.78}.sm-source__actions{align-content:center;display:flex;flex-direction:column;gap:8px}.sm-source__actions .sm-link-button{white-space:nowrap}.sm-faq-layout{display:grid;gap:64px;grid-template-columns:.75fr 1.25fr}.sm-faq details{border-top:1px solid rgba(35,31,58,.18);padding:20px 0}.sm-faq details:last-child{border-bottom:1px solid rgba(35,31,58,.18)}.sm-faq summary{align-items:center;cursor:pointer;display:flex;font-size:18px;font-weight:700;justify-content:space-between;list-style:none}.sm-faq summary::-webkit-details-marker{display:none}.sm-faq summary span{font-size:24px;margin-left:16px}.sm-faq details[open] summary span{transform:rotate(45deg)}.sm-faq details p{margin-top:12px;max-width:720px}.sm-footer{background:#171521;color:#fff;padding:34px 0}.sm-footer strong{font-size:14px}.sm-footer p{font-size:13px;margin-top:6px;max-width:980px;opacity:.72}.sm-page :focus-visible{outline:3px solid #ffbf47;outline-offset:4px}
+  @media(max-width:900px){.sm-hero__grid,.sm-faq-layout{grid-template-columns:1fr}.sm-choices,.sm-card-grid,.sm-source,.sm-evidence-grid{grid-template-columns:1fr}.sm-source{gap:16px}.sm-evidence-grid article,.sm-evidence-grid article:first-child,.sm-evidence-grid article:last-child{border-radius:16px}.sm-heading--sticky{position:static}}
+  @media(max-width:640px){.sm-shell{padding-left:18px;padding-right:18px}.sm-hero{padding-top:58px}.sm-choices,.sm-research-grid,.sm-card-grid--two{grid-template-columns:1fr}.sm-choice{padding:22px}.sm-choice__icon{height:52px;width:52px}.sm-section{padding:64px 0}.sm-panel,.sm-pdf-card{padding:22px}}
+  @media(prefers-reduced-motion:reduce){.sm-page *{scroll-behavior:auto!important;transition:none!important}}
+</style>
+
+{% schema %}
+{
+  "name": "Shettles evidence page",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {"type":"text","id":"eyebrow","label":"Hero eyebrow","default":"Genesyx evidence library"},
+    {"type":"text","id":"hero_title","label":"Hero title","default":"The Shettles Method: Research, Claims and Evidence"},
+    {"type":"textarea","id":"hero_text","label":"Hero text","default":"An evidence-based overview of the theory, its historical development, and what published research has found."},
+    {"type":"textarea","id":"disclaimer","label":"Hero disclaimer","default":"The Shettles Method is not proven to guarantee or reliably determine the sex of a baby. This page is for educational purposes and is not medical advice."},
+    {"type":"text","id":"research_cta","label":"Research button label","default":"Explore the Research"},
+    {"type":"text","id":"publications_cta","label":"Publications button label","default":"View Publications"},
+    {"type":"textarea","id":"footer_disclaimer","label":"Footer medical disclaimer","default":"This educational page does not provide medical advice, diagnosis, or treatment. The Shettles Method has not been established as a reliable way to determine the sex of a baby. Always consult an appropriately qualified healthcare professional for personal medical guidance."},
+    {"type":"header","content":"Design"},
+    {"type":"color","id":"background","label":"Page background","default":"#fffefb"},
+    {"type":"color","id":"surface","label":"Card background","default":"#ffffff"},
+    {"type":"color","id":"text_color","label":"Text colour","default":"#252238"},
+    {"type":"color","id":"accent","label":"Accent colour","default":"#6650c7"},
+    {"type":"range","id":"section_spacing","label":"Section spacing","min":48,"max":140,"step":4,"unit":"px","default":96}
+  ],
+  "blocks": [
+    {"type":"publication","name":"Verified publication","limit":6,"settings":[
+      {"type":"text","id":"anchor","label":"Anchor ID"},{"type":"text","id":"title","label":"Title"},{"type":"text","id":"publication_type","label":"Publication type"},{"type":"textarea","id":"authors","label":"Authors"},{"type":"text","id":"journal","label":"Journal"},{"type":"text","id":"year","label":"Year"},{"type":"text","id":"doi","label":"DOI"},{"type":"url","id":"url","label":"Source URL"},{"type":"textarea","id":"summary","label":"Evidence summary"}
+    ]}
+  ],
+  "presets": [{"name":"Shettles evidence page"}]
+}
+{% endschema %}

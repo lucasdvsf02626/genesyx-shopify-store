@@ -1,0 +1,55 @@
+{%- comment -%}
+  pH-tracking landing — Photo band. Three lifestyle/product shots in a responsive row.
+  Each tile defaults to a theme asset (overridable via the image pickers), cropped to a uniform 4:5 tile.
+{%- endcomment -%}
+<section id="phgal-{{ section.id }}" class="wi-scope w-full bg-background py-16 md:py-24">
+  <div class="wi-container">
+    {%- if section.settings.heading != blank -%}
+      <div class="wi-reveal mx-auto max-w-2xl text-center">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="mt-3 text-[28px] leading-[1.08] tracking-[-0.02em] sm:text-[36px] md:text-[40px]">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="phgal-grid mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div class="phgal-tile wi-reveal overflow-hidden rounded-2xl bg-greige">
+        {% render 'wi-image', image: section.settings.image_1, fallback: 'ph-tracking-lifestyle.jpg', alt: section.settings.alt_1, class: 'h-full w-full object-cover', sizes: '(min-width: 640px) 33vw, 100vw' %}
+      </div>
+      <div class="phgal-tile wi-reveal overflow-hidden rounded-2xl bg-greige" data-reveal-delay="80">
+        {% render 'wi-image', image: section.settings.image_2, fallback: 'ph-tracking-flatlay.jpg', alt: section.settings.alt_2, class: 'h-full w-full object-cover', sizes: '(min-width: 640px) 33vw, 100vw' %}
+      </div>
+      <div class="phgal-tile wi-reveal overflow-hidden rounded-2xl bg-greige" data-reveal-delay="160">
+        {% render 'wi-image', image: section.settings.image_3, fallback: 'ph-tracking-data.jpg', alt: section.settings.alt_3, class: 'h-full w-full object-cover', sizes: '(min-width: 640px) 33vw, 100vw' %}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #phgal-{{ section.id }} .phgal-tile { aspect-ratio: 4 / 5; }
+    @media (min-width: 640px) {
+      #phgal-{{ section.id }} .phgal-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 56rem; margin-inline: auto; }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "pH landing · Photo band",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "In everyday life" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A simple habit that fits your morning" },
+    { "type": "header", "content": "Photo 1" },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "text", "id": "alt_1", "label": "Image 1 alt text", "default": "Checking a pH reading on the Genesyx app" },
+    { "type": "header", "content": "Photo 2" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "text", "id": "alt_2", "label": "Image 2 alt text", "default": "pH test strip and water beside the phone" },
+    { "type": "header", "content": "Photo 3" },
+    { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+    { "type": "text", "id": "alt_3", "label": "Image 3 alt text", "default": "The pH reading logged in the app" }
+  ],
+  "presets": [{ "name": "pH landing · Photo band" }]
+}
+{% endschema %}

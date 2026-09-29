@@ -1,0 +1,282 @@
+{%- comment -%} Shop configurator — static marketing markup with JS package/gallery toggle (assets/withings.js).
+  Single centred column: copy on top, product image in the middle, call to action at the bottom.
+  Every group below renders only when its settings are filled in, so blanking a setting in the theme editor hides that part. {%- endcomment -%}
+<style>
+  {%- comment -%} Scoped layout. Tailwind arbitrary values behind a breakpoint prefix are not in this
+    theme's compiled CSS, so the column caps live here. {%- endcomment -%}
+  #shop .wi-shop-inner { margin-left: auto; margin-right: auto; max-width: 760px; }
+  #shop .wi-shop-stack { display: flex; flex-direction: column; align-items: center; gap: 40px; text-align: center; }
+  #shop .wi-shop-copy, #shop .wi-shop-media, #shop .wi-shop-cta { width: 100%; }
+  #shop .wi-shop-copy { margin-left: auto; margin-right: auto; max-width: 680px; }
+  #shop .wi-shop-mainimg { display: block; margin-left: auto; margin-right: auto; height: 300px; width: 100%; object-fit: contain; object-position: center; cursor: zoom-in; }
+  #shop .wi-shop-richtext p + p { margin-top: 1em; }
+  #shop .wi-shop-richtext a { text-decoration: underline; }
+  {%- comment -%} Rows that read as two columns stay left-aligned so labels and values still line up. {%- endcomment -%}
+  #shop .wi-shop-cta fieldset, #shop .wi-shop-cta dl, #shop .wi-shop-upgrade { text-align: left; }
+  #shop .wi-shop-form { margin-left: auto; margin-right: auto; max-width: 560px; }
+  #shop .wi-shop-lightbox { display: none; position: fixed; inset: 0; z-index: 999; align-items: center; justify-content: center; padding: 24px; background: rgba(17, 17, 17, 0.85); cursor: zoom-out; }
+  #shop .wi-shop-lightbox.is-open { display: flex; }
+  #shop .wi-shop-lightbox img { max-width: 90vw; max-height: 90vh; width: auto; height: auto; object-fit: contain; border-radius: 12px; }
+  @media (min-width: 1024px) {
+    #shop .wi-shop-stack { gap: 48px; }
+    #shop .wi-shop-mainimg { height: 400px; }
+  }
+</style>
+<section id="shop" class="wi-scope scroll-mt-32 bg-background py-20 md:py-28">
+  <div class="wi-container" data-wi-configurator>
+    <div class="wi-shop-inner">
+      <div class="wi-shop-stack">
+        {%- comment -%} 1 — copy {%- endcomment -%}
+        <div class="wi-reveal wi-shop-copy">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="text-[28px] leading-[1.08] tracking-[-0.02em] sm:text-[36px] md:text-[42px]">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.body != blank -%}
+            <p class="mt-4 text-[16px] text-ink-soft">{{ section.settings.body }}</p>
+          {%- endif -%}
+          {%- if section.settings.left_text != blank -%}
+            <div class="wi-shop-richtext mt-6 text-[15px] leading-relaxed text-ink-soft">{{ section.settings.left_text }}</div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} 2 — product image {%- endcomment -%}
+        <div class="wi-reveal wi-shop-media" data-reveal-delay="80">
+          {%- liquid
+            assign images = ''
+            if section.settings.gallery_1 != blank
+              assign src = section.settings.gallery_1 | image_url: width: 900
+              assign images = images | append: src | append: '|'
+            endif
+            if section.settings.gallery_2 != blank
+              assign src = section.settings.gallery_2 | image_url: width: 900
+              assign images = images | append: src | append: '|'
+            endif
+            if section.settings.gallery_3 != blank
+              assign src = section.settings.gallery_3 | image_url: width: 900
+              assign images = images | append: src | append: '|'
+            endif
+            if images == blank
+              assign src = 'u-scan-nutrio.png' | asset_url
+              assign images = src | append: '|'
+            endif
+            assign gallery = images | split: '|'
+          -%}
+          <div class="overflow-hidden rounded-2xl bg-background">
+            <img data-wi-main-img src="{{ gallery.first }}" alt="{{ section.settings.product_name }}" width="900" height="900" class="wi-shop-mainimg">
+          </div>
+          {%- if gallery.size > 1 -%}
+            <div class="mt-4 flex justify-center gap-3">
+              {%- for g in gallery -%}
+                <button type="button" data-wi-thumb data-src="{{ g }}" aria-label="View image {{ forloop.index }}"
+                  class="h-20 w-20 overflow-hidden rounded-xl border bg-background transition {% if forloop.first %}border-ink{% else %}border-border-soft hover:border-ink/40{% endif %}">
+                  <img src="{{ g }}" alt="" width="80" height="80" loading="lazy" class="h-full w-full object-contain p-2">
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} 3 — call to action {%- endcomment -%}
+        <div class="wi-reveal wi-shop-cta" data-reveal-delay="160">
+          {%- if section.settings.badge != blank -%}
+            <span class="inline-block rounded-full bg-lilac/30 px-3 py-1 text-[12px] font-medium">{{ section.settings.badge }}</span>
+          {%- endif -%}
+          <h3 class="mt-4 text-[28px] leading-tight tracking-[-0.02em]">
+            {{ section.settings.product_name }}
+            {%- if section.settings.p1_name != blank or section.settings.p1_freq != blank -%}
+              <span class="block text-[16px] font-normal text-ink-soft">
+                <span data-wi-package-name>{{ section.settings.p1_name }}</span>{% if section.settings.p1_name != blank and section.settings.p1_freq != blank %} package · {% endif %}<span data-wi-freq>{{ section.settings.p1_freq }}</span>
+              </span>
+            {%- endif -%}
+          </h3>
+          {%- if section.settings.p1_price != blank -%}
+            <p class="mt-3 text-[26px] tracking-[-0.02em]" data-wi-price>{{ section.settings.p1_price }}</p>
+          {%- endif -%}
+
+          {%- comment -%} Package selector — only shown when there are two packages to choose between {%- endcomment -%}
+          {%- if section.settings.p1_name != blank and section.settings.p2_name != blank -%}
+            <fieldset class="mt-8">
+              <legend class="text-[13px] font-medium uppercase tracking-wide text-ink-soft">Package</legend>
+              <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <label class="group flex cursor-pointer items-center gap-3 rounded-xl border border-border-soft p-4 transition hover:border-ink/40 has-[:checked]:border-ink has-[:checked]:bg-greige"
+                  data-price="{{ section.settings.p1_price }}" data-freq="{{ section.settings.p1_freq }}" data-cartridge="{{ section.settings.p1_cartridge }}" data-name="{{ section.settings.p1_name }}">
+                  <input type="radio" name="wi-package" data-wi-package checked class="sr-only">
+                  <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-border-soft group-has-[:checked]:border-ink group-has-[:checked]:bg-ink group-has-[:checked]:text-white">
+                    <span class="hidden group-has-[:checked]:block">{% render 'wi-icon', name: 'check', class: 'h-3 w-3' %}</span>
+                  </span>
+                  <span>
+                    <span class="block text-[15px] font-medium">{{ section.settings.p1_name }}</span>
+                    <span class="block text-[13px] text-ink-soft">{{ section.settings.p1_freq }}</span>
+                  </span>
+                </label>
+                <label class="group flex cursor-pointer items-center gap-3 rounded-xl border border-border-soft p-4 transition hover:border-ink/40 has-[:checked]:border-ink has-[:checked]:bg-greige"
+                  data-price="{{ section.settings.p2_price }}" data-freq="{{ section.settings.p2_freq }}" data-cartridge="{{ section.settings.p2_cartridge }}" data-name="{{ section.settings.p2_name }}">
+                  <input type="radio" name="wi-package" data-wi-package class="sr-only">
+                  <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-border-soft group-has-[:checked]:border-ink group-has-[:checked]:bg-ink group-has-[:checked]:text-white">
+                    <span class="hidden group-has-[:checked]:block">{% render 'wi-icon', name: 'check', class: 'h-3 w-3' %}</span>
+                  </span>
+                  <span>
+                    <span class="block text-[15px] font-medium">{{ section.settings.p2_name }}</span>
+                    <span class="block text-[13px] text-ink-soft">{{ section.settings.p2_freq }}</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          {%- endif -%}
+
+          {%- comment -%} Upgrade row {%- endcomment -%}
+          {%- if section.settings.wplus_title != blank or section.settings.wplus_desc != blank -%}
+            <div class="wi-shop-upgrade mt-6 flex items-center justify-between rounded-xl border border-border-soft p-4">
+              <div>
+                <p class="text-[15px] font-medium">{{ section.settings.wplus_title }}</p>
+                <p class="text-[13px] text-ink-soft">{{ section.settings.wplus_desc }}</p>
+              </div>
+              {%- if section.settings.wplus_badge != blank -%}
+                <span class="rounded-full bg-mint/40 px-3 py-1 text-[13px] font-medium">{{ section.settings.wplus_badge }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} Order summary {%- endcomment -%}
+          {%- liquid
+            assign show_summary = false
+            if section.settings.summary_reader != blank or section.settings.p1_cartridge != blank or section.settings.summary_station != blank or section.settings.total_label != blank
+              assign show_summary = true
+            endif
+          -%}
+          {%- if show_summary -%}
+            <dl class="mt-8 space-y-3 border-t border-border-soft pt-6 text-[14px]">
+              {%- if section.settings.summary_reader != blank -%}
+                <div class="flex justify-between">
+                  <dt class="text-ink-soft">{{ section.settings.summary_reader }}</dt>
+                  <dd class="font-medium">{{ section.settings.included_label }}</dd>
+                </div>
+              {%- endif -%}
+              {%- if section.settings.p1_cartridge != blank -%}
+                <div class="flex justify-between">
+                  <dt class="text-ink-soft" data-wi-cartridge>{{ section.settings.p1_cartridge }}</dt>
+                  <dd class="font-medium">{{ section.settings.included_label }}</dd>
+                </div>
+              {%- endif -%}
+              {%- if section.settings.summary_station != blank -%}
+                <div class="flex justify-between">
+                  <dt class="text-ink-soft">{{ section.settings.summary_station }}</dt>
+                  <dd class="font-medium">{{ section.settings.included_label }}</dd>
+                </div>
+              {%- endif -%}
+              {%- if section.settings.total_label != blank -%}
+                <div class="flex justify-between border-t border-border-soft pt-3 text-[18px]">
+                  <dt class="font-medium">{{ section.settings.total_label }}</dt>
+                  <dd class="font-medium" data-wi-total>{{ section.settings.p1_price }}</dd>
+                </div>
+              {%- endif -%}
+            </dl>
+          {%- endif -%}
+
+          {%- form 'customer', id: 'GenesyxEarlyAccess', class: 'wi-shop-form mt-6' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter, genesyx early access">
+            {%- if form.posted_successfully? -%}
+              <p class="rounded-lg bg-mint/40 px-5 py-4 text-center text-[15px] font-medium" role="status" tabindex="-1">
+                {{ section.settings.added_label }}
+              </p>
+            {%- else -%}
+              <div class="flex flex-col gap-3 sm:flex-row">
+                <label class="sr-only" for="GenesyxEarlyAccessEmail-{{ section.id }}">Email address</label>
+                <input
+                  id="GenesyxEarlyAccessEmail-{{ section.id }}"
+                  class="min-h-14 min-w-0 flex-1 rounded-lg border border-border-soft bg-white px-4 text-[16px] text-ink outline-none transition placeholder:text-ink-soft focus:border-periwinkle focus:ring-2 focus:ring-periwinkle/20"
+                  type="email"
+                  name="contact[email]"
+                  value="{{ form.email }}"
+                  autocomplete="email"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  placeholder="{{ section.settings.email_placeholder }}"
+                  aria-required="true"
+                  required
+                >
+                <button type="submit" class="min-h-14 rounded-lg bg-periwinkle px-6 py-3 text-[16px] font-medium text-white transition hover:bg-periwinkle-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-periwinkle">
+                  {{ section.settings.cta_label }}
+                </button>
+              </div>
+              {%- if form.errors -%}
+                <div class="mt-3 text-[13px] text-red-700" role="alert">{{ form.errors | default_errors }}</div>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endform -%}
+
+          {%- if section.settings.trust_1 != blank or section.settings.trust_2 != blank or section.settings.trust_3 != blank -%}
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[13px] text-ink-soft">
+              {%- if section.settings.trust_1 != blank -%}
+                <span class="inline-flex items-center gap-1.5">{% render 'wi-icon', name: 'check', class: 'h-4 w-4 text-periwinkle' %} {{ section.settings.trust_1 }}</span>
+              {%- endif -%}
+              {%- if section.settings.trust_2 != blank -%}
+                <span class="inline-flex items-center gap-1.5">{% render 'wi-icon', name: 'check', class: 'h-4 w-4 text-periwinkle' %} {{ section.settings.trust_2 }}</span>
+              {%- endif -%}
+              {%- if section.settings.trust_3 != blank -%}
+                <span class="inline-flex items-center gap-1.5">{% render 'wi-icon', name: 'check', class: 'h-4 w-4 text-periwinkle' %} {{ section.settings.trust_3 }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.disclaimer != blank -%}
+            <p class="mt-6 text-[12px] leading-relaxed text-ink-soft">{{ section.settings.disclaimer }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Lightbox lives outside .wi-reveal — that wrapper's scroll-reveal animation sets a
+        transform, which would otherwise turn position:fixed into a local, non-viewport overlay. {%- endcomment -%}
+      <div class="wi-shop-lightbox" data-wi-lightbox role="dialog" aria-modal="true" aria-label="{{ section.settings.product_name }}">
+        <img data-wi-lightbox-img src="" alt="{{ section.settings.product_name }}">
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Genesyx coming soon",
+  "settings": [
+    { "type": "header", "content": "Text (top)", "info": "All three fields sit at the top of the block, above the product image. Leave any of them blank to hide it." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "U-Scan packages are based on consumption needs" },
+    { "type": "textarea", "id": "body", "label": "Intro paragraph", "default": "Your plan is built around your expected usage — each U-Scan cartridge holds a fixed number of tests, so pick the frequency that fits your routine." },
+    { "type": "richtext", "id": "left_text", "label": "Body text", "info": "Supports bold, italic, links and multiple paragraphs.", "default": "<p>Everything in one private place: your cycle, your fertile window, vaginal pH, hydration and sleep.</p><p>No pressure and no scores — just the context to understand your own patterns, day by day.</p>" },
+    { "type": "header", "content": "Product", "info": "The product image sits in the middle, between the text and the signup form." },
+    { "type": "text", "id": "product_name", "label": "Product name", "default": "U-Scan Nutrio" },
+    { "type": "text", "id": "badge", "label": "Badge", "info": "Leave blank to hide", "default": "New" },
+    { "type": "header", "content": "Gallery", "info": "Leave images 2 and 3 blank to show a single product image with no thumbnails." },
+    { "type": "image_picker", "id": "gallery_1", "label": "Image 1 (main)" },
+    { "type": "image_picker", "id": "gallery_2", "label": "Image 2" },
+    { "type": "image_picker", "id": "gallery_3", "label": "Image 3" },
+    { "type": "header", "content": "Package 1", "info": "The package selector only appears when both package names are filled in. Leave the name, frequency and price blank to hide pricing entirely." },
+    { "type": "text", "id": "p1_name", "label": "Name", "default": "Proactive" },
+    { "type": "text", "id": "p1_freq", "label": "Frequency", "default": "2 weekly measurements" },
+    { "type": "text", "id": "p1_price", "label": "Price", "default": "£ 319.95" },
+    { "type": "text", "id": "p1_cartridge", "label": "Cartridge line", "default": "U-Scan Nutrio Cartridge x1" },
+    { "type": "header", "content": "Package 2" },
+    { "type": "text", "id": "p2_name", "label": "Name", "default": "Intensive" },
+    { "type": "text", "id": "p2_freq", "label": "Frequency", "default": "5 weekly measurements" },
+    { "type": "text", "id": "p2_price", "label": "Price", "default": "£ 389.96" },
+    { "type": "text", "id": "p2_cartridge", "label": "Cartridge line", "default": "U-Scan Nutrio Cartridge x2" },
+    { "type": "header", "content": "Upgrade row", "info": "Leave the title and description blank to hide this row." },
+    { "type": "text", "id": "wplus_title", "label": "Title", "default": "Withings+" },
+    { "type": "text", "id": "wplus_desc", "label": "Description", "default": "Included for the launch of U-Scan" },
+    { "type": "text", "id": "wplus_badge", "label": "Badge", "default": "Included" },
+    { "type": "header", "content": "Order summary", "info": "Leave all four lines blank to hide the summary and total." },
+    { "type": "text", "id": "summary_reader", "label": "Reader line", "default": "U-Scan Reader" },
+    { "type": "text", "id": "summary_station", "label": "Station line", "default": "U-Scan Station" },
+    { "type": "text", "id": "included_label", "label": "Included label", "default": "Included" },
+    { "type": "text", "id": "total_label", "label": "Total label", "default": "Total" },
+    { "type": "header", "content": "Early-access signup (bottom)" },
+    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "Enter your email" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Join the early-access list" },
+    { "type": "text", "id": "added_label", "label": "Success message", "default": "You're on the list" },
+    { "type": "text", "id": "trust_1", "label": "Trust badge 1", "default": "No payment today" },
+    { "type": "text", "id": "trust_2", "label": "Trust badge 2", "default": "Unsubscribe anytime" },
+    { "type": "text", "id": "trust_3", "label": "Trust badge 3", "default": "Private by design" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "A new shipment of the cartridges in your selected package ships automatically when your current supply runs out. For hygiene reasons, returns are not accepted." }
+  ],
+  "presets": [{ "name": "Genesyx coming soon" }]
+}
+{% endschema %}

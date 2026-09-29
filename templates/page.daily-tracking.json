@@ -1,0 +1,274 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "withings-ph-hero",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "Genesyx app",
+        "title": "Log your day in seconds",
+        "subtitle": "Genesyx makes daily tracking effortless — pH, hydration, symptoms and mood, all captured in a few taps before you put the kettle on.",
+        "poster": "shopify://shop_images/ph-tracking-flatlay.jpg",
+        "video_url": "",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": "https://apps.apple.com/gb/app/genesyx/id6787682466"
+      }
+    },
+    "image_banner_yEmAgb": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_phPr96": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h1"
+          }
+        },
+        "text_33eRJh": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "buttons_tjXeDh": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_phPr96",
+        "text_33eRJh",
+        "buttons_tjXeDh"
+      ],
+      "disabled": true,
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Generated_image_1_1.png",
+        "image_2": "shopify://shop_images/Generated_image_1.png",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "1788768942d8dcf5b5": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_88ab2c0_hfxmzy": {
+          "type": "ai_gen_block_88ab2c0",
+          "settings": {
+            "image_left": "shopify://shop_images/Generated_image_1_1.png",
+            "image_right": "shopify://shop_images/Generated_image_1.png",
+            "image_ratio": "3/4",
+            "desktop_width_percent": 100,
+            "gap": 8,
+            "mobile_gap": 8,
+            "border_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_88ab2c0_hfxmzy"
+      ],
+      "settings": {}
+    },
+    "value": {
+      "type": "withings-ph-value",
+      "blocks": {
+        "v1": {
+          "type": "prop",
+          "settings": {
+            "icon": "icon-bottle.svg",
+            "title": "Two taps, done",
+            "body": "Open, tap, log — capturing today takes less time than reading this sentence."
+          }
+        },
+        "v2": {
+          "type": "prop",
+          "settings": {
+            "icon": "icon-heart.svg",
+            "title": "Never miss a day",
+            "body": "Gentle reminders and a visible streak keep the habit sticking."
+          }
+        },
+        "v3": {
+          "type": "prop",
+          "settings": {
+            "icon": "icon-lightning-bolt.svg",
+            "title": "Everything in one place",
+            "body": "pH, water, supplements and notes live on a single home screen."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "settings": {
+        "eyebrow": "Why daily",
+        "heading": "Small habit, big signal"
+      }
+    },
+    "feature": {
+      "type": "withings-ph-feature",
+      "blocks": {
+        "c1": {
+          "type": "callout",
+          "settings": {
+            "title": "Tap to log pH",
+            "body": "Match your strip colour — no manual entry.",
+            "x": 2,
+            "y": 6
+          }
+        },
+        "c2": {
+          "type": "callout",
+          "settings": {
+            "title": "Today's numbers",
+            "body": "pH, water and streak, all at a glance.",
+            "x": 68,
+            "y": 20
+          }
+        },
+        "c3": {
+          "type": "callout",
+          "settings": {
+            "title": "Optimal window",
+            "body": "A clear 6.0–7.5 band shows where today sits.",
+            "x": 0,
+            "y": 62
+          }
+        },
+        "c4": {
+          "type": "callout",
+          "settings": {
+            "title": "One-tap reminders",
+            "body": "A nudge if the day is slipping by unlogged.",
+            "x": 70,
+            "y": 66
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "eyebrow": "The log screen",
+        "heading": "Today, captured in one tap",
+        "body": "Log your pH and the rest without leaving the home screen.",
+        "screenshot": "shopify://shop_images/VagpH.png"
+      }
+    },
+    "data": {
+      "type": "withings-ph-data",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "See it add up",
+        "heading": "Every day builds your 30-day picture",
+        "body": "Log a little each morning and the dashboard fills in — sleep, water, supplements and nutrition in one view.",
+        "poster": "shopify://shop_images/videoframe_7552.png",
+        "video_url": ""
+      }
+    },
+    "gallery": {
+      "type": "withings-ph-gallery",
+      "settings": {
+        "eyebrow": "In everyday life",
+        "heading": "A habit that fits your morning",
+        "image_1": "shopify://shop_images/crop-hero-B.png",
+        "alt_1": "The Genesyx trackers screen on a warm wood surface",
+        "image_2": "shopify://shop_images/feature-B.png",
+        "alt_2": "Checking today's Vaginal pH reading on the Genesyx app",
+        "image_3": "shopify://shop_images/flatlay.png",
+        "alt_3": "The Genesyx app beside a pH strip and morning coffee setup"
+      }
+    },
+    "social": {
+      "type": "withings-ph-social",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Placeholder quote — the two-tap logging finally made me stick with it.",
+            "author": "Reviewer name"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Placeholder quote — the streak is oddly motivating, I log every morning now.",
+            "author": "Reviewer name"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Placeholder quote — everything on one screen means I actually keep it up.",
+            "author": "Reviewer name"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "rating": "4.8",
+        "rating_label": "4.8 average · App Store & Google Play",
+        "heading": "People are building the daily habit"
+      }
+    },
+    "cta": {
+      "type": "withings-ph-cta",
+      "settings": {
+        "eyebrow": "Start today",
+        "heading": "Start tracking from tomorrow morning",
+        "body": "Free to download. Your first reading takes under a minute.",
+        "qr_caption": "Scan to download",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": "",
+        "disclaimer": "Genesyx is a wellness tracking tool and does not diagnose, treat, or prevent any medical condition. If you have symptoms or concerns, please speak with a healthcare professional."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "image_banner_yEmAgb",
+    "1788768942d8dcf5b5",
+    "value",
+    "feature",
+    "data",
+    "gallery",
+    "social",
+    "cta"
+  ]
+}

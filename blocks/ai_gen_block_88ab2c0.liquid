@@ -1,0 +1,218 @@
+{% doc %}
+  @prompt
+    I need to generate a Image banner with two pics like the image banner above be without the white square in the middle 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-dual-image-banner-{{ ai_gen_id }} {
+    width: 100%;
+    display: block;
+  }
+
+  .ai-dual-image-banner__wrapper-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ block.settings.gap }}px;
+    width: {{ block.settings.desktop_width_percent }}%;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .ai-dual-image-banner__image-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-dual-image-banner__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .ai-dual-image-banner__placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: {{ block.settings.image_ratio }};
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-dual-image-banner__placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-dual-image-banner__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-dual-image-banner__wrapper-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.mobile_gap }}px;
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<dual-image-banner-{{ ai_gen_id }}
+  class="ai-dual-image-banner-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-dual-image-banner__wrapper-{{ ai_gen_id }}">
+    <div class="ai-dual-image-banner__image-container-{{ ai_gen_id }}">
+      {% if block.settings.image_left %}
+        <img
+          src="{{ block.settings.image_left | image_url: width: 1200 }}"
+          alt="{{ block.settings.image_left.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.image_left.width }}"
+          height="{{ block.settings.image_left.height }}"
+          class="ai-dual-image-banner__image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-dual-image-banner__placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-dual-image-banner__empty-state-{{ ai_gen_id }}">
+            Add left image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-dual-image-banner__image-container-{{ ai_gen_id }}">
+      {% if block.settings.image_right %}
+        <img
+          src="{{ block.settings.image_right | image_url: width: 1200 }}"
+          alt="{{ block.settings.image_right.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.image_right.width }}"
+          height="{{ block.settings.image_right.height }}"
+          class="ai-dual-image-banner__image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-dual-image-banner__placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-dual-image-banner__empty-state-{{ ai_gen_id }}">
+            Add right image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</dual-image-banner-{{ ai_gen_id }}>
+
+{% schema %}
+{
+  "name": "Dual image banner",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_left",
+      "label": "Left image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_right",
+      "label": "Right image"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "16/9",
+          "label": "16:9"
+        },
+        {
+          "value": "4/3",
+          "label": "4:3"
+        },
+        {
+          "value": "1/1",
+          "label": "1:1"
+        },
+        {
+          "value": "3/4",
+          "label": "3:4"
+        },
+        {
+          "value": "2/3",
+          "label": "2:3"
+        }
+      ],
+      "default": "16/9"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between images",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Mobile gap",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dual image banner"
+    }
+  ]
+}
+{% endschema %}

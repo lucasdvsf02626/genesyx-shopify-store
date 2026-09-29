@@ -1,0 +1,189 @@
+<section
+  id="hero-{{ section.id }}"
+  class="wihero wi-scope"
+  style="--wihero-position-x: {{ section.settings.focal_x }}%; --wihero-position-y: {{ section.settings.focal_y }}%; --wihero-surface: {{ section.settings.background_color | default: '#ffffff' }};"
+>
+  <div class="wihero__grid">
+    <div class="wihero__copy">
+      <div class="wihero__copy-inner">
+        {%- if section.settings.logo != blank -%}
+          <div class="wihero__logo" style="max-width: {{ section.settings.logo_width | default: 140 }}px;">
+            {{ section.settings.logo | image_url: width: 400 | image_tag: loading: 'eager', class: 'wihero__logo-image', alt: section.settings.logo_alt }}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="wihero__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="wihero__title">{{ section.settings.title }}</h1>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="wihero__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_link | default: '#' }}" class="wi-cta wihero__cta">{{ section.settings.cta_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="wihero__media">
+      {%- if section.settings.poster != blank -%}
+        {{ section.settings.poster | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '480, 720, 960, 1200, 1600, 2000, 2400', sizes: '(min-width: 768px) 52vw, 100vw', class: 'wihero__image', alt: section.settings.image_alt }}
+      {%- elsif section.settings.hero_image_url != blank -%}
+        <img
+          class="wihero__image"
+          src="{{ section.settings.hero_image_url | escape }}"
+          alt="{{ section.settings.image_alt | escape }}"
+          width="1536"
+          height="2048"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        >
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'wihero__image wihero__placeholder' }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .wihero {
+    width: 100%;
+    overflow: hidden;
+    background: var(--wihero-surface, #ffffff);
+    color: #292522;
+  }
+
+  .wihero__grid {
+    display: grid;
+    min-height: clamp(620px, calc(100svh - 110px), 780px);
+    grid-template-columns: minmax(0, 48%) minmax(0, 52%);
+  }
+
+  .wihero__copy {
+    display: flex;
+    align-items: center;
+    padding: clamp(4rem, 8vw, 8rem) clamp(2rem, 6vw, 7rem);
+  }
+
+  .wihero__copy-inner {
+    max-width: 620px;
+  }
+
+  .wihero__logo {
+    margin: 0 0 1.5rem;
+  }
+
+  .wihero__logo-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .wihero__eyebrow {
+    margin: 0 0 1rem;
+    color: #6f6862;
+    font-size: 0.94rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+  }
+
+  .wihero__title {
+    margin: 0;
+    color: inherit;
+    font-size: clamp(3.4rem, 6vw, 6.5rem);
+    font-weight: 400;
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+  }
+
+  .wihero__subtitle {
+    max-width: 31rem;
+    margin: 1.5rem 0 0;
+    color: #5e5751;
+    font-size: clamp(1.15rem, 1.55vw, 1.45rem);
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .wihero__cta {
+    margin-top: 2rem;
+  }
+
+  .wihero__media {
+    position: relative;
+    min-width: 0;
+    min-height: 100%;
+    overflow: hidden;
+    background: #ddd6cf;
+  }
+
+  .wihero__image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--wihero-position-x) var(--wihero-position-y);
+  }
+
+  .wihero__placeholder {
+    background: #ddd6cf;
+  }
+
+  @media (max-width: 767px) {
+    .wihero__grid {
+      display: flex;
+      min-height: 0;
+      flex-direction: column;
+    }
+
+    .wihero__copy {
+      padding: 2.5rem 1.25rem 2rem;
+    }
+
+    .wihero__title {
+      font-size: clamp(3.25rem, 17vw, 4.5rem);
+    }
+
+    .wihero__subtitle {
+      margin-top: 1.1rem;
+      font-size: 1.12rem;
+      line-height: 1.45;
+    }
+
+    .wihero__cta {
+      margin-top: 1.5rem;
+    }
+
+    .wihero__media {
+      min-height: 0;
+      aspect-ratio: 4 / 5;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Withings hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New" },
+    { "type": "text", "id": "title", "label": "Title", "default": "U-Scan Nutrio" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Master your body's response to nutrition" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Buy now" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "color", "id": "background_color", "label": "Copy panel background", "default": "#ffffff", "info": "Fills the left half of the hero, behind the heading and button." },
+    { "type": "header", "content": "Logo" },
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "text", "id": "logo_alt", "label": "Logo alt text", "default": "Genesyx" },
+    { "type": "range", "id": "logo_width", "min": 60, "max": 320, "step": 10, "unit": "px", "label": "Logo width", "default": 140 },
+    { "type": "header", "content": "Hero image" },
+    { "type": "image_picker", "id": "poster", "label": "Image" },
+    { "type": "text", "id": "hero_image_url", "label": "External image URL", "info": "Used only when no Shopify image is selected." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "A person using Genesyx on their phone" },
+    { "type": "range", "id": "focal_x", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Horizontal focal point", "default": 50 },
+    { "type": "range", "id": "focal_y", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Vertical focal point", "default": 45 }
+  ],
+  "presets": [{ "name": "Withings hero" }]
+}
+{% endschema %}

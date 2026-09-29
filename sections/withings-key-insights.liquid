@@ -1,0 +1,75 @@
+{%- comment -%} Withings U-Scan Nutrio key insights — 4 cards {%- endcomment -%}
+<section class="wi-scope bg-background py-20 md:py-28">
+  <div class="wi-container">
+    <div class="wi-reveal max-w-3xl">
+      <p class="text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ section.settings.eyebrow }}</p>
+      <h2 class="mt-3 text-[30px] leading-[1.08] tracking-[-0.02em] sm:text-[40px] md:text-[48px]">{{ section.settings.heading }}</h2>
+      <p class="mt-5 max-w-2xl text-[17px] text-ink-soft">{{ section.settings.body }}</p>
+    </div>
+
+    {%- if section.settings.video != blank or section.settings.video_url != blank -%}
+      <div class="wi-reveal mt-12 overflow-hidden rounded-2xl bg-card" data-reveal-delay="60">
+        {%- if section.settings.video != blank -%}
+          {{ section.settings.video | video_tag: class: 'js-inview-video h-full w-full object-cover', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
+        {%- else -%}
+          <video class="js-inview-video h-full w-full object-cover" muted autoplay loop playsinline preload="none"><source src="{{ section.settings.video_url }}"></video>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {%- for block in section.blocks -%}
+        {%- assign delay = forloop.index0 | modulo: 2 | times: 80 -%}
+        <div class="wi-reveal group overflow-hidden rounded-2xl bg-card" data-reveal-delay="{{ delay }}" {{ block.shopify_attributes }}>
+          {% render 'wi-image', image: block.settings.image_pick, fallback: block.settings.image, alt: block.settings.label, class: 'h-56 w-full object-cover transition duration-500 group-hover:scale-[1.03]' %}
+          <div class="p-8">
+            <p class="text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ block.settings.label }}</p>
+            <h3 class="mt-2 text-[24px] leading-snug">{{ block.settings.title }}</h3>
+            <p class="mt-3 text-[15px] text-ink-soft">{{ block.settings.body }}</p>
+            <p class="mt-5 inline-flex items-center gap-1 text-[15px] font-medium text-periwinkle">{{ block.settings.cta }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Withings key insights",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Advanced nutrition parameters" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Capture key nutritional insights" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "U-Scan Nutrio automatically sends your results to the app, revealing four key insights about how your body responds to different foods." },
+    { "type": "header", "content": "Intro video" },
+    { "type": "video", "id": "video", "label": "Video (Shopify files)" },
+    { "type": "text", "id": "video_url", "label": "External video URL fallback" }
+  ],
+  "blocks": [
+    {
+      "type": "insight",
+      "name": "Insight",
+      "settings": [
+        { "type": "image_picker", "id": "image_pick", "label": "Image (upload)" },
+        { "type": "text", "id": "image", "label": "…or bundled image filename" },
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" },
+        { "type": "text", "id": "cta", "label": "CTA text" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Withings key insights",
+      "blocks": [
+        { "type": "insight", "settings": { "image": "ketones.jpg", "label": "Ketone levels", "title": "Understand your metabolism", "body": "Ketones can signal early shifts in how your body uses energy — useful when following a keto diet or fasting.", "cta": "Track your Ketone levels" } },
+        { "type": "insight", "settings": { "image": "vitamines.jpg", "label": "Vitamin C levels", "title": "Boost your immune system", "body": "Urinary Vitamin C reflects your intake of this essential antioxidant, helping you ensure you get enough.", "cta": "Optimize Vitamin C levels" } },
+        { "type": "insight", "settings": { "image": "bio-acidity.jpg", "label": "Bio-Acidity", "title": "Balance your diet", "body": "Bio-Acidity measures your urine pH, revealing whether your diet leans too acidic or too alkaline.", "cta": "Regulate your Bio-Acidity" } },
+        { "type": "insight", "settings": { "image": "hydratation.jpg", "label": "HydroStatus", "title": "Find your optimal fluid intake", "body": "Estimated from your urine's specific gravity, HydroStatus helps you fine-tune hydration for performance and recovery.", "cta": "Follow your HydroStatus" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

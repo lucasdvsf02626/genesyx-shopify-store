@@ -1,0 +1,108 @@
+{%- comment -%} Withings U-Scan Nutrio package comparison {%- endcomment -%}
+<section class="wi-scope bg-greige py-20 md:py-28">
+  <div class="wi-container">
+    <div class="wi-reveal text-center">
+      <h2 class="text-[28px] leading-[1.08] tracking-[-0.02em] sm:text-[36px] md:text-[42px]">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
+      {%- for block in section.blocks -%}
+        <div class="wi-reveal flex flex-col rounded-2xl bg-card p-8" data-reveal-delay="{{ forloop.index0 | times: 100 }}" {{ block.shopify_attributes }}>
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="text-[22px]">{{ block.settings.name }}</h3>
+              <p class="mt-1 text-[14px] text-ink-soft">{{ block.settings.tagline }}</p>
+              <p class="mt-1 text-[26px] tracking-[-0.02em]">{{ block.settings.price }}</p>
+            </div>
+            {% render 'wi-image', image: block.settings.image_pick, fallback: block.settings.image, alt: block.settings.name, class: 'h-24 w-24 shrink-0 object-contain' %}
+          </div>
+
+          <a href="{{ block.settings.cta_link | default: '#shop' }}" class="mt-6 inline-flex w-full items-center justify-center rounded-lg px-6 py-3 text-[15px] font-medium transition {% if block.settings.accent %}bg-periwinkle text-white hover:bg-periwinkle-hover{% else %}border border-ink text-ink hover:bg-ink hover:text-white{% endif %}">
+            {{ block.settings.cta_label | default: 'Shop now' }}
+          </a>
+
+          <p class="mt-8 text-[13px] font-medium uppercase tracking-wide text-ink-soft">What's included?</p>
+          <dl class="mt-4 divide-y divide-border-soft">
+            {%- for i in (1..5) -%}
+              {%- assign label_key = 'row' | append: i | append: '_label' -%}
+              {%- assign value_key = 'row' | append: i | append: '_value' -%}
+              {%- assign r_label = block.settings[label_key] -%}
+              {%- assign r_value = block.settings[value_key] -%}
+              {%- if r_label != blank -%}
+                <div class="flex items-center justify-between gap-4 py-3">
+                  <dt class="text-[14px] text-ink-soft">{{ r_label }}</dt>
+                  <dd class="flex items-center gap-1.5 text-right text-[14px] font-medium">
+                    {% render 'wi-icon', name: 'check', class: 'h-4 w-4 text-periwinkle' %}
+                    {{ r_value }}
+                  </dd>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </dl>
+
+          <div class="mt-6 rounded-xl bg-greige p-5 text-[13px] text-ink-soft">
+            <p><span class="font-medium text-ink">Initial payment:</span> {{ block.settings.initial }}</p>
+            <p class="mt-1"><span class="font-medium text-ink">Cartridge renewal:</span> {{ block.settings.renewal }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="wi-reveal mt-10 text-center" data-reveal-delay="80">
+      <p class="text-[15px] text-ink-soft">{{ section.settings.quiz_text }}</p>
+      <a href="{{ section.settings.quiz_link | default: '#' }}" class="wi-cta mt-4">{{ section.settings.quiz_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Withings package compare",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Which package is right for you?" },
+    { "type": "text", "id": "quiz_text", "label": "Quiz text", "default": "Find your ideal package" },
+    { "type": "text", "id": "quiz_label", "label": "Quiz CTA label", "default": "Take the quiz" },
+    { "type": "url", "id": "quiz_link", "label": "Quiz link" }
+  ],
+  "blocks": [
+    {
+      "type": "package",
+      "name": "Package",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "image_picker", "id": "image_pick", "label": "Image (upload)" },
+        { "type": "text", "id": "image", "label": "…or bundled image filename" },
+        { "type": "text", "id": "tagline", "label": "Tagline" },
+        { "type": "text", "id": "price", "label": "Price" },
+        { "type": "checkbox", "id": "accent", "label": "Accent (primary button)", "default": false },
+        { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop now" },
+        { "type": "url", "id": "cta_link", "label": "CTA link" },
+        { "type": "header", "content": "Included rows (up to 5)" },
+        { "type": "text", "id": "row1_label", "label": "1 · Label" },
+        { "type": "text", "id": "row1_value", "label": "1 · Value" },
+        { "type": "text", "id": "row2_label", "label": "2 · Label" },
+        { "type": "text", "id": "row2_value", "label": "2 · Value" },
+        { "type": "text", "id": "row3_label", "label": "3 · Label" },
+        { "type": "text", "id": "row3_value", "label": "3 · Value" },
+        { "type": "text", "id": "row4_label", "label": "4 · Label" },
+        { "type": "text", "id": "row4_value", "label": "4 · Value" },
+        { "type": "text", "id": "row5_label", "label": "5 · Label" },
+        { "type": "text", "id": "row5_value", "label": "5 · Value" },
+        { "type": "header", "content": "Payment" },
+        { "type": "text", "id": "initial", "label": "Initial payment" },
+        { "type": "textarea", "id": "renewal", "label": "Cartridge renewal" }
+      ]
+    }
+  ],
+  "max_blocks": 2,
+  "presets": [
+    {
+      "name": "Withings package compare",
+      "blocks": [
+        { "type": "package", "settings": { "name": "Proactive Package", "image": "u-scan-nutrio-proactive-2mpw.png", "tagline": "Your urine lab twice a week from", "price": "£35/month", "accent": true, "row1_label": "Reader and Station", "row1_value": "Included (£230 value)", "row2_label": "Cartridge", "row2_value": "1 cartridge included", "row3_label": "Test capacity", "row3_value": "22 tests", "row4_label": "Monitoring frequency", "row4_value": "2 measurements/week", "row5_label": "Withings+", "row5_value": "Free access", "initial": "£319.95", "renewal": "From £35/month (£89.95 charged every 2.5 months)" } },
+        { "type": "package", "settings": { "name": "Intensive Package", "image": "u-scan-nutrio-intensive-5mpw.png", "tagline": "Your urine lab five times a week from", "price": "£79/month", "accent": false, "row1_label": "Reader and Station", "row1_value": "Included (£230 value)", "row2_label": "Cartridge", "row2_value": "2 cartridges included", "row3_label": "Test capacity", "row3_value": "44 tests", "row4_label": "Monitoring frequency", "row4_value": "5 measurements/week", "row5_label": "Withings+", "row5_value": "Free access", "initial": "£389.96", "renewal": "From £79/month (£159.96 charged every 2 months)" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

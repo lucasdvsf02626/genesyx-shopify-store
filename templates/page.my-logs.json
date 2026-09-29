@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "withings-ph-hero",
+      "settings": {
+        "eyebrow": "Genesyx app",
+        "title": "Everything you've tracked, in one place",
+        "subtitle": "Genesyx keeps every reading, symptom and note in one tidy timeline — so nothing gets lost and patterns have room to show.",
+        "poster": "shopify://shop_images/hf_20260715_121207_677589ec-ea68-4ed0-9c6d-f8f26f5ced78.png",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": ""
+      }
+    },
+    "value": {
+      "type": "withings-ph-value",
+      "settings": {
+        "eyebrow": "Why logs",
+        "heading": "Your history, kept for you"
+      },
+      "blocks": {
+        "v1": { "type": "prop", "settings": { "icon": "icon-heart.svg", "title": "One tidy timeline", "body": "Every pH reading, symptom and note in a single, scrollable place." } },
+        "v2": { "type": "prop", "settings": { "icon": "icon-lightning-bolt.svg", "title": "Nothing slips away", "body": "Yesterday's entry is a tap away, whenever you need it." } },
+        "v3": { "type": "prop", "settings": { "icon": "icon-bottle.svg", "title": "Ready when you are", "body": "Bring your log to an appointment or just check back on a hunch." } }
+      },
+      "block_order": ["v1", "v2", "v3"]
+    },
+    "feature": {
+      "type": "withings-ph-feature",
+      "settings": {
+        "eyebrow": "The logs screen",
+        "heading": "Your whole history, one tap away",
+        "body": "Scroll back through everything you've tracked, grouped and easy to read.",
+        "screenshot": "shopify://shop_images/Screenshot_20260708_162335.png"
+      },
+      "blocks": {
+        "c1": { "type": "callout", "settings": { "title": "All your logs", "body": "Every entry, in one scrollable list.", "x": 2, "y": 6 } },
+        "c2": { "type": "callout", "settings": { "title": "Jump to any day", "body": "Tap a date to see exactly what you recorded.", "x": 68, "y": 20 } },
+        "c3": { "type": "callout", "settings": { "title": "pH and cycle together", "body": "Readings sit alongside your cycle context.", "x": 0, "y": 62 } },
+        "c4": { "type": "callout", "settings": { "title": "Yours to keep", "body": "Your history stays with you, always.", "x": 70, "y": 66 } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"]
+    },
+    "data": {
+      "type": "withings-ph-data",
+      "settings": {
+        "eyebrow": "See the pattern",
+        "heading": "Every entry builds the bigger picture",
+        "body": "The more you log, the clearer your pH and cycle graphs become over 30 days.",
+        "poster": "shopify://shop_images/Screenshot_20260708_150457.png"
+      }
+    },
+    "gallery": {
+      "type": "withings-ph-gallery",
+      "settings": {
+        "eyebrow": "In everyday life",
+        "heading": "A habit that fits your morning",
+        "image_1": "shopify://shop_images/ph-tracking-data.jpg",
+        "alt_1": "A reading logged in the Genesyx app",
+        "image_2": "shopify://shop_images/ph-tracking-flatlay.jpg",
+        "alt_2": "pH test strip and water beside the phone",
+        "image_3": "shopify://shop_images/ph-tracking-lifestyle.jpg",
+        "alt_3": "Reviewing the log on the Genesyx app"
+      }
+    },
+    "social": {
+      "type": "withings-ph-social",
+      "settings": {
+        "rating": "4.8",
+        "rating_label": "4.8 average · App Store & Google Play",
+        "heading": "People are keeping their history in one place"
+      },
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "quote": "Placeholder quote — having every reading in one timeline is such a relief.", "author": "Reviewer name" } },
+        "t2": { "type": "testimonial", "settings": { "quote": "Placeholder quote — I brought my log to an appointment and it just made sense.", "author": "Reviewer name" } },
+        "t3": { "type": "testimonial", "settings": { "quote": "Placeholder quote — nothing gets lost anymore, it's all there when I look.", "author": "Reviewer name" } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "cta": {
+      "type": "withings-ph-cta",
+      "settings": {
+        "eyebrow": "Start today",
+        "heading": "Start your log from tomorrow morning",
+        "body": "Free to download. Your first reading takes under a minute.",
+        "qr_caption": "Scan to download",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": ""
+      }
+    }
+  },
+  "order": ["hero", "value", "feature", "data", "gallery", "social", "cta"]
+}

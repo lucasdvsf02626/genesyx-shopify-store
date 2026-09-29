@@ -1,0 +1,106 @@
+{%- comment -%}
+  pH-tracking landing — Feature showcase. Large pH-screen screenshot with annotated callouts.
+  Desktop: callouts float around the phone (positioned via each block's X/Y %).
+  Mobile: the same callouts stack as a numbered list under the image (no absolute layout).
+  Single DOM node per callout — CSS handles the two layouts, so no duplication.
+{%- endcomment -%}
+<section id="phfeat-{{ section.id }}" class="wi-scope bg-greige py-16 md:py-28">
+  <div class="wi-container">
+    <div class="wi-reveal mx-auto max-w-2xl text-center">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="mt-3 text-[28px] leading-[1.08] tracking-[-0.02em] sm:text-[36px] md:text-[44px]">{{ section.settings.heading }}</h2>
+      {%- if section.settings.body != blank -%}
+        <p class="mx-auto mt-5 max-w-xl text-[17px] text-ink-soft">{{ section.settings.body }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="phfeat-stage wi-reveal" data-reveal-delay="60">
+      <div class="phfeat-phone">
+        {%- comment -%} IMAGE: ph-tracking-screen.png — app pH screen, portrait 1080×1620 (2:3). Lazy, dimensions reserved. {%- endcomment -%}
+        {% render 'wi-image', image: section.settings.screenshot, fallback: 'ph-tracking-screen.png', alt: section.settings.heading, class: 'phfeat-img', sizes: '(min-width: 768px) 360px, 80vw' %}
+      </div>
+
+      <ol class="phfeat-callouts">
+        {%- for block in section.blocks -%}
+          <li class="phfeat-callout" style="--x:{{ block.settings.x | default: 50 }}%; --y:{{ block.settings.y | default: 50 }}%;" {{ block.shopify_attributes }}>
+            <span class="phfeat-num">{{ forloop.index }}</span>
+            <span class="phfeat-copy">
+              <strong class="text-[15px] font-medium text-ink">{{ block.settings.title }}</strong>
+              {%- if block.settings.body != blank -%}<span class="mt-1 block text-[13px] text-ink-soft">{{ block.settings.body }}</span>{%- endif -%}
+            </span>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+
+  <style>
+    /* Shared */
+    #phfeat-{{ section.id }} .phfeat-stage { margin-top: 3rem; }
+    #phfeat-{{ section.id }} .phfeat-phone { max-width: 360px; margin-inline: auto; }
+    #phfeat-{{ section.id }} .phfeat-img {
+      width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover;
+      border-radius: var(--radius-2xl); background: var(--color-card);
+      box-shadow: 0 24px 40px -24px rgba(0,0,0,.25);
+    }
+    #phfeat-{{ section.id }} .phfeat-num {
+      flex: 0 0 auto; width: 26px; height: 26px; border-radius: 999px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--color-periwinkle); color: #fff; font-size: 13px; font-weight: 500;
+    }
+    /* Mobile-first: callouts as a numbered list under the phone */
+    #phfeat-{{ section.id }} .phfeat-callouts { margin-top: 2rem; display: grid; gap: 1rem; }
+    #phfeat-{{ section.id }} .phfeat-callout { display: flex; gap: .75rem; align-items: flex-start; }
+
+    /* Desktop: float callouts around the phone using each block's X/Y % */
+    @media (min-width: 1024px) {
+      #phfeat-{{ section.id }} .phfeat-stage { position: relative; min-height: 590px; }
+      #phfeat-{{ section.id }} .phfeat-phone { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 340px; }
+      #phfeat-{{ section.id }} .phfeat-callouts { margin-top: 0; display: block; }
+      #phfeat-{{ section.id }} .phfeat-callout {
+        position: absolute; left: var(--x); top: var(--y);
+        width: 230px; padding: 12px 14px; border-radius: var(--radius-lg);
+        background: var(--color-card); box-shadow: 0 10px 30px -14px rgba(0,0,0,.25);
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "pH landing · Feature",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The pH screen" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your reading, decoded in one tap" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Log, review and understand your pH without leaving the home screen." },
+    { "type": "header", "content": "Screenshot" },
+    { "type": "image_picker", "id": "screenshot", "label": "pH screen screenshot", "info": "Portrait phone screen. Recommended 1080×1620 (2:3)." }
+  ],
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body (optional)" },
+        { "type": "range", "id": "x", "label": "Desktop X position (%)", "min": 0, "max": 80, "step": 1, "unit": "%", "default": 0 },
+        { "type": "range", "id": "y", "label": "Desktop Y position (%)", "min": 0, "max": 90, "step": 1, "unit": "%", "default": 0 }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "pH landing · Feature",
+      "blocks": [
+        { "type": "callout", "settings": { "title": "Log pH in 2 taps", "body": "Open, tap your strip colour, done — no manual entry.", "x": 2, "y": 6 } },
+        { "type": "callout", "settings": { "title": "Optimal window at a glance", "body": "A clear 6.0–7.5 band shows where today sits.", "x": 68, "y": 20 } },
+        { "type": "callout", "settings": { "title": "30-day trend graph", "body": "See how hydration and diet move your baseline.", "x": 0, "y": 62 } },
+        { "type": "callout", "settings": { "title": "Smart alerts", "body": "A gentle nudge when readings drift out of range.", "x": 70, "y": 66 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

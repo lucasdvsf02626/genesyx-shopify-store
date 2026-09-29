@@ -1,0 +1,49 @@
+{%- comment -%} Genesyx desktop-version info + launch button {%- endcomment -%}
+<section class="wi-scope bg-background py-20 md:py-28">
+  <div class="wi-container">
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <div class="wi-reveal">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="mt-4 max-w-md text-[32px] leading-[1.06] tracking-[-0.02em] sm:text-[42px] md:text-[52px]">{{ section.settings.heading }}</h1>
+        {%- if section.settings.body != blank -%}
+          <p class="mt-6 max-w-md text-[17px] text-ink-soft">{{ section.settings.body }}</p>
+        {%- endif -%}
+
+        <a href="{{ section.settings.button_link | default: '/pages/journey-guide' }}" class="mt-10 inline-flex items-center gap-2 rounded-lg bg-periwinkle px-6 py-3 text-[15px] font-medium text-white transition hover:bg-periwinkle-hover">
+          {{ section.settings.button_label }}
+          {% render 'wi-icon', name: 'arrow-right', class: 'h-4 w-4' %}
+        </a>
+
+        {%- if section.settings.footnote != blank -%}
+          <p class="mt-6 max-w-md text-[12px] leading-relaxed text-ink-soft">{{ section.settings.footnote }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="wi-reveal" data-reveal-delay="100">
+        <div class="overflow-hidden rounded-2xl bg-card p-2">
+          {% render 'wi-image', image: section.settings.image, fallback: 'genesyx-desktop-app.jpg', alt: section.settings.heading, class: 'w-full rounded-xl object-cover' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Genesyx desktop",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Desktop version" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Genesyx on the big screen" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Prefer to explore on your computer? Launch the full Genesyx journey guide in your browser — the same calm, gently-guided experience, sized for desktop." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Launch the journey guide" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Point to the embed page, e.g. /pages/journey-guide" },
+    { "type": "image_picker", "id": "image", "label": "Image (optional)" },
+    { "type": "textarea", "id": "footnote", "label": "Footnote", "default": "Genesyx is an educational wellness tool. It doesn't provide medical advice, diagnosis or treatment." }
+  ],
+  "presets": [
+    { "name": "Genesyx desktop" }
+  ]
+}
+{% endschema %}

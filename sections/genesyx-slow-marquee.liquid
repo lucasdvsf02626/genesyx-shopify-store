@@ -1,0 +1,526 @@
+<section
+  id="genesyx-marquee-{{ section.id }}"
+  class="genesyx-marquee"
+  style="--genesyx-marquee-speed: {{ section.settings.speed }}s; --genesyx-marquee-background: {{ section.settings.background }}; --genesyx-marquee-text: {{ section.settings.text_color }};"
+  aria-label="{{ section.settings.carousel_label | escape }}"
+>
+  {%- if section.settings.heading != blank -%}
+    <div class="genesyx-marquee__heading-wrap">
+      <h2 class="genesyx-marquee__heading">{{ section.settings.heading }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div class="genesyx-marquee__viewport">
+    <div class="genesyx-marquee__track">
+      {%- for duplicate in (1..2) -%}
+        <div class="genesyx-marquee__group"{% if duplicate == 2 %} aria-hidden="true"{% endif %}>
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign card_tag = 'article'
+              if block.settings.link != blank
+                assign card_tag = 'a'
+              endif
+            -%}
+            <{{ card_tag }}
+              class="genesyx-marquee__card"
+              {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
+              {% if block.settings.link != blank %}draggable="false"{% endif %}
+              {% if duplicate == 2 and block.settings.link != blank %}tabindex="-1"{% endif %}
+              {% if duplicate == 1 %}{{ block.shopify_attributes }}{% endif %}
+            >
+              <div class="genesyx-marquee__media">
+                {%- if block.settings.visual_style == 'research' -%}
+                  <div class="genesyx-marquee__research-visual" role="img" aria-label="{{ block.settings.image_alt | default: 'Research papers and a laboratory flask' | escape }}">
+                    <svg viewBox="0 0 420 560" aria-hidden="true" focusable="false">
+                      <circle cx="314" cy="116" r="92" class="genesyx-marquee__research-orbit"/>
+                      <path d="M86 104h190v270H86z" class="genesyx-marquee__research-paper"/>
+                      <path d="M118 158h126M118 194h102M118 230h126M118 266h82" class="genesyx-marquee__research-line"/>
+                      <path d="M274 202v82l-62 116c-13 25 5 55 33 55h108c28 0 46-30 33-55l-62-116v-82" class="genesyx-marquee__research-flask"/>
+                      <path d="M258 342h82" class="genesyx-marquee__research-line"/>
+                      <circle cx="282" cy="382" r="8" class="genesyx-marquee__research-dot"/>
+                      <circle cx="320" cy="410" r="12" class="genesyx-marquee__research-dot"/>
+                    </svg>
+                  </div>
+                {%- elsif block.settings.visual_style == 'research_photo' -%}
+                  <img
+                    class="genesyx-marquee__image"
+                    src="{{ 'genesyx-shettles-research-card.jpg' | asset_url }}"
+                    alt="{{ block.settings.image_alt | escape }}"
+                    width="868"
+                    height="1812"
+                    loading="lazy"
+                  >
+                {%- elsif block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900, 1000', sizes: '(min-width: 990px) 420px, 78vw', class: 'genesyx-marquee__image', alt: block.settings.image_alt }}
+                {%- elsif block.settings.external_image_url != blank -%}
+                  <img
+                    class="genesyx-marquee__image"
+                    src="{{ block.settings.external_image_url | escape }}"
+                    alt="{{ block.settings.image_alt | escape }}"
+                    width="900"
+                    height="1200"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'genesyx-marquee__image genesyx-marquee__placeholder' }}
+                {%- endif -%}
+              </div>
+              <div class="genesyx-marquee__shade"></div>
+              <div class="genesyx-marquee__topline">
+                {%- if block.settings.label != blank -%}
+                  <span class="genesyx-marquee__pill">{{ block.settings.label }}</span>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.title != blank -%}
+                <h3 class="genesyx-marquee__title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+            </{{ card_tag }}>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="genesyx-marquee__controls">
+    <button class="genesyx-marquee__arrow" type="button" data-marquee-direction="-1" aria-label="{{ section.settings.previous_label | escape }}">
+      <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <path d="M12.5 4.5 7 10l5.5 5.5M7.5 10H17" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      </svg>
+    </button>
+    <button class="genesyx-marquee__arrow genesyx-marquee__arrow--next" type="button" data-marquee-direction="1" aria-label="{{ section.settings.next_label | escape }}">
+      <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <path d="m7.5 4.5 5.5 5.5-5.5 5.5M3 10h9.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      </svg>
+    </button>
+  </div>
+</section>
+
+{% stylesheet %}
+  .genesyx-marquee {
+    overflow: hidden;
+    padding-block: clamp(3rem, 7vw, 6.5rem);
+    background: var(--genesyx-marquee-background);
+    color: var(--genesyx-marquee-text);
+  }
+
+  .genesyx-marquee__heading-wrap {
+    width: min(100% - 2rem, 1440px);
+    margin: 0 auto clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .genesyx-marquee__heading {
+    max-width: 760px;
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+
+  .genesyx-marquee__viewport {
+    overflow: hidden;
+    scrollbar-width: none;
+    touch-action: pan-y;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .genesyx-marquee__viewport.is-dragging {
+    cursor: grabbing;
+  }
+
+  .genesyx-marquee__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .genesyx-marquee__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: genesyx-marquee-scroll var(--genesyx-marquee-speed) linear infinite;
+  }
+
+  .genesyx-marquee__group {
+    display: flex;
+    flex-shrink: 0;
+    gap: clamp(0.75rem, 1.2vw, 1.5rem);
+    padding-right: clamp(0.75rem, 1.2vw, 1.5rem);
+  }
+
+  .genesyx-marquee__card {
+    position: relative;
+    display: block;
+    flex: 0 0 clamp(280px, 28vw, 440px);
+    width: clamp(280px, 28vw, 440px);
+    aspect-ratio: 0.74;
+    overflow: hidden;
+    border-radius: 18px;
+    color: #fff;
+    text-decoration: none;
+    background: #655e56;
+    isolation: isolate;
+  }
+
+  .genesyx-marquee__media,
+  .genesyx-marquee__image,
+  .genesyx-marquee__shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .genesyx-marquee__image {
+    object-fit: cover;
+    transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .genesyx-marquee__placeholder {
+    background: #c9c1b8;
+  }
+
+  .genesyx-marquee__research-visual {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, #4d3a91 0%, #7b68c9 52%, #b7abdF 100%);
+  }
+
+  .genesyx-marquee__research-visual svg {
+    width: 88%;
+    height: 88%;
+  }
+
+  .genesyx-marquee__research-orbit {
+    fill: rgba(255, 255, 255, 0.12);
+  }
+
+  .genesyx-marquee__research-paper {
+    fill: rgba(255, 255, 255, 0.16);
+    stroke: rgba(255, 255, 255, 0.72);
+    stroke-width: 3;
+  }
+
+  .genesyx-marquee__research-line,
+  .genesyx-marquee__research-flask {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.84);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 5;
+  }
+
+  .genesyx-marquee__research-dot {
+    fill: #d8f4e8;
+  }
+
+  .genesyx-marquee__shade {
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(20, 16, 13, 0.28) 0%, rgba(20, 16, 13, 0.05) 38%, rgba(20, 16, 13, 0.76) 100%);
+  }
+
+  .genesyx-marquee__topline {
+    position: absolute;
+    z-index: 2;
+    top: 1.25rem;
+    right: 1.25rem;
+    left: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .genesyx-marquee__pill {
+    display: inline-flex;
+    min-width: clamp(190px, 17vw, 240px);
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    background: rgba(51, 45, 42, 0.72);
+    font-size: 0.9rem;
+    line-height: 1.2;
+    text-align: center;
+    backdrop-filter: blur(12px);
+  }
+
+  .genesyx-marquee__title {
+    position: absolute;
+    z-index: 2;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    max-width: 13ch;
+    margin: 0;
+    color: inherit;
+    font-size: clamp(1.8rem, 2.6vw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+
+  .genesyx-marquee__card[href]:hover .genesyx-marquee__image,
+  .genesyx-marquee__card[href]:focus-visible .genesyx-marquee__image {
+    transform: scale(1.035);
+  }
+
+  .genesyx-marquee__card[href]:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: -6px;
+  }
+
+  .genesyx-marquee__viewport:hover .genesyx-marquee__track,
+  .genesyx-marquee__viewport:focus-within .genesyx-marquee__track {
+    animation-play-state: paused;
+  }
+
+  .genesyx-marquee__controls {
+    display: flex;
+    width: min(100% - 2rem, 1440px);
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+    padding-top: clamp(1.25rem, 2vw, 2rem);
+    border-top: 1px solid rgba(41, 37, 34, 0.14);
+  }
+
+  .genesyx-marquee__arrow {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    place-items: center;
+    border: 1px solid rgba(41, 37, 34, 0.3);
+    border-radius: 50%;
+    color: #292522;
+    background: transparent;
+    cursor: pointer;
+    transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+
+  .genesyx-marquee__arrow--next {
+    border-color: #35312d;
+    color: #fff;
+    background: #35312d;
+  }
+
+  .genesyx-marquee__arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .genesyx-marquee__arrow:hover {
+    border-color: #35312d;
+    color: #fff;
+    background: #35312d;
+    transform: translateY(-1px);
+  }
+
+  .genesyx-marquee__arrow:focus-visible {
+    outline: 2px solid #35312d;
+    outline-offset: 3px;
+  }
+
+  @keyframes genesyx-marquee-scroll {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media (max-width: 749px) {
+    .genesyx-marquee__card {
+      flex-basis: min(78vw, 330px);
+      width: min(78vw, 330px);
+    }
+
+    .genesyx-marquee__title {
+      font-size: clamp(1.75rem, 8vw, 2.35rem);
+    }
+
+    .genesyx-marquee__pill {
+      min-width: 180px;
+      min-height: 48px;
+      padding-inline: 1.35rem;
+      font-size: 0.84rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .genesyx-marquee__viewport {
+      overflow-x: auto;
+      scrollbar-width: thin;
+      touch-action: pan-x;
+      cursor: auto;
+      user-select: auto;
+    }
+
+    .genesyx-marquee__track {
+      animation: none;
+    }
+
+    .genesyx-marquee__group[aria-hidden='true'] {
+      display: none;
+    }
+
+    .genesyx-marquee__image {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('.genesyx-marquee').forEach((section) => {
+    if (section.dataset.marqueeControlsReady === 'true') return;
+
+    const track = section.querySelector('.genesyx-marquee__track');
+    const group = section.querySelector('.genesyx-marquee__group');
+    const firstCard = section.querySelector('.genesyx-marquee__card');
+    const viewport = section.querySelector('.genesyx-marquee__viewport');
+
+    if (!track || !group || !firstCard || !viewport) return;
+
+    section.dataset.marqueeControlsReady = 'true';
+
+    let activePointer = null;
+    let startX = 0;
+    let startTime = 0;
+    let dragged = false;
+    let suppressClick = false;
+
+    const getDuration = () => Number.parseFloat(window.getComputedStyle(section).getPropertyValue('--genesyx-marquee-speed')) * 1000;
+
+    const normalizeTime = (time, duration) => {
+      return ((time % duration) + duration) % duration;
+    };
+
+    viewport.addEventListener('pointerdown', (event) => {
+      if (!event.isPrimary || event.button !== 0) return;
+
+      const animation = track.getAnimations()[0];
+      if (!animation || typeof animation.currentTime !== 'number') return;
+
+      activePointer = event.pointerId;
+      startX = event.clientX;
+      startTime = animation.currentTime;
+      dragged = false;
+      viewport.classList.add('is-dragging');
+      viewport.setPointerCapture(event.pointerId);
+      animation.pause();
+    });
+
+    viewport.addEventListener('pointermove', (event) => {
+      if (event.pointerId !== activePointer) return;
+
+      const distance = event.clientX - startX;
+      if (!dragged && Math.abs(distance) < 6) return;
+
+      dragged = true;
+      event.preventDefault();
+
+      const animation = track.getAnimations()[0];
+      if (!animation) return;
+
+      const duration = getDuration();
+      const timeShift = distance / group.scrollWidth * duration;
+      animation.currentTime = normalizeTime(startTime - timeShift, duration);
+    }, { passive: false });
+
+    const finishSwipe = (event) => {
+      if (event.pointerId !== activePointer) return;
+
+      const animation = track.getAnimations()[0];
+      if (animation) animation.play();
+
+      if (viewport.hasPointerCapture(event.pointerId)) {
+        viewport.releasePointerCapture(event.pointerId);
+      }
+
+      activePointer = null;
+      viewport.classList.remove('is-dragging');
+
+      if (dragged) {
+        suppressClick = true;
+        window.setTimeout(() => {
+          suppressClick = false;
+        }, 0);
+      }
+    };
+
+    viewport.addEventListener('pointerup', finishSwipe);
+    viewport.addEventListener('pointercancel', finishSwipe);
+
+    viewport.addEventListener('click', (event) => {
+      if (!suppressClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+      suppressClick = false;
+    }, true);
+
+    section.querySelectorAll('[data-marquee-direction]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const direction = Number(button.dataset.marqueeDirection);
+        const groupStyles = window.getComputedStyle(group);
+        const gap = Number.parseFloat(groupStyles.columnGap || groupStyles.gap) || 0;
+        const cardStep = firstCard.getBoundingClientRect().width + gap;
+        const animation = track.getAnimations()[0];
+
+        if (animation && typeof animation.currentTime === 'number') {
+          const duration = Number.parseFloat(window.getComputedStyle(section).getPropertyValue('--genesyx-marquee-speed')) * 1000;
+          const timeStep = cardStep / group.scrollWidth * duration;
+          animation.currentTime = (animation.currentTime + direction * timeStep + duration) % duration;
+          return;
+        }
+
+        viewport.scrollBy({ left: direction * cardStep, behavior: 'smooth' });
+      });
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Slow card marquee",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "carousel_label", "label": "Accessibility label", "default": "Explore Genesyx" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "range", "id": "speed", "min": 40, "max": 180, "step": 5, "unit": "s", "label": "Scroll time", "default": 120, "info": "Higher values move more slowly." },
+    { "type": "text", "id": "previous_label", "label": "Previous button label", "default": "Previous cards" },
+    { "type": "text", "id": "next_label", "label": "Next button label", "default": "Next cards" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "text_color", "label": "Heading colour", "default": "#292522" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "select", "id": "visual_style", "label": "Visual style", "options": [{ "value": "photo", "label": "Photo" }, { "value": "research", "label": "Research illustration" }, { "value": "research_photo", "label": "Research photo" }], "default": "photo" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "external_image_url", "label": "External image URL", "info": "Used only when no Shopify image is selected." },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Wellbeing" },
+        { "type": "textarea", "id": "title", "label": "Title", "default": "Support for your everyday wellbeing" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slow card marquee",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

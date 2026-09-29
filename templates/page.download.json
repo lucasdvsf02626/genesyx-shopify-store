@@ -1,0 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "withings-download",
+      "settings": {
+        "eyebrow": "Genesyx app",
+        "heading": "Download the app",
+        "subtitle": "Track your cycle, log daily and get tailored nutrition insights — free on your phone.",
+        "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
+        "apple_link": "https://apps.apple.com/us/app/genesyx/id6787682466"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

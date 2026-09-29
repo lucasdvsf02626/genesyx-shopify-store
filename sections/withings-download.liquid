@@ -1,0 +1,55 @@
+{%- comment -%} Genesyx app download page — App Store + Google Play badges {%- endcomment -%}
+<section class="wi-scope flex min-h-[560px] items-center bg-background py-20 md:py-28">
+  <div class="wi-container">
+    <div class="mx-auto max-w-2xl text-center">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="mb-4 text-[13px] font-medium uppercase tracking-wide text-ink-soft">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="text-[30px] leading-[1.08] tracking-[-0.02em] sm:text-[40px] md:text-[48px]">{{ section.settings.heading }}</h1>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="mx-auto mt-4 max-w-xl text-[18px] leading-snug text-ink-soft">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        {%- comment -%} Google Play — live {%- endcomment -%}
+        {%- assign gp_link = section.settings.googleplay_link | strip | default: 'https://play.google.com/store/apps/details?id=com.genesyx.app' -%}
+        <a href="{{ gp_link }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+          {% render 'wi-image', image: section.settings.googleplay_image, fallback: 'google-play.png', alt: 'Get it on Google Play', class: 'h-12 w-auto', eager: true %}
+        </a>
+
+        {%- comment -%} Apple App Store — links when a URL is set, otherwise shows ‘Coming soon’ {%- endcomment -%}
+        {%- assign apple_link = section.settings.apple_link | strip -%}
+        {%- if apple_link != blank and apple_link != '#' -%}
+          <a href="{{ apple_link }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
+            {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store', class: 'h-12 w-auto', eager: true %}
+          </a>
+        {%- else -%}
+          <div class="flex flex-col items-center">
+            <span class="pointer-events-none" style="opacity:.45">
+              {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store — coming soon', class: 'h-12 w-auto', eager: true %}
+            </span>
+            <span class="mt-2 text-[13px] text-ink-soft">Coming soon</span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Withings download",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Genesyx app" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Download the app" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Track your cycle, log daily and get tailored nutrition insights — free on your phone." },
+    { "type": "header", "content": "Google Play" },
+    { "type": "text", "id": "googleplay_link", "label": "Google Play link", "default": "https://play.google.com/store/apps/details?id=com.genesyx.app" },
+    { "type": "image_picker", "id": "googleplay_image", "label": "Google Play badge (optional override)" },
+    { "type": "header", "content": "Apple App Store" },
+    { "type": "text", "id": "apple_link", "label": "App Store link — leave blank to show ‘Coming soon’" },
+    { "type": "image_picker", "id": "appstore_image", "label": "App Store badge (optional override)" }
+  ],
+  "presets": [{ "name": "Withings download" }]
+}
+{% endschema %}

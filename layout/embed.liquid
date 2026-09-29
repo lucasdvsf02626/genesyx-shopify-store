@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      <link rel="icon" type="image/png" href="{{ 'genesyx-favicon.png' | asset_url }}">
+    {%- endif -%}
+
+    <title>{{ page_title }}</title>
+    {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+
+    {{ content_for_header }}
+
+    {% style %}
+      html, body { margin: 0; padding: 0; height: 100%; background: #ffffff; }
+      .genesyx-embed-frame { display: block; border: 0; width: 100vw; height: 100vh; height: 100dvh; }
+    {% endstyle %}
+  </head>
+
+  <body>
+    {{ content_for_layout }}
+  </body>
+</html>
