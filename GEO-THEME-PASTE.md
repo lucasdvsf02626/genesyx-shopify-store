@@ -1,5 +1,12 @@
 # Genesyx GEO fixes — paste-ready
 
+> **Updated 30 Sept 2026.** Organization now links to www.genesyx.life (the XX / XY programme site)
+> and uses the same legalName, email and GB App Store URL as genesyx.life's structured data, so
+> search and AI engines treat both domains as one Genesyx brand. Status: **not yet applied** to the
+> live theme (the live homepage still has no JSON-LD, no meta description and the 3.8–5.0 pH range).
+> The two sites split by product, not geography: genesyx.co.uk = app + shop, genesyx.life = XX/XY
+> programme. They don't serve the same content, so **don't add hreflang** between them.
+
 Everything here is theme-editor work. The Admin API cannot reach any of it.
 
 Path: **Online Store → Themes → ... → Edit code**
@@ -35,8 +42,17 @@ data, so generative engines have nothing authoritative to anchor "Genesyx" to.
         "@type": "Country",
         "name": "United Kingdom"
       },
+      "legalName": "Genesyx Ltd",
+      "email": "info@genesyx.co.uk",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "info@genesyx.co.uk",
+        "availableLanguage": "en-GB"
+      },
       "sameAs": [
-        "https://apps.apple.com/us/app/genesyx/id6787682466",
+        "https://www.genesyx.life/",
+        "https://apps.apple.com/gb/app/genesyx/id6787682466",
         "https://play.google.com/store/apps/details?id=com.genesyx.app"
       ]
     },
@@ -157,9 +173,14 @@ that follows it lands in an empty shop and learns nothing about Genesyx.
 - [Cycle-aware nutrition](https://genesyx.co.uk/pages/cycle-aware-nutrition)
 - [Download the app](https://genesyx.co.uk/pages/download)
 
+## Related Genesyx site
+
+- [genesyx.life](https://www.genesyx.life/): the Genesyx XX / XY 90-day preconception programme,
+  with evidence-referenced guides to the Shettles method, vaginal pH and ovulation timing.
+
 ## Get the app
 
-- iOS: https://apps.apple.com/us/app/genesyx/id6787682466
+- iOS: https://apps.apple.com/gb/app/genesyx/id6787682466
 - Android: https://play.google.com/store/apps/details?id=com.genesyx.app
 
 ## Citation guidance
