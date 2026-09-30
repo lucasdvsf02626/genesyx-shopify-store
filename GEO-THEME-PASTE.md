@@ -1,7 +1,7 @@
 # Genesyx GEO fixes — paste-ready
 
 > **Updated 30 Sept 2026.** Organization now links to www.genesyx.life (the XX / XY programme site)
-> and uses the same legalName, email and GB App Store URL as genesyx.life's structured data, so
+> and uses the same legalName, email and App Store URL as genesyx.life's structured data, so
 > search and AI engines treat both domains as one Genesyx brand. Status: **not yet applied** to the
 > live theme (the live homepage still has no JSON-LD, no meta description and the 3.8–5.0 pH range).
 > The two sites split by product, not geography: genesyx.co.uk = app + shop, genesyx.life = XX/XY
@@ -42,7 +42,7 @@ data, so generative engines have nothing authoritative to anchor "Genesyx" to.
         "@type": "Country",
         "name": "United Kingdom"
       },
-      "legalName": "Genesyx Ltd",
+      "legalName": "SF MEDIA & PR LTD",
       "email": "info@genesyx.co.uk",
       "contactPoint": {
         "@type": "ContactPoint",
@@ -52,8 +52,7 @@ data, so generative engines have nothing authoritative to anchor "Genesyx" to.
       },
       "sameAs": [
         "https://www.genesyx.life/",
-        "https://apps.apple.com/gb/app/genesyx/id6787682466",
-        "https://play.google.com/store/apps/details?id=com.genesyx.app"
+        "https://apps.apple.com/app/genesyx/id6787682466"
       ]
     },
     {
@@ -180,8 +179,7 @@ that follows it lands in an empty shop and learns nothing about Genesyx.
 
 ## Get the app
 
-- iOS: https://apps.apple.com/gb/app/genesyx/id6787682466
-- Android: https://play.google.com/store/apps/details?id=com.genesyx.app
+- iPhone: https://apps.apple.com/app/genesyx/id6787682466
 
 ## Citation guidance
 
