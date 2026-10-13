@@ -1,0 +1,100 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "gx_intro": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  /* No price is shown for this product, so the tax note under it has nothing to refer to. */\n  .product__tax { display: none; }\n  .gx-pd-intro { margin-top: 4px; font-size: 15px; line-height: 1.6; }\n  .gx-pd-intro p { margin: 0 0 10px; }\n  .gx-pd-intro ul { list-style: none; padding: 0; margin: 14px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }\n  .gx-pd-intro li { position: relative; padding-left: 28px; font-size: 14px; line-height: 20px; }\n  .gx-pd-intro li::before { content: \"\\2713\"; position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: rgba(110, 114, 216, 0.14); color: #5b5fc7; font-size: 12px; line-height: 20px; text-align: center; }\n  .gx-pd-tabs { border-bottom: 1px solid rgba(41, 37, 34, 0.12); }\n  .gx-pd-tab { border-top: 1px solid rgba(41, 37, 34, 0.12); }\n  .gx-pd-tab > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 16px 0; font-size: 16px; font-weight: 500; }\n  .gx-pd-tab > summary::-webkit-details-marker { display: none; }\n  .gx-pd-tab > summary::after { content: \"+\"; font-size: 22px; line-height: 1; font-weight: 300; }\n  .gx-pd-tab[open] > summary::after { content: \"\\2212\"; }\n  .gx-pd-tab-body { padding: 0 0 18px; font-size: 14px; line-height: 1.6; }\n  .gx-pd-tab-body p { margin: 0 0 10px; }\n  .gx-pd-tab .gx-pd-tab-body table { width: 100%; table-layout: auto; border-collapse: collapse; border-style: none; box-shadow: none; margin: 6px 0 10px; font-size: 14px; }\n  .gx-pd-tab .gx-pd-tab-body table th, .gx-pd-tab .gx-pd-tab-body table td { padding: 7px 0; border: 0; border-bottom: 1px solid rgba(41, 37, 34, 0.08); text-align: left; line-height: 1.4; }\n  .gx-pd-tab .gx-pd-tab-body table th { font-weight: 500; }\n  .gx-pd-tab .gx-pd-tab-body table th + th, .gx-pd-tab .gx-pd-tab-body table td + td { width: 1%; text-align: right; padding-left: 16px; white-space: nowrap; }\n  .gx-pd-credit { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 14px; background: rgba(110, 114, 216, 0.08); }\n  .gx-pd-credit-mark { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: #5b5fc7; color: #fff; font-size: 15px; font-weight: 500; line-height: 40px; text-align: center; }\n  .gx-pd-credit p { margin: 0; font-size: 13px; line-height: 1.4; }\n  .gx-pd-credit strong { display: block; font-size: 15px; font-weight: 500; }\n  @media (max-width: 749px) { .gx-pd-intro ul { grid-template-columns: 1fr; } }\n  @media screen and (min-width: 750px) {\n    .product.grid { display: block; }\n    .product.grid > .product__media-wrapper,\n    .product.grid > .product__info-wrapper { width: 100% !important; max-width: 760px !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }\n    .product__media-wrapper media-gallery { display: block; max-width: 520px; margin: 0 auto; position: static !important; }\n    .product__info-container { position: static !important; max-width: none !important; text-align: center; }\n    .product__info-container .price, .product__info-container .price__container { justify-content: center; }\n    .gx-pd-intro ul { max-width: 520px; margin-left: auto; margin-right: auto; text-align: left; }\n    .product-form__quantity { display: flex; flex-direction: column; align-items: center; margin-left: auto; margin-right: auto; }\n    .product-form__quantity quantity-input { margin-left: auto; margin-right: auto; }\n    .product-form__buttons { max-width: 440px; margin-left: auto; margin-right: auto; }\n    .gx-pd-tabs { text-align: left; }\n    .gx-pd-credit { max-width: 440px; margin-left: auto; margin-right: auto; text-align: left; }\n  }\n</style>\n{%- assign gx_parts = product.description | split: '<h3>' -%}\n<div class=\"gx-pd-intro\">{{ gx_parts.first }}</div>"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "gx_tabs": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- assign gx_parts = product.description | split: '<h3>' -%}\n{%- if gx_parts.size > 1 -%}\n<div class=\"gx-pd-tabs\">\n  {%- for gx_part in gx_parts offset: 1 -%}\n    {%- assign gx_hp = gx_part | split: '</h3>' -%}\n    <details class=\"gx-pd-tab\"{% if forloop.first %} open{% endif %}>\n      <summary>{{ gx_hp[0] | strip_html }}</summary>\n      <div class=\"gx-pd-tab-body\">{{ gx_hp[1] }}</div>\n    </details>\n  {%- endfor -%}\n</div>\n{%- endif -%}"
+          }
+        },
+        "gx_credit": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- if product.type == 'Food Supplement' -%}\n<div class=\"gx-pd-credit\">\n  <span class=\"gx-pd-credit-mark\" aria-hidden=\"true\">GI</span>\n  <p>Formulated by<strong>Gabriel Isaic</strong>Formulation Biochemist</p>\n</div>\n{%- endif -%}"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "gx_intro",
+        "buy_buttons",
+        "gx_tabs",
+        "gx_credit",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "disclosures"
+  ]
+}

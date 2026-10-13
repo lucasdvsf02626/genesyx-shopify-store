@@ -1,20 +1,43 @@
+{%- liquid
+  # When the visible title is blank, the logo becomes the page's H1 so the homepage
+  # still has one meaningful heading. The descriptive suffix is visually hidden.
+  assign logo_is_h1 = false
+  if section.settings.title == blank and section.settings.logo != blank
+    assign logo_is_h1 = true
+  endif
+-%}
 <section
   id="hero-{{ section.id }}"
-  class="wihero wi-scope"
+  class="wihero wi-scope{% if section.settings.title == blank %} wihero--no-title{% endif %}"
   style="--wihero-position-x: {{ section.settings.focal_x }}%; --wihero-position-y: {{ section.settings.focal_y }}%; --wihero-surface: {{ section.settings.background_color | default: '#ffffff' }};"
 >
   <div class="wihero__grid">
     <div class="wihero__copy">
       <div class="wihero__copy-inner">
         {%- if section.settings.logo != blank -%}
-          <div class="wihero__logo" style="max-width: {{ section.settings.logo_width | default: 140 }}px;">
+          {%- if logo_is_h1 -%}
+            <h1 class="wihero__logo wihero__logo--h1" style="max-width: {{ section.settings.logo_width | default: 140 }}px;">
+          {%- else -%}
+            <div class="wihero__logo" style="max-width: {{ section.settings.logo_width | default: 140 }}px;">
+          {%- endif -%}
             {{ section.settings.logo | image_url: width: 400 | image_tag: loading: 'eager', class: 'wihero__logo-image', alt: section.settings.logo_alt }}
-          </div>
+            {%- if logo_is_h1 and section.settings.h1_text != blank -%}
+              <span class="visually-hidden"> – {{ section.settings.h1_text }}</span>
+            {%- endif -%}
+          {%- if logo_is_h1 -%}
+            </h1>
+          {%- else -%}
+            </div>
+          {%- endif -%}
         {%- endif -%}
         {%- if section.settings.eyebrow != blank -%}
           <p class="wihero__eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
-        <h1 class="wihero__title">{{ section.settings.title }}</h1>
+        {%- if section.settings.title != blank -%}
+          <h1 class="wihero__title">{{ section.settings.title }}</h1>
+        {%- elsif section.settings.logo == blank and section.settings.h1_text != blank -%}
+          <h1 class="visually-hidden">{{ shop.name }} – {{ section.settings.h1_text }}</h1>
+        {%- endif -%}
         {%- if section.settings.subtitle != blank -%}
           <p class="wihero__subtitle">{{ section.settings.subtitle }}</p>
         {%- endif -%}
@@ -71,6 +94,13 @@
 
   .wihero__logo {
     margin: 0 0 1.5rem;
+  }
+
+  .wihero__logo--h1 {
+    font: inherit;
+    letter-spacing: normal;
+    line-height: 0;
+    color: inherit;
   }
 
   .wihero__logo-image {
@@ -139,16 +169,37 @@
     }
 
     .wihero__copy {
-      padding: 2.5rem 1.25rem 2rem;
+      padding: 28px 16px 24px;
+    }
+
+    /* The header already shows the logo on phones, so this one stays for search engines only. */
+    .wihero__logo {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    /* With no title, the eyebrow is the only heading-like line, so it leads the hero on phones. */
+    .wihero--no-title .wihero__eyebrow {
+      margin: 0;
+      color: inherit;
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
     }
 
     .wihero__title {
       font-size: clamp(3.25rem, 17vw, 4.5rem);
     }
 
-    .wihero__subtitle {
-      margin-top: 1.1rem;
-      font-size: 1.12rem;
+    /* .wihero prefix: the theme's ".wi-scope p" reset would otherwise zero this margin. */
+    .wihero .wihero__subtitle {
+      margin-top: 12px;
+      font-size: 16px;
       line-height: 1.45;
     }
 
@@ -169,6 +220,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New" },
     { "type": "text", "id": "title", "label": "Title", "default": "U-Scan Nutrio" },
+    { "type": "text", "id": "h1_text", "label": "Hidden H1 description", "default": "fertility, cycle and vaginal pH tracking app", "info": "Used for SEO and AI search when Title is blank: the logo becomes the H1 and this text is added for screen readers and search engines (not shown visually)." },
     { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Master your body's response to nutrition" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Buy now" },
     { "type": "url", "id": "cta_link", "label": "CTA link" },

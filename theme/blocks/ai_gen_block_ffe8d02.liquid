@@ -89,10 +89,27 @@
     background-color: {{ block.settings.active_link_bg }};
   }
 
-  @media screen and (max-width: 749px) {
+  .ai-nav-menu__toggle-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  /* Small laptops: tighter spacing keeps every link on one row. */
+  @media screen and (min-width: 990px) and (max-width: 1199px) {
     .ai-nav-menu__wrapper-{{ ai_gen_id }} {
-      flex-direction: column;
-      gap: 20px;
+      gap: 24px;
+    }
+
+    .ai-nav-menu__container-{{ ai_gen_id }} {
+      gap: 12px;
+    }
+  }
+
+  /* Phones and tablets: menu button + dropdown panel. */
+  @media screen and (max-width: 989px) {
+    .ai-nav-menu-{{ ai_gen_id }} {
+      position: relative;
+      z-index: 20;
+      padding: 12px 16px;
     }
 
     .ai-nav-menu__logo-image-{{ ai_gen_id }} {
@@ -103,19 +120,149 @@
       width: {{ block.settings.mobile_logo_width }}px;
     }
 
-    .ai-nav-menu__container-{{ ai_gen_id }} {
+    /* Without JavaScript the links stay visible, wrapped under the logo. */
+    nav-menu-{{ ai_gen_id }}:not(:defined) .ai-nav-menu__wrapper-{{ ai_gen_id }} {
       flex-direction: column;
-      align-items: {{ block.settings.mobile_alignment }};
-      gap: {{ block.settings.mobile_item_spacing }}px;
+      gap: 8px;
     }
 
-    .ai-nav-menu__link-{{ ai_gen_id }} {
+    nav-menu-{{ ai_gen_id }}:not(:defined) .ai-nav-menu__container-{{ ai_gen_id }} {
+      justify-content: {{ block.settings.mobile_alignment }};
+      gap: 2px 4px;
+    }
+
+    nav-menu-{{ ai_gen_id }}:not(:defined) .ai-nav-menu__link-{{ ai_gen_id }} {
+      padding: 6px 10px;
       font-size: {{ block.settings.mobile_font_size }}px;
+    }
+
+    /* With JavaScript: logo + menu button in one row, links in a dropdown panel. */
+    nav-menu-{{ ai_gen_id }}:defined .ai-nav-menu__wrapper-{{ ai_gen_id }} {
+      gap: 16px;
+    }
+
+    nav-menu-{{ ai_gen_id }}:defined .ai-nav-menu__toggle-{{ ai_gen_id }} {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      margin-right: -10px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: {{ block.settings.link_color }};
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }},
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }}::before,
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }}::after {
+      display: block;
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background-color: currentColor;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }} {
+      position: relative;
+    }
+
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }}::before,
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }}::after {
+      content: '';
+      position: absolute;
+      left: 0;
+    }
+
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }}::before {
+      top: -7px;
+    }
+
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }}::after {
+      top: 7px;
+    }
+
+    .ai-nav-menu-{{ ai_gen_id }}.is-open .ai-nav-menu__toggle-bars-{{ ai_gen_id }} {
+      background-color: transparent;
+    }
+
+    .ai-nav-menu-{{ ai_gen_id }}.is-open .ai-nav-menu__toggle-bars-{{ ai_gen_id }}::before {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .ai-nav-menu-{{ ai_gen_id }}.is-open .ai-nav-menu__toggle-bars-{{ ai_gen_id }}::after {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    nav-menu-{{ ai_gen_id }}:defined .ai-nav-menu__container-{{ ai_gen_id }} {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: 0;
+      padding: 4px 16px 12px;
+      background-color: {{ block.settings.background_color }};
+      border-top: 1px solid rgba(18, 18, 18, 0.08);
+      box-shadow: 0 16px 24px rgba(18, 18, 18, 0.08);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+    }
+
+    .ai-nav-menu-{{ ai_gen_id }}.is-open .ai-nav-menu__container-{{ ai_gen_id }} {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s;
+    }
+
+    .ai-nav-menu-{{ ai_gen_id }}.is-resizing .ai-nav-menu__container-{{ ai_gen_id }} {
+      transition: none;
+    }
+
+    nav-menu-{{ ai_gen_id }}:defined .ai-nav-menu__item-{{ ai_gen_id }} + .ai-nav-menu__item-{{ ai_gen_id }} {
+      border-top: 1px solid rgba(18, 18, 18, 0.08);
+    }
+
+    nav-menu-{{ ai_gen_id }}:defined .ai-nav-menu__link-{{ ai_gen_id }} {
+      display: block;
+      padding: 14px 4px;
+      font-size: {{ block.settings.mobile_font_size }}px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-nav-menu-{{ ai_gen_id }} *,
+    .ai-nav-menu-{{ ai_gen_id }} *::before,
+    .ai-nav-menu-{{ ai_gen_id }} *::after {
+      transition: none !important;
+    }
+  }
+
+  /* Windows High Contrast drops background colours; keep the menu icon visible. */
+  @media (forced-colors: active) {
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }},
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }}::before,
+    .ai-nav-menu__toggle-bars-{{ ai_gen_id }}::after {
+      forced-color-adjust: none;
+      background-color: ButtonText;
+    }
+
+    .ai-nav-menu-{{ ai_gen_id }}.is-open .ai-nav-menu__toggle-bars-{{ ai_gen_id }} {
+      background-color: transparent;
     }
   }
 {% endstyle %}
 
-<nav-menu-{{ ai_gen_id }} class="ai-nav-menu-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+<nav-menu-{{ ai_gen_id }} class="ai-nav-menu-{{ ai_gen_id }}" role="navigation" aria-label="Main menu" {{ block.shopify_attributes }}>
   <div class="ai-nav-menu__wrapper-{{ ai_gen_id }}">
     <div class="ai-nav-menu__logo-{{ ai_gen_id }}">
       <a href="/" class="ai-nav-menu__logo-link-{{ ai_gen_id }}">
@@ -126,7 +273,7 @@
             class="ai-nav-menu__logo-image-{{ ai_gen_id }}"
             width="{{ block.settings.logo.width }}"
             height="{{ block.settings.logo.height }}"
-            loading="lazy"
+            loading="eager"
           >
         {% else %}
           <div class="ai-nav-menu__logo-placeholder-{{ ai_gen_id }}">
@@ -136,12 +283,22 @@
       </a>
     </div>
 
-    <ul class="ai-nav-menu__container-{{ ai_gen_id }}">
+    <button
+      type="button"
+      class="ai-nav-menu__toggle-{{ ai_gen_id }}"
+      aria-controls="ai-nav-menu-list-{{ ai_gen_id }}"
+      aria-expanded="false"
+      aria-label="Open menu"
+    >
+      <span class="ai-nav-menu__toggle-bars-{{ ai_gen_id }}" aria-hidden="true"></span>
+    </button>
+
+    <ul id="ai-nav-menu-list-{{ ai_gen_id }}" class="ai-nav-menu__container-{{ ai_gen_id }}">
       {% if block.settings.menu != blank %}
         {% for link in block.settings.menu.links %}
           <li class="ai-nav-menu__item-{{ ai_gen_id }}">
-            <a 
-              href="{{ link.url }}" 
+            <a
+              href="{{ link.url }}"
               class="ai-nav-menu__link-{{ ai_gen_id }} {% if link.active %}ai-nav-menu__link-{{ ai_gen_id }}--active{% endif %}"
               {% if link.current %}aria-current="page"{% endif %}
             >
@@ -176,12 +333,74 @@
 
       connectedCallback() {
         this.highlightCurrentPage();
+        this.toggle = this.querySelector('.ai-nav-menu__toggle-{{ ai_gen_id }}');
+        if (!this.toggle) return;
+        if (!this.onDocumentClick) this.setUpMobileToggle();
+
+        document.addEventListener('click', this.onDocumentClick);
+        document.addEventListener('keydown', this.onKeydown);
+        this.desktopQuery.addEventListener('change', this.onBreakpointChange);
+      }
+
+      disconnectedCallback() {
+        if (!this.onDocumentClick) return;
+        document.removeEventListener('click', this.onDocumentClick);
+        document.removeEventListener('keydown', this.onKeydown);
+        this.desktopQuery.removeEventListener('change', this.onBreakpointChange);
+      }
+
+      setUpMobileToggle() {
+        this.onDocumentClick = (event) => {
+          if (!this.contains(event.target)) this.close();
+        };
+        this.onKeydown = (event) => {
+          if (event.key === 'Escape' && this.classList.contains('is-open')) {
+            const focusWasInside = this.contains(document.activeElement);
+            this.close();
+            if (focusWasInside) this.toggle.focus();
+          }
+        };
+        this.onBreakpointChange = (event) => {
+          // Skip the panel fade for the frame where the layout switches, so it doesn't flash.
+          this.classList.add('is-resizing');
+          requestAnimationFrame(() => requestAnimationFrame(() => this.classList.remove('is-resizing')));
+          if (event.matches) this.close();
+        };
+        this.desktopQuery = window.matchMedia('(min-width: 990px)');
+
+        this.toggle.addEventListener('click', () => {
+          if (this.classList.contains('is-open')) {
+            this.close();
+          } else {
+            this.open();
+          }
+        });
+        this.querySelectorAll('.ai-nav-menu__link-{{ ai_gen_id }}').forEach(link => {
+          link.addEventListener('click', () => this.close());
+        });
+        // Close when keyboard focus moves past the last link, so the panel can't cover what gets focus next.
+        this.addEventListener('focusout', (event) => {
+          if (event.relatedTarget && !this.contains(event.relatedTarget)) this.close();
+        });
+      }
+
+      open() {
+        this.classList.add('is-open');
+        this.toggle.setAttribute('aria-expanded', 'true');
+        this.toggle.setAttribute('aria-label', 'Close menu');
+      }
+
+      close() {
+        if (!this.toggle) return;
+        this.classList.remove('is-open');
+        this.toggle.setAttribute('aria-expanded', 'false');
+        this.toggle.setAttribute('aria-label', 'Open menu');
       }
 
       highlightCurrentPage() {
         const currentPath = window.location.pathname;
         const links = this.querySelectorAll('.ai-nav-menu__link-{{ ai_gen_id }}');
-        
+
         links.forEach(link => {
           if (link.getAttribute('href') === currentPath) {
             link.classList.add('ai-nav-menu__link-{{ ai_gen_id }}--active');

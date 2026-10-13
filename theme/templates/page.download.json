@@ -10,13 +10,83 @@
 {
   "sections": {
     "main": {
-      "type": "withings-download",
+      "type": "genesyx-app-download",
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "label": "Cycle awareness",
+            "title": "Know your phase at a glance",
+            "body": "See where you are in your cycle today, with gentle guidance for each phase."
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "label": "Fertile window",
+            "title": "Your fertile window, in plain sight",
+            "body": "Genesyx marks the days your own cycle data points to, so you can plan around them instead of guessing."
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "label": "Vaginal pH",
+            "title": "A number you can actually read",
+            "body": "Log a strip in seconds and see it against the typical 3.8 to 4.5 range."
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "label": "Nutrition",
+            "title": "Cycle-aware nutrition",
+            "body": "Focus foods and supplement suggestions matched to your current phase."
+          }
+        },
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Download Genesyx",
+            "body": "Get it free from the App Store or Google Play."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Take the short quiz",
+            "body": "A quick onboarding quiz tailors the whole experience to your cycle and your goals."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Log your day",
+            "body": "Record mood, energy, symptoms and pH readings in seconds, then watch patterns emerge."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
-        "eyebrow": "Genesyx app",
-        "heading": "Download the app",
-        "subtitle": "Track your cycle, log daily and get tailored nutrition insights — free on your phone.",
+        "eyebrow": "Free on iPhone and Android",
+        "heading": "Download the Genesyx app",
+        "subtitle": "Track your cycle, log daily and get tailored nutrition insights, all in one calm, private space on your phone.",
+        "note": "Free to download. No card required.",
+        "apple_link": "https://apps.apple.com/us/app/genesyx/id6787682466",
         "googleplay_link": "https://play.google.com/store/apps/details?id=com.genesyx.app",
-        "apple_link": "https://apps.apple.com/us/app/genesyx/id6787682466"
+        "features_heading": "Everything in one calm, private space",
+        "steps_heading": "Get started in three steps",
+        "cta_heading": "Get Genesyx on your phone",
+        "privacy": "Private and in your control. Sign in with Google or email. Your data is encrypted in transit, and you can delete it any time.",
+        "disclaimer": "Genesyx is an educational wellness tool. It doesn't provide medical advice, diagnosis or treatment."
       }
     }
   },

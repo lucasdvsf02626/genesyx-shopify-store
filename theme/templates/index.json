@@ -529,36 +529,23 @@
       "settings": {}
     },
     "shop": {
-      "type": "withings-shop-configurator",
+      "type": "genesyx-shop-products",
       "settings": {
-        "heading": "Genesyx XY Formula is coming soon",
-        "body": "One private space for cycle context, your fertile window, vaginal pH, hydration and sleep  with gentle daily guidance based on what you choose to track.",
-        "left_text": "<p>Join the early-access list to receive launch updates and be among the first to experience Genesyx.</p><p>No pressure and no scores just the context to understand your own patterns, day by day.</p>",
-        "product_name": "",
-        "badge": "Coming soon",
-        "gallery_1": "shopify://shop_images/2.png",
-        "p1_name": "",
-        "p1_freq": "",
-        "p1_price": "",
-        "p1_cartridge": "",
-        "p2_name": "",
-        "p2_freq": "",
-        "p2_price": "",
-        "p2_cartridge": "",
-        "wplus_title": "",
-        "wplus_desc": "",
-        "wplus_badge": "",
-        "summary_reader": "",
-        "summary_station": "",
-        "included_label": "Included",
-        "total_label": "",
-        "email_placeholder": "Enter your email",
-        "cta_label": "Join the early-access list",
-        "added_label": "You're on the list",
-        "trust_1": "No payment today",
-        "trust_2": "Unsubscribe anytime",
-        "trust_3": "Private by design",
-        "disclaimer": "Genesyx is an educational wellness tool — it doesn't provide medical advice, diagnosis or treatment. Features and availability may change before launch."
+        "badge": "Now available",
+        "heading": "Shop Genesyx",
+        "body": "<p>XX and XY Formula, formulated by Formulation Biochemist Gabriel Isaic, and our Ovulation Test Strips. Track it all in the free Genesyx app.</p><p>Pair your formula with ovulation testing and the free app, and plan your timing with calm, daily guidance.</p>",
+        "products": [
+          "xx-formula",
+          "xy-formula",
+          "ovulation-test-strips"
+        ],
+        "button_label": "Add to basket",
+        "sold_out_label": "Coming soon",
+        "details_label": "View details",
+        "trust_1": "Made in the UK",
+        "trust_2": "Free Genesyx app",
+        "trust_3": "Secure checkout",
+        "disclaimer": "Food supplements are not a substitute for a varied, balanced diet and a healthy lifestyle. The Genesyx app is an educational wellness tool. It does not provide medical advice, diagnosis or treatment."
       }
     },
     "newsletter": {
