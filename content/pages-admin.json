@@ -1,0 +1,216 @@
+{
+  "source": "Shopify admin, read by hand on the date shown; the export script can only refresh this file with an Admin API token",
+  "capturedOn": "2026-10-13",
+  "pages": [
+    {
+      "handle": "about",
+      "title": "About Genesyx",
+      "isPublished": false,
+      "templateSuffix": null,
+      "updatedAt": "2026-10-01T15:59:12Z"
+    },
+    {
+      "handle": "contact",
+      "title": "Contact",
+      "isPublished": true,
+      "templateSuffix": "contact",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "cookie-policy",
+      "title": "Cookie Policy",
+      "isPublished": true,
+      "templateSuffix": "page",
+      "updatedAt": "2026-07-08T22:01:40Z"
+    },
+    {
+      "handle": "copy-of-delete-your-data",
+      "title": "Delete your data",
+      "isPublished": true,
+      "templateSuffix": "page",
+      "updatedAt": "2026-07-10T12:42:52Z"
+    },
+    {
+      "handle": "cycle-aware-nutrition",
+      "title": "Cycle-aware nutrition",
+      "isPublished": true,
+      "templateSuffix": "cycle-aware-nutrition",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "cycle-awareness",
+      "title": "Cycle awareness",
+      "isPublished": true,
+      "templateSuffix": "cycle-awareness",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "daily-tracking",
+      "title": "Daily tracking",
+      "isPublished": true,
+      "templateSuffix": "daily-tracking",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "delete-account",
+      "title": "Delete account",
+      "isPublished": true,
+      "templateSuffix": "page",
+      "updatedAt": "2026-09-03T01:44:57Z"
+    },
+    {
+      "handle": "delete-your-data",
+      "title": "Delete your data",
+      "isPublished": false,
+      "templateSuffix": null,
+      "updatedAt": "2026-07-08T22:01:40Z"
+    },
+    {
+      "handle": "desktop",
+      "title": "Desktop version",
+      "isPublished": true,
+      "templateSuffix": "desktop",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "download",
+      "title": "Download",
+      "isPublished": true,
+      "templateSuffix": "download",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "faq",
+      "title": "Genesyx FAQs",
+      "isPublished": false,
+      "templateSuffix": "faq",
+      "updatedAt": "2026-10-01T15:59:29Z"
+    },
+    {
+      "handle": "genesyx-landing",
+      "title": "Genesyx Landing",
+      "isPublished": true,
+      "templateSuffix": "Default page",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "journey-guide",
+      "title": "Journey guide",
+      "isPublished": true,
+      "templateSuffix": "journey-guide",
+      "updatedAt": "2026-07-08T16:00:44Z"
+    },
+    {
+      "handle": "landing",
+      "title": "APP",
+      "isPublished": true,
+      "templateSuffix": "landingpage1",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "my-logs",
+      "title": "My Logs",
+      "isPublished": true,
+      "templateSuffix": "my-logs",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "personalise-your-conception-journey",
+      "title": "Personalise Your Conception Journey",
+      "isPublished": true,
+      "templateSuffix": "page",
+      "updatedAt": "2026-10-01T15:41:53Z"
+    },
+    {
+      "handle": "personalise-your-conception-journey_02",
+      "title": "Personalise Your Conception Journey_02",
+      "isPublished": true,
+      "templateSuffix": "page",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "ph-tracking",
+      "title": "pH Tracking",
+      "isPublished": true,
+      "templateSuffix": "ph-tracking",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "privacy-policy",
+      "title": "Privacy Policy",
+      "isPublished": true,
+      "templateSuffix": "page",
+      "updatedAt": "2026-09-03T01:44:12Z"
+    },
+    {
+      "handle": "privacy-policy_v1-0",
+      "title": "Privacy Policy_V1.0",
+      "isPublished": false,
+      "templateSuffix": "page",
+      "updatedAt": "2026-07-24T10:35:04Z"
+    },
+    {
+      "handle": "shettles-method",
+      "title": "Shettles method",
+      "isPublished": false,
+      "templateSuffix": "page",
+      "updatedAt": "2026-09-02T15:53:49Z"
+    },
+    {
+      "handle": "shettles-method-evidence-limitations",
+      "title": "method-evidence-limitations",
+      "isPublished": true,
+      "templateSuffix": "page",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "shettles-method-research-evidence",
+      "title": "The Shettles Method: Research, Claims and Evidence",
+      "isPublished": true,
+      "templateSuffix": "shettles-method",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "shop",
+      "title": "Shop",
+      "isPublished": true,
+      "templateSuffix": "shop",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "tailored-insights",
+      "title": "Tailored insights",
+      "isPublished": true,
+      "templateSuffix": "tailored-insights",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "take-the-quiz",
+      "title": "Take the Quiz",
+      "isPublished": true,
+      "templateSuffix": "page",
+      "updatedAt": "2026-04-16T08:29:24Z"
+    },
+    {
+      "handle": "terms-of-use",
+      "title": "Terms of use",
+      "isPublished": true,
+      "templateSuffix": null,
+      "updatedAt": "2026-07-08T21:58:52Z"
+    },
+    {
+      "handle": "vaginal-ph-fertility-science",
+      "title": "vaginal-ph-fertility-science ",
+      "isPublished": true,
+      "templateSuffix": "ph-tracking",
+      "updatedAt": "2026-10-01T16:00:09Z"
+    },
+    {
+      "handle": "why-genesyx",
+      "title": "Why Genesyx",
+      "isPublished": false,
+      "templateSuffix": "why-genesyx",
+      "updatedAt": "2026-07-29T09:34:40Z"
+    }
+  ]
+}

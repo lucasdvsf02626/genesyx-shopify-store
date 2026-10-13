@@ -1,0 +1,42 @@
+{
+  "source": "Shopify admin, read by hand on the date shown; the export script can only refresh this file with an Admin API token",
+  "capturedOn": "2026-10-13",
+  "redirects": [
+    {
+      "path": "/blogs/learn",
+      "target": "https://www.genesyx.life/learn"
+    },
+    {
+      "path": "/blogs/learn/evidence",
+      "target": "https://www.genesyx.life/evidence"
+    },
+    {
+      "path": "/blogs/learn/how-to-conceive-a-girl-or-boy",
+      "target": "https://www.genesyx.life/how-to-conceive-a-girl-or-boy"
+    },
+    {
+      "path": "/blogs/learn/ovulation-tests",
+      "target": "https://www.genesyx.life/ovulation-tests"
+    },
+    {
+      "path": "/blogs/learn/shettles-method",
+      "target": "https://www.genesyx.life/shettles-method"
+    },
+    {
+      "path": "/blogs/learn/vaginal-ph",
+      "target": "https://www.genesyx.life/vaginal-ph"
+    },
+    {
+      "path": "/blogs/news",
+      "target": "https://www.genesyx.life/learn"
+    },
+    {
+      "path": "/privacy",
+      "target": "/pages/privacy-policy"
+    },
+    {
+      "path": "/products/xx-formula-copy",
+      "target": "/products/xx-formula"
+    }
+  ]
+}

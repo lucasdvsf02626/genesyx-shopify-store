@@ -1,0 +1,157 @@
+[
+  {
+    "handle": "ovulation-test-strips",
+    "title": "Ovulation Test Strips",
+    "status": null,
+    "productType": "Ovulation Test",
+    "vendor": "Genesyx",
+    "tags": [
+      "Conception",
+      "Fertility",
+      "LH Test",
+      "Ovulation",
+      "Test Strips",
+      "Women",
+      "coming-soon"
+    ],
+    "templateSuffix": null,
+    "seo": {
+      "title": null,
+      "description": null
+    },
+    "options": [
+      {
+        "name": "Title",
+        "values": [
+          "25 Strips"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "25 Strips",
+        "sku": null,
+        "price": "14.99",
+        "compareAtPrice": null,
+        "inventoryPolicy": null,
+        "availableForSale": false
+      }
+    ],
+    "media": [
+      {
+        "alt": null,
+        "url": "https://cdn.shopify.com/s/files/1/1027/6516/6922/files/genesyx-ovulation-test-strips.webp?v=1790854786"
+      }
+    ]
+  },
+  {
+    "handle": "xx-formula",
+    "title": "XX Formula",
+    "status": null,
+    "productType": "Food Supplement",
+    "vendor": "Genesyx",
+    "tags": [
+      "Capsules",
+      "Conception",
+      "Fertility",
+      "Vegan",
+      "Vegetarian",
+      "Women",
+      "XX Formula",
+      "coming-soon-variants"
+    ],
+    "templateSuffix": null,
+    "seo": {
+      "title": null,
+      "description": null
+    },
+    "options": [
+      {
+        "name": "Supply",
+        "values": [
+          "1 month (1 box)",
+          "3-month kit (3 boxes + tests)"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "1 month (1 box)",
+        "sku": null,
+        "price": "99.00",
+        "compareAtPrice": null,
+        "inventoryPolicy": null,
+        "availableForSale": true
+      },
+      {
+        "title": "3-month kit (3 boxes + tests)",
+        "sku": null,
+        "price": "267.00",
+        "compareAtPrice": "297.00",
+        "inventoryPolicy": null,
+        "availableForSale": false
+      }
+    ],
+    "media": [
+      {
+        "alt": null,
+        "url": "https://cdn.shopify.com/s/files/1/1027/6516/6922/files/Genesyx_XX_Formula_Supplement_Box.png?v=1790854280"
+      }
+    ]
+  },
+  {
+    "handle": "xy-formula",
+    "title": "XY Formula",
+    "status": null,
+    "productType": "Food Supplement",
+    "vendor": "Genesyx",
+    "tags": [
+      "Capsules",
+      "Conception",
+      "Fertility",
+      "Vegan",
+      "Vegetarian",
+      "Women",
+      "XY Formula",
+      "coming-soon-variants"
+    ],
+    "templateSuffix": null,
+    "seo": {
+      "title": null,
+      "description": null
+    },
+    "options": [
+      {
+        "name": "Supply",
+        "values": [
+          "1 month (1 box)",
+          "3-month kit (3 boxes + tests)"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "title": "1 month (1 box)",
+        "sku": null,
+        "price": "99.00",
+        "compareAtPrice": null,
+        "inventoryPolicy": null,
+        "availableForSale": true
+      },
+      {
+        "title": "3-month kit (3 boxes + tests)",
+        "sku": null,
+        "price": "267.00",
+        "compareAtPrice": "297.00",
+        "inventoryPolicy": null,
+        "availableForSale": false
+      }
+    ],
+    "media": [
+      {
+        "alt": null,
+        "url": "https://cdn.shopify.com/s/files/1/1027/6516/6922/files/genesyx-xy-formula.webp?v=1790852016"
+      }
+    ]
+  }
+]

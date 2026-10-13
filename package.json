@@ -5,6 +5,8 @@
   "scripts": {
     "export": "tsx export-files.ts",
     "export:images": "tsx export-files.ts --images-only",
+    "export:content": "tsx export-content.ts",
+    "export:content:public": "tsx export-content.ts --public-only",
     "seo:plan": "tsx apply-seo-fixes.ts",
     "seo:apply": "tsx apply-seo-fixes.ts --apply"
   },

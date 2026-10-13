@@ -1,0 +1,174 @@
+{
+  "source": "public feed",
+  "capturedOn": "2026-10-13",
+  "pages": [
+    {
+      "handle": "contact",
+      "title": "Contact",
+      "publishedAt": "2026-03-12T10:11:33Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "cookie-policy",
+      "title": "Cookie Policy",
+      "publishedAt": "2026-07-08T22:01:40Z",
+      "updatedAt": "2026-07-08T22:01:40Z",
+      "hasBody": true
+    },
+    {
+      "handle": "copy-of-delete-your-data",
+      "title": "Delete your data",
+      "publishedAt": "2026-07-10T12:42:51Z",
+      "updatedAt": "2026-07-10T12:42:52Z",
+      "hasBody": true
+    },
+    {
+      "handle": "cycle-aware-nutrition",
+      "title": "Cycle-aware nutrition",
+      "publishedAt": "2026-07-15T14:44:10Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "cycle-awareness",
+      "title": "Cycle awareness",
+      "publishedAt": "2026-07-15T14:39:39Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "daily-tracking",
+      "title": "Daily tracking",
+      "publishedAt": "2026-07-15T14:44:10Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "delete-account",
+      "title": "Delete account",
+      "publishedAt": "2026-07-03T21:00:38Z",
+      "updatedAt": "2026-09-03T01:44:57Z",
+      "hasBody": true
+    },
+    {
+      "handle": "desktop",
+      "title": "Desktop version",
+      "publishedAt": "2026-07-08T16:00:49Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "download",
+      "title": "Download",
+      "publishedAt": "2026-07-09T12:33:27Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "genesyx-landing",
+      "title": "Genesyx Landing",
+      "publishedAt": "2026-03-19T12:28:57Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "journey-guide",
+      "title": "Journey guide",
+      "publishedAt": "2026-07-08T16:00:44Z",
+      "updatedAt": "2026-07-08T16:00:44Z",
+      "hasBody": false
+    },
+    {
+      "handle": "landing",
+      "title": "APP",
+      "publishedAt": "2026-03-18T13:57:43Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": true
+    },
+    {
+      "handle": "my-logs",
+      "title": "My Logs",
+      "publishedAt": "2026-07-15T14:44:10Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "personalise-your-conception-journey",
+      "title": "Personalise Your Conception Journey",
+      "publishedAt": "2026-04-15T13:58:47Z",
+      "updatedAt": "2026-10-01T15:41:53Z",
+      "hasBody": true
+    },
+    {
+      "handle": "personalise-your-conception-journey_02",
+      "title": "Personalise Your Conception Journey_02",
+      "publishedAt": "2026-04-15T14:34:18Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": true
+    },
+    {
+      "handle": "ph-tracking",
+      "title": "pH Tracking",
+      "publishedAt": "2026-07-15T09:58:51Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "privacy-policy",
+      "title": "Privacy Policy",
+      "publishedAt": "2026-07-03T21:06:53Z",
+      "updatedAt": "2026-09-03T01:44:12Z",
+      "hasBody": true
+    },
+    {
+      "handle": "shettles-method-evidence-limitations",
+      "title": "method-evidence-limitations",
+      "publishedAt": "2026-08-14T11:16:10Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": true
+    },
+    {
+      "handle": "shettles-method-research-evidence",
+      "title": "The Shettles Method: Research, Claims and Evidence",
+      "publishedAt": "2026-09-04T13:44:02Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "shop",
+      "title": "Shop",
+      "publishedAt": "2026-10-01T14:57:44Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": true
+    },
+    {
+      "handle": "tailored-insights",
+      "title": "Tailored insights",
+      "publishedAt": "2026-07-15T14:44:10Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    },
+    {
+      "handle": "take-the-quiz",
+      "title": "Take the Quiz",
+      "publishedAt": "2026-04-15T14:54:00Z",
+      "updatedAt": "2026-04-16T08:29:24Z",
+      "hasBody": true
+    },
+    {
+      "handle": "terms-of-use",
+      "title": "Terms of use",
+      "publishedAt": "2026-07-08T21:58:52Z",
+      "updatedAt": "2026-07-08T21:58:52Z",
+      "hasBody": true
+    },
+    {
+      "handle": "vaginal-ph-fertility-science",
+      "title": "vaginal-ph-fertility-science ",
+      "publishedAt": "2026-08-14T11:14:56Z",
+      "updatedAt": "2026-10-01T16:00:09Z",
+      "hasBody": false
+    }
+  ]
+}

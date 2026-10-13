@@ -1,0 +1,42 @@
+{
+  "source": "public feed",
+  "capturedOn": "2026-10-13",
+  "policies": [
+    {
+      "handle": "contact-information",
+      "address": "/policies/contact-information",
+      "status": 404,
+      "exists": false
+    },
+    {
+      "handle": "legal-notice",
+      "address": "/policies/legal-notice",
+      "status": 404,
+      "exists": false
+    },
+    {
+      "handle": "privacy-policy",
+      "address": "/policies/privacy-policy",
+      "status": 200,
+      "exists": true
+    },
+    {
+      "handle": "refund-policy",
+      "address": "/policies/refund-policy",
+      "status": 404,
+      "exists": false
+    },
+    {
+      "handle": "shipping-policy",
+      "address": "/policies/shipping-policy",
+      "status": 404,
+      "exists": false
+    },
+    {
+      "handle": "terms-of-service",
+      "address": "/policies/terms-of-service",
+      "status": 404,
+      "exists": false
+    }
+  ]
+}

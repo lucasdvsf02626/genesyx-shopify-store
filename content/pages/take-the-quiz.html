@@ -1,0 +1,29 @@
+<style>
+/* Hide Shopify default page title */
+.page-width-content .section-content-wrapper .text-block:has(h1) { display:none!important; }
+/* Full-bleed wrapper */
+#gx-quiz-embed-wrap {
+  position:relative;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  width:100vw;
+  overflow:hidden;
+  background:#edecea;
+  line-height:0;
+  font-size:0;
+}
+#gx-quiz-embed-wrap iframe {
+  display:block;
+  width:100%;
+  min-height:100vh;
+  border:none;
+  background:transparent;
+  line-height:normal;
+  font-size:16px;
+}
+</style>
+<div id="gx-quiz-embed-wrap">
+  <iframe src="https://trygenesyx.lovable.app/quiz" title="Genesyx Conception Journey Quiz" frameborder="0" scrolling="yes" allow="fullscreen"></iframe>
+</div>

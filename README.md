@@ -1,27 +1,36 @@
 # Genesyx Shopify store
 
-This repository holds the code for the Genesyx online shop (genesyx.co.uk). It keeps two things together:
+This repository holds the code for the Genesyx online shop (genesyx.co.uk). It keeps these things together:
 
-- the **Shopify theme**, which is the code that controls how the shop looks, and
-- a few **helper scripts** for jobs outside the theme, such as downloading the store's images and fixing page titles for search engines.
+- the **Shopify theme**, which is the code that controls how the shop looks,
+- a few **helper scripts** for jobs outside the theme, such as downloading the store's images and fixing page titles for search engines,
+- a dated copy of the shop's content (`content/`), and
+- the handover notes (`docs/`).
 
 Store details: Shopify store handle `genesyx1`, admin name `trygenesyx`.
+
+New here? Start with [docs/HANDOVER.md](docs/HANDOVER.md).
 
 ## What is in here
 
 | Path | What it is |
 | --- | --- |
 | `theme/` | The Shopify theme code. This is the part that matters most. It has the usual Shopify folders: `assets`, `blocks`, `config`, `layout`, `locales`, `sections`, `snippets` and `templates`. |
-| `export-files.ts` | Downloads the images, videos and other uploaded files (such as PDFs) from the store into an `exports/` folder on your computer. It normally asks Shopify for the list of files. It can read the saved list `files-genesyx1.json` instead, but only when started with the extra option `--from files-genesyx1.json`, which none of the four scripts below uses. |
+| `export-files.ts` | Downloads the images, videos and other uploaded files (such as PDFs) from the store into an `exports/` folder on your computer. It normally asks Shopify for the list of files. It can read the saved list `files-genesyx1.json` instead, but only when started with the extra option `--from files-genesyx1.json`, which none of the six scripts below uses. |
 | `apply-seo-fixes.ts` | Plans, and when asked applies, search-engine fixes to store pages (page titles, descriptions, small wording fixes and redirects). Applying also unpublishes (hides) six old pages; they are listed in the file. It only shows a plan unless you tell it to apply. Applying writes to the live store. |
 | `files-genesyx1.json` | A saved list of the files in the store, used by `export-files.ts`. |
 | `GEO-THEME-PASTE.md` | Ready-to-paste code snippets for the theme editor that help search engines and AI assistants understand the site. |
-| `package.json` | Lists the four scripts below. |
+| `export-content.ts` | Reads the shop's content and saves a copy in `content/`. It only reads; it never changes the store. With the option `--public-only` it reads only the public website and needs no token. Without it, it reads everything through the Admin API and needs a token. |
+| `content/` | A dated copy (13 October 2026) of the shop's pages, products, collections, menus, redirects and privacy policy, plus a list of its blog articles. See `content/README.md`. |
+| `docs/` | Handover notes (`HANDOVER.md`) and the search and AI visibility checklist. |
+| `package.json` | Lists the six scripts below. |
 
-The four scripts (run with `npm run <name>`):
+The six scripts (run with `npm run <name>`):
 
 - `export` downloads all the store's files.
 - `export:images` downloads images only.
+- `export:content` saves a copy of the shop's pages, products, collections, menus and redirects (plus blogs and policies) in `content/`. It needs an Admin API token. It only reads from Shopify and changes nothing.
+- `export:content:public` refreshes the pages, products, collections and privacy policy in `content/` from the public website. It needs no token. It cannot refresh the menus, redirects or blogs, or see unpublished pages. It only reads and changes nothing.
 - `seo:plan` shows what `apply-seo-fixes.ts` would change, without changing anything.
 - `seo:apply` makes those changes in the live store. This includes unpublishing (hiding) six old pages.
 
@@ -29,11 +38,11 @@ Because `seo:apply` changes the live shop, it should only be run by someone who 
 
 Before using any of them, run `npm install` once in the top folder of the repository. None of the scripts will work without it.
 
-To use them, copy `.env.example` to `.env` and fill it in. Never commit `.env`: it is kept out of the repository on purpose.
+To use them (all except `export:content:public`), copy `.env.example` to `.env` and fill it in. Never commit `.env`: it is kept out of the repository on purpose.
 
 ## What is not in this repository
 
-- This repository has the shop's theme (its design and code) only. The shop's content lives in Shopify itself and is managed in the Shopify admin: products and prices, the text of pages, menus, redirects, uploaded images and videos, store settings, installed apps, customers and orders. (`export-files.ts` can download the uploaded files.)
+- This repository has the shop's theme (its design and code) and, in `content/`, a dated copy of the shop's content taken on 13 October 2026: the 24 published pages (text for the 11 that have any), a list of all 30 pages, the menus, the redirects, the blog (titles only), the 3 products, the 2 collections and the privacy policy. The `content/README.md` file says where each part came from and what is missing, such as the text of the 6 unpublished pages and 5 unpublished blog articles. Shopify remains the source of truth, and the content is managed in the Shopify admin. Not in the repository at all: uploaded images and videos (`export-files.ts` can download them), store settings, installed apps, customers and orders.
 - The guides website, www.genesyx.life, is a separate project with its own repository: `FORZA-Industries/genesyx_astro`. It is built with Astro and published through Vercel.
 - The quiz shown on the shop's "Personalise Your Conception Journey" page is a separate app, hosted at `trygenesyx.lovable.app`. It is embedded in that page. Its code is not here.
 - The Genesyx mobile apps (iPhone and Android) are separate projects and are not in this repository.
