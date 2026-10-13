@@ -27,11 +27,10 @@
           "type": "price",
           "settings": {}
         },
-        "variant_picker": {
-          "type": "variant_picker",
+        "gx_intro": {
+          "type": "custom_liquid",
           "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
+            "custom_liquid": "<style>\n  .gx-pd-intro { margin-top: 4px; font-size: 15px; line-height: 1.6; }\n  .gx-pd-intro p { margin: 0 0 10px; }\n  .gx-pd-intro ul { list-style: none; padding: 0; margin: 14px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }\n  .gx-pd-intro li { position: relative; padding-left: 28px; font-size: 14px; line-height: 20px; }\n  .gx-pd-intro li::before { content: \"\\2713\"; position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: rgba(110, 114, 216, 0.14); color: #5b5fc7; font-size: 12px; line-height: 20px; text-align: center; }\n  .gx-pd-tabs { border-bottom: 1px solid rgba(41, 37, 34, 0.12); }\n  .gx-pd-tab { border-top: 1px solid rgba(41, 37, 34, 0.12); }\n  .gx-pd-tab > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 16px 0; font-size: 16px; font-weight: 500; }\n  .gx-pd-tab > summary::-webkit-details-marker { display: none; }\n  .gx-pd-tab > summary::after { content: \"+\"; font-size: 22px; line-height: 1; font-weight: 300; }\n  .gx-pd-tab[open] > summary::after { content: \"\\2212\"; }\n  .gx-pd-tab-body { padding: 0 0 18px; font-size: 14px; line-height: 1.6; }\n  .gx-pd-tab-body p { margin: 0 0 10px; }\n  .gx-pd-tab .gx-pd-tab-body table { width: 100%; table-layout: auto; border-collapse: collapse; border-style: none; box-shadow: none; margin: 6px 0 10px; font-size: 14px; }\n  .gx-pd-tab .gx-pd-tab-body table th, .gx-pd-tab .gx-pd-tab-body table td { padding: 7px 0; border: 0; border-bottom: 1px solid rgba(41, 37, 34, 0.08); text-align: left; line-height: 1.4; }\n  .gx-pd-tab .gx-pd-tab-body table th { font-weight: 500; }\n  .gx-pd-tab .gx-pd-tab-body table th + th, .gx-pd-tab .gx-pd-tab-body table td + td { width: 1%; text-align: right; padding-left: 16px; white-space: nowrap; }\n  .gx-pd-credit { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 14px; background: rgba(110, 114, 216, 0.08); }\n  .gx-pd-credit-mark { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: #5b5fc7; color: #fff; font-size: 15px; font-weight: 500; line-height: 40px; text-align: center; }\n  .gx-pd-credit p { margin: 0; font-size: 13px; line-height: 1.4; }\n  .gx-pd-credit strong { display: block; font-size: 15px; font-weight: 500; }\n  @media (max-width: 749px) { .gx-pd-intro ul { grid-template-columns: 1fr; } }\n  @media screen and (min-width: 750px) {\n    .product.grid { display: block; }\n    .product.grid > .product__media-wrapper,\n    .product.grid > .product__info-wrapper { width: 100% !important; max-width: 760px !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; }\n    .product__media-wrapper media-gallery { display: block; max-width: 520px; margin: 0 auto; position: static !important; }\n    .product__info-container { position: static !important; max-width: none !important; text-align: center; }\n    .product__info-container .price, .product__info-container .price__container { justify-content: center; }\n    .gx-pd-intro ul { max-width: 520px; margin-left: auto; margin-right: auto; text-align: left; }\n    .product-form__quantity { display: flex; flex-direction: column; align-items: center; margin-left: auto; margin-right: auto; }\n    .product-form__quantity quantity-input { margin-left: auto; margin-right: auto; }\n    .product-form__buttons { max-width: 440px; margin-left: auto; margin-right: auto; }\n    .gx-pd-tabs { text-align: left; }\n    .gx-pd-credit { max-width: 440px; margin-left: auto; margin-right: auto; text-align: left; }\n    .product__info-container variant-selects { display: block; text-align: center; }\n    .product__info-container variant-selects fieldset { margin-left: auto; margin-right: auto; }\n  }\n  .gx-pd-kit-note { margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; background: rgba(110, 114, 216, 0.08); font-size: 14px; line-height: 1.5; }\n</style>\n{%- assign gx_parts = product.description | split: '<h3>' -%}\n<div class=\"gx-pd-intro\">{{ gx_parts.first }}</div>\n{%- for gx_v in product.variants -%}\n  {%- if gx_v.title contains 'kit' -%}{%- assign gx_kit = gx_v -%}{%- endif -%}\n{%- endfor -%}\n{%- if gx_kit -%}\n<p class=\"gx-pd-kit-note\"><strong>3-month kit{% unless gx_kit.available %}, coming soon{% endunless %}:</strong> 3 boxes of {{ product.title }} plus pH and ovulation test strips, at {{ gx_kit.price | divided_by: 3 | money }} per box instead of {{ product.variants.first.price | money }}.</p>\n{%- endif -%}\n{%- if product.tags contains 'coming-soon' or product.tags contains 'coming-soon-variants' -%}\n<script>document.addEventListener('DOMContentLoaded', function () { if (window.variantStrings) { window.variantStrings.soldOut = 'Coming soon'; } });</script>\n{%- endif -%}"
           }
         },
         "quantity_selector": {
@@ -45,14 +44,29 @@
             "show_gift_card_recipient": true
           }
         },
-        "description": {
-          "type": "description",
-          "settings": {}
+        "gx_tabs": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- assign gx_parts = product.description | split: '<h3>' -%}\n{%- if gx_parts.size > 1 -%}\n<div class=\"gx-pd-tabs\">\n  {%- for gx_part in gx_parts offset: 1 -%}\n    {%- assign gx_hp = gx_part | split: '</h3>' -%}\n    <details class=\"gx-pd-tab\"{% if forloop.first %} open{% endif %}>\n      <summary>{{ gx_hp[0] | strip_html }}</summary>\n      <div class=\"gx-pd-tab-body\">{{ gx_hp[1] }}</div>\n    </details>\n  {%- endfor -%}\n</div>\n{%- endif -%}"
+          }
+        },
+        "gx_credit": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- if product.type == 'Food Supplement' -%}\n<div class=\"gx-pd-credit\">\n  <span class=\"gx-pd-credit-mark\" aria-hidden=\"true\">GI</span>\n  <p>Formulated by<strong>Gabriel Isaic</strong>Formulation Biochemist</p>\n</div>\n{%- endif -%}"
+          }
         },
         "share": {
           "type": "share",
           "settings": {
             "share_label": "Share"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
           }
         }
       },
@@ -60,10 +74,12 @@
         "vendor",
         "title",
         "price",
+        "gx_intro",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "description",
+        "gx_tabs",
+        "gx_credit",
         "share"
       ],
       "settings": {
@@ -89,28 +105,94 @@
         "padding_bottom": 0
       }
     },
-    "related-products": {
-      "type": "related-products",
+    "pair": {
+      "type": "genesyx-shop-products",
       "settings": {
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
+        "badge": "",
+        "heading": "Pair it with",
+        "body": "<p>Time your window with Genesyx Ovulation Test Strips. Buy them with XX or XY Formula and get 10% off the strips.</p>",
+        "show_all": false,
+        "products": [
+          "ovulation-test-strips"
+        ],
+        "button_label": "Add to basket",
+        "sold_out_label": "Coming soon",
+        "details_label": "View details",
+        "trust_1": "",
+        "trust_2": "",
+        "trust_3": "",
+        "disclaimer": ""
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "faq1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How long should I take it?",
+            "icon": "question_mark",
+            "row_content": "<p>Take 2 capsules a day. Each pack holds 60 capsules, a 1-month supply. The Genesyx programme runs for 90 days, which is three packs.</p>"
+          }
+        },
+        "faq2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can it guarantee a girl or a boy?",
+            "icon": "question_mark",
+            "row_content": "<p>No. No supplement can guarantee the sex of a baby. XX and XY Formula provide nutritional support as part of the Genesyx programme, alongside timing, testing and the free app.</p>"
+          }
+        },
+        "faq3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I take it with other supplements?",
+            "icon": "question_mark",
+            "row_content": "<p>Check the Nutritional information and Ingredients tabs against anything else you take, and don't exceed the recommended intakes. If you take medication or are under medical supervision, speak to your GP or pharmacist first.</p>"
+          }
+        },
+        "faq4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Is it suitable for vegans?",
+            "icon": "question_mark",
+            "row_content": "<p>Yes. Both XX and XY Formula are suitable for vegetarians and vegans.</p>"
+          }
+        },
+        "faq5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I track my fertile window?",
+            "icon": "question_mark",
+            "row_content": "<p>Use Genesyx Ovulation Test Strips with the free Genesyx app. The app uses your test results to show your timing window.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq1",
+        "faq2",
+        "faq3",
+        "faq4",
+        "faq5"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Questions",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
         "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
+        "container_color_scheme": "scheme-2",
+        "open_first_collapsible_row": false,
         "padding_top": 36,
-        "padding_bottom": 28
+        "padding_bottom": 52
       }
     }
   },
   "order": [
     "main",
     "disclosures",
-    "related-products"
+    "pair",
+    "faq"
   ]
 }

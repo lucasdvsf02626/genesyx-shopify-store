@@ -86,7 +86,11 @@
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
-                {{ 'products.product.sold_out' | t }}
+                {%- if product.tags contains 'coming-soon' or product.tags contains 'coming-soon-variants' -%}
+                  Coming soon
+                {%- else -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- endif -%}
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}

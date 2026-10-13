@@ -14,7 +14,10 @@
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
-      }
+      },
+      "custom_css": [
+        "@media (max-width: 749px) {#genesyx-quiz-wrap .gx-hero {padding: 20px 20px 16px;} #genesyx-quiz-wrap .gx-eyebrow {margin-bottom: 12px;} #genesyx-quiz-wrap .gx-subtitle {margin-bottom: 16px;} #genesyx-quiz-wrap .gx-quiz-area {padding-bottom: 16px;}}"
+      ]
     }
   },
   "order": [

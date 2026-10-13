@@ -1,4 +1,9 @@
 {%- comment -%} Withings U-Scan Nutrio footer {%- endcomment -%}
+{%- comment -%} The root font-size is 10px, so the h-10 utility makes the badges 25px tall. Size them in px. {%- endcomment -%}
+<style>
+  .gx-footer-badges { gap: 12px; }
+  .gx-footer-badges img { height: 40px; width: auto; }
+</style>
 <footer class="wi-scope bg-white text-ink">
   <div class="wi-container py-14">
     {%- comment -%} Country selector {%- endcomment -%}
@@ -34,7 +39,7 @@
     </div>
 
     {%- comment -%} App badges {%- endcomment -%}
-    <div class="mt-12 flex flex-wrap items-center gap-4 border-t border-border-soft pt-8">
+    <div class="gx-footer-badges mt-12 flex flex-wrap items-center gap-4 border-t border-border-soft pt-8">
       {%- if section.settings.appstore_link != blank -%}
         <a href="{{ section.settings.appstore_link }}" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store (opens in a new tab)">
           {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store', class: 'h-10 w-auto' %}

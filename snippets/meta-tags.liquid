@@ -37,3 +37,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ og_title | escape }}">
 <meta name="twitter:description" content="{{ og_description | escape }}">
+
+{%- comment -%} Entity structured data (Organization / WebSite / MobileApplication) for search and AI assistants {%- endcomment -%}
+{%- unless request.page_type == 'password' -%}
+  {% render 'genesyx-structured-data' %}
+{%- endunless -%}
