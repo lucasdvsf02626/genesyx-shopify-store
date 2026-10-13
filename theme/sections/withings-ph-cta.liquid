@@ -19,7 +19,7 @@
           <a href="{{ gp_link }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
             {% render 'wi-image', image: section.settings.googleplay_image, fallback: 'google-play.png', alt: 'Get it on Google Play', class: 'h-12 w-auto' %}
           </a>
-          {%- assign apple_link = section.settings.apple_link | strip -%}
+          {%- assign apple_link = section.settings.apple_link | strip | default: 'https://apps.apple.com/app/genesyx/id6787682466' -%}
           {%- if apple_link != blank and apple_link != '#' -%}
             <a href="{{ apple_link }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
               {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store', class: 'h-12 w-auto' %}
@@ -87,7 +87,7 @@
     { "type": "text", "id": "googleplay_link", "label": "Google Play link", "default": "https://play.google.com/store/apps/details?id=com.genesyx.app" },
     { "type": "image_picker", "id": "googleplay_image", "label": "Google Play badge (optional override)" },
     { "type": "header", "content": "Apple App Store" },
-    { "type": "text", "id": "apple_link", "label": "App Store link — leave blank to show ‘Coming soon’" },
+    { "type": "text", "id": "apple_link", "label": "App Store link — enter # to show ‘Coming soon’" },
     { "type": "image_picker", "id": "appstore_image", "label": "App Store badge (optional override)" },
     { "type": "header", "content": "Legal" },
     { "type": "textarea", "id": "disclaimer", "label": "Disclaimer / fine print", "default": "Genesyx is a wellness tracking tool and does not diagnose, treat, or prevent any medical condition. If you have symptoms or concerns, please speak with a healthcare professional." }

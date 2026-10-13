@@ -3,7 +3,7 @@
   font-size is 10px, so everything here is px. Badge markup reuses the classes the old download section used. {%- endcomment -%}
 {%- liquid
   assign sid = 'gx-dl-' | append: section.id
-  assign apple_link = section.settings.apple_link | strip | default: 'https://apps.apple.com/us/app/genesyx/id6787682466'
+  assign apple_link = section.settings.apple_link | strip | default: 'https://apps.apple.com/app/genesyx/id6787682466'
   assign gp_link = section.settings.googleplay_link | strip | default: 'https://play.google.com/store/apps/details?id=com.genesyx.app'
 -%}
 <style>
@@ -163,7 +163,7 @@
     { "type": "textarea", "id": "subtitle", "label": "Subtitle" },
     { "type": "text", "id": "note", "label": "Note under badges" },
     { "type": "header", "content": "Store links" },
-    { "type": "text", "id": "apple_link", "label": "App Store link", "default": "https://apps.apple.com/us/app/genesyx/id6787682466" },
+    { "type": "text", "id": "apple_link", "label": "App Store link", "default": "https://apps.apple.com/app/genesyx/id6787682466" },
     { "type": "image_picker", "id": "appstore_image", "label": "App Store badge (optional override)" },
     { "type": "text", "id": "googleplay_link", "label": "Google Play link", "default": "https://play.google.com/store/apps/details?id=com.genesyx.app" },
     { "type": "image_picker", "id": "googleplay_image", "label": "Google Play badge (optional override)" },

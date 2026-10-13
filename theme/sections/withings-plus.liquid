@@ -5,6 +5,11 @@
     values aren't compiled into this theme, so it lives here rather than in a utility class. {%- endcomment -%}
   #{{ wi_plus_id }} .wi-plus-mediaframe { width: fit-content; max-width: 100%; margin-left: auto; margin-right: auto; }
   #{{ wi_plus_id }} .wi-plus-media { display: block; width: auto; height: auto; max-width: 100%; max-height: {{ section.settings.media_max_height }}px; border-radius: 0.75rem; }
+  {%- if section.settings.screen_video.aspect_ratio > 0 -%}
+    {%- comment -%} A picked video knows its aspect ratio, so reserve its final box. With preload="none"
+      the real dimensions only arrive once the clip starts loading near the viewport. {%- endcomment -%}
+    #{{ wi_plus_id }} .wi-plus-media { width: {{ section.settings.media_max_height | times: section.settings.screen_video.aspect_ratio }}px; aspect-ratio: {{ section.settings.screen_video.aspect_ratio }}; }
+  {%- endif -%}
 </style>
 <section id="{{ wi_plus_id }}" class="wi-scope bg-background py-20 md:py-28">
   <div class="wi-container">
@@ -38,13 +43,14 @@
       </div>
 
       <div class="wi-reveal" data-reveal-delay="100">
+        {%- comment -%} No autoplay attribute: it would download the whole file on page load. assets/withings.js (.js-inview-video) starts playback in view. {%- endcomment -%}
         {%- if section.settings.screen_video != blank -%}
           <div class="wi-plus-mediaframe overflow-hidden rounded-2xl bg-card p-2">
-            {{ section.settings.screen_video | video_tag: class: 'wi-plus-media', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+            {{ section.settings.screen_video | video_tag: class: 'wi-plus-media js-inview-video', loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
           </div>
         {%- elsif section.settings.video_url != blank -%}
           <div class="wi-plus-mediaframe overflow-hidden rounded-2xl bg-card p-2">
-            <video class="wi-plus-media" autoplay loop muted playsinline preload="metadata" aria-label="{{ section.settings.heading | escape }}">
+            <video class="wi-plus-media js-inview-video" loop muted playsinline preload="none" aria-label="{{ section.settings.heading | escape }}">
               <source src="{{ section.settings.video_url }}" type="video/mp4">
             </video>
           </div>

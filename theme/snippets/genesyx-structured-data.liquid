@@ -16,6 +16,7 @@
   assign app_store_url = 'https://apps.apple.com/gb/app/genesyx/id6787682466'
   assign play_store_url = 'https://play.google.com/store/apps/details?id=com.genesyx.app'
   assign companies_house_url = 'https://find-and-update.company-information.service.gov.uk/company/16913651'
+  assign guides_site_url = 'https://www.genesyx.life/'
 
   if settings.logo != blank
     assign logo_url = settings.logo | image_url: width: 600 | prepend: 'https:'
@@ -25,7 +26,7 @@
     assign logo_url = 'genesyx-favicon.png' | asset_url | prepend: 'https:'
   endif
 
-  assign same_as = companies_house_url
+  assign same_as = companies_house_url | append: '|' | append: guides_site_url
   if settings.social_instagram_link != blank
     assign same_as = same_as | append: '|' | append: settings.social_instagram_link
   endif
@@ -48,6 +49,8 @@
 
   assign brand_description = 'Genesyx is a UK fertility companion app for people trying to conceive. It brings cycle awareness, fertile-window tracking, at-home vaginal pH logging, daily wellbeing check-ins and cycle-aware nutrition guidance into one private space. Genesyx is an educational wellness tool and does not diagnose or treat any condition.'
 
+  assign org_description = 'Genesyx makes XX Formula and XY Formula food supplements and a free fertility companion app for people trying to conceive. The app brings cycle awareness, fertile-window tracking, at-home vaginal pH logging, daily wellbeing check-ins and cycle-aware nutrition guidance into one private space. Genesyx is an educational wellness tool and does not diagnose or treat any condition.'
+
   assign show_app = false
   if request.page_type == 'index'
     assign show_app = true
@@ -69,7 +72,7 @@
           "@type": "ImageObject",
           "url": {{ logo_url | json }}
         },
-        "description": {{ brand_description | json }},
+        "description": {{ org_description | json }},
         "email": "info@genesyx.co.uk",
         "address": {
           "@type": "PostalAddress",

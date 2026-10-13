@@ -8,11 +8,13 @@
     </div>
 
     {%- if section.settings.video != blank or section.settings.video_url != blank -%}
-      <div class="wi-reveal mt-12 overflow-hidden rounded-2xl bg-card" data-reveal-delay="60">
+      {%- comment -%} A picked video knows its aspect ratio, so reserve the box. With preload="none" the real dimensions only arrive once the clip starts loading near the viewport. {%- endcomment -%}
+      <div class="wi-reveal mt-12 overflow-hidden rounded-2xl bg-card" data-reveal-delay="60"{% if section.settings.video.aspect_ratio > 0 %} style="aspect-ratio: {{ section.settings.video.aspect_ratio }};"{% endif %}>
         {%- if section.settings.video != blank -%}
-          {{ section.settings.video | video_tag: class: 'js-inview-video h-full w-full object-cover', autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
+          {%- comment -%} No autoplay attribute: it would download the whole file on page load. assets/withings.js (.js-inview-video) starts playback in view. {%- endcomment -%}
+          {{ section.settings.video | video_tag: class: 'js-inview-video h-full w-full object-cover', loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
         {%- else -%}
-          <video class="js-inview-video h-full w-full object-cover" muted autoplay loop playsinline preload="none"><source src="{{ section.settings.video_url }}"></video>
+          <video class="js-inview-video h-full w-full object-cover" muted loop playsinline preload="none"><source src="{{ section.settings.video_url }}"></video>
         {%- endif -%}
       </div>
     {%- endif -%}

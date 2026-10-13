@@ -23,6 +23,15 @@
 
   assign compare_at_price = target.compare_at_price
   assign price = target.price | default: 1999
+
+  comment
+    For a whole-product price (cards), Shopify returns the lowest price and the lowest compare-at price, which can
+    belong to different variants. Only show a sale when the cheapest variant itself is discounted.
+  endcomment
+  if target == product and product.price_varies
+    assign cheapest_variant = product.variants | sort: 'price' | first
+    assign compare_at_price = cheapest_variant.compare_at_price
+  endif
   assign price_min = product.price_min
   assign price_max = product.price_max
   assign available = target.available | default: false

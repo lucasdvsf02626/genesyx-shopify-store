@@ -52,7 +52,7 @@
       {% for block in section.blocks %}
         {%- liquid
           assign panel_loading = 'lazy'
-          if forloop.first
+          if forloop.first and section.index == 1
             assign panel_loading = 'eager'
           endif
         -%}
@@ -90,7 +90,7 @@
               </figure>
             {% elsif block.settings.screen_1 != blank %}
               <figure class="gx-experience__screen gx-experience__screen--wide">
-                {{ block.settings.screen_1 | image_url: width: 1200 | image_tag: loading: panel_loading, widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 990px) 25vw, 100vw', alt: block.settings.screen_1_alt }}
+                {{ block.settings.screen_1 | image_url: width: 1200 | image_tag: loading: panel_loading, widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 37vw, calc(50vw - 24px)', alt: block.settings.screen_1_alt }}
               </figure>
             {% endif %}
             {% if block.settings.screen_2_video != blank %}
@@ -99,7 +99,7 @@
               </figure>
             {% elsif block.settings.screen_2 != blank %}
               <figure class="gx-experience__screen gx-experience__screen--tall">
-                {{ block.settings.screen_2 | image_url: width: 1200 | image_tag: loading: panel_loading, widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 990px) 25vw, 100vw', alt: block.settings.screen_2_alt }}
+                {{ block.settings.screen_2 | image_url: width: 1200 | image_tag: loading: panel_loading, widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 37vw, calc(50vw - 24px)', alt: block.settings.screen_2_alt }}
               </figure>
             {% endif %}
           </div>
@@ -393,6 +393,7 @@
             this.restart();
           });
           tab.addEventListener('keydown', (event) => this.onKeydown(event, index));
+          tab.addEventListener('pointerenter', () => this.loadPanel(index));
         });
         this.previousButton?.addEventListener('click', () => this.move(-1));
         this.nextButton?.addEventListener('click', () => this.move(1));
@@ -409,6 +410,8 @@
           const panel = event.target.closest('[data-panel-index]');
           if (panel) this.setActive(Number(panel.dataset.panelIndex), false);
         });
+        // load does not bubble, hence capture.
+        this.addEventListener('load', () => this.warmMedia(), true);
         this.warmMedia();
         this.start();
       }
@@ -417,16 +420,28 @@
         this.stop();
       }
 
-      // Lazy images inside hidden panels never enter the viewport, so tabs 2-5 would stay empty forever.
+      // Lazy images inside hidden panels never enter the viewport, so they would only start loading once their tab opens.
+      // Nothing is fetched until the visible panel's own image has arrived, which native lazy-loading only starts when
+      // the section is near the viewport. From then on the hidden panels are loaded outward from the visible one, a pair
+      // at a time and each pair only once the previous one has arrived: both neighbours first (where Previous/Next,
+      // swipes and arrow keys land), then the rest, so no tab switch has to wait for the network.
       // Deliberately not IntersectionObserver-driven: its callbacks do not fire reliably on this page.
       warmMedia() {
-        const load = () => this.querySelectorAll('img[loading="lazy"]').forEach((image) => { image.loading = 'eager'; });
-        const schedule = () => {
-          if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1500 });
-          else window.setTimeout(load, 200);
+        const count = this.panels.length;
+        const index = this.panels.findIndex((panel) => !panel.hidden);
+        const loaded = (panel) => {
+          const image = panel?.querySelector('img');
+          return image?.complete && image.naturalWidth > 0;
         };
-        if (document.readyState === 'complete') schedule();
-        else window.addEventListener('load', schedule, { once: true });
+        for (let step = 0; step < count / 2; step += 1) {
+          if (!loaded(this.panels[(index + step) % count]) || !loaded(this.panels[(index - step + count) % count])) return;
+          this.loadPanel(index + step + 1);
+          this.loadPanel(index - step - 1 + count);
+        }
+      }
+
+      loadPanel(index) {
+        this.panels[index % this.panels.length]?.querySelectorAll('img[loading="lazy"]').forEach((image) => { image.loading = 'eager'; });
       }
 
       setActive(index, moveFocus) {
@@ -444,6 +459,7 @@
           const target = activeTab.offsetLeft - ((this.tabsWrap.clientWidth - activeTab.offsetWidth) / 2);
           this.tabsWrap.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
         }
+        this.warmMedia();
       }
 
       move(step) {
