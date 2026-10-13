@@ -1,28 +1,35 @@
 import { mkdir, readdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-try {
-  process.loadEnvFile(path.resolve(".env"));
-} catch {
-  // .env is optional when the vars are already exported in the shell
+// --public-only reads only what the shop publishes on genesyx.co.uk. In that mode the
+// script sends no Admin API request and needs no token, store handle or settings file.
+const PUBLIC_ONLY = process.argv.includes("--public-only");
+
+if (!PUBLIC_ONLY) {
+  try {
+    process.loadEnvFile(path.resolve(".env"));
+  } catch {
+    // .env is optional when the vars are already exported in the shell
+  }
 }
 
-const STORE = process.env.SHOPIFY_STORE?.trim();
-const TOKEN = process.env.SHOPIFY_ADMIN_TOKEN?.trim();
+const STORE = PUBLIC_ONLY ? undefined : process.env.SHOPIFY_STORE?.trim();
+const TOKEN = PUBLIC_ONLY ? undefined : process.env.SHOPIFY_ADMIN_TOKEN?.trim();
 const API_VERSION = process.env.SHOPIFY_API_VERSION?.trim() || "2026-07";
 
 const outFlag = process.argv.indexOf("--out");
 const OUT_DIR = outFlag === -1 ? "content" : (process.argv[outFlag + 1] ?? "");
 
-if (!STORE) {
+if (!PUBLIC_ONLY && !STORE) {
   console.error("Missing SHOPIFY_STORE. Copy .env.example to .env and fill it in.");
   process.exit(1);
 }
-if (!TOKEN) {
+if (!PUBLIC_ONLY && !TOKEN) {
   console.error(
     "Missing SHOPIFY_ADMIN_TOKEN.\n" +
       "The token needs these read permissions: read_content, read_products, read_online_store_navigation, read_legal_policies.\n" +
-      "How to get one is in docs/HANDOVER.md, section 6."
+      "How to get one is in docs/HANDOVER.md, section 6.\n" +
+      "Without a token you can still refresh pages, products, collections and the privacy policy: npm run export:content:public"
   );
   process.exit(1);
 }
@@ -32,7 +39,7 @@ if (!OUT_DIR || OUT_DIR.startsWith("--")) {
 }
 
 // This script only ever sends GraphQL queries. It never changes the store.
-const ENDPOINT = `https://${STORE}.myshopify.com/admin/api/${API_VERSION}/graphql.json`;
+const ENDPOINT = PUBLIC_ONLY ? "" : `https://${STORE}.myshopify.com/admin/api/${API_VERSION}/graphql.json`;
 const MAX_RETRIES = 3;
 const THROTTLE_FLOOR = 300;
 
@@ -81,6 +88,9 @@ async function backoff(attempt: number, retryAfter?: string | null) {
 }
 
 async function graphql<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
+  if (PUBLIC_ONLY) {
+    throw new Error("Internal error: an Admin API request was attempted in --public-only mode.");
+  }
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     const res = await fetch(ENDPOINT, {
       method: "POST",
@@ -166,14 +176,24 @@ async function writeJson(file: string, value: unknown) {
   await writeFile(dest, JSON.stringify(value, null, 2) + "\n");
 }
 
-// Writes each text exactly as Shopify returned it, then removes .html files in
-// that folder that are no longer in the store, so the folder always matches.
-async function writeHtmlFiles(dir: string, files: Map<string, string>) {
+// Lists whose content depends on where it was read from carry the source and the
+// date, so a reader can tell a public-feed copy from an Admin API copy.
+type Source = "public feed" | "admin api";
+const CAPTURED_ON = new Date().toISOString().slice(0, 10);
+
+async function writeSourced(file: string, source: Source, key: string, items: unknown[]) {
+  await writeJson(file, { source, capturedOn: CAPTURED_ON, [key]: items });
+}
+
+// Writes each text exactly as Shopify returned it, then (unless prune is false)
+// removes .html files in that folder that are no longer in the store, so the folder always matches.
+async function writeHtmlFiles(dir: string, files: Map<string, string>, prune = true) {
   const folder = path.join(OUT_DIR, dir);
   await mkdir(folder, { recursive: true });
   for (const [name, html] of files) {
     await writeFile(path.join(folder, `${sanitize(name)}.html`), html);
   }
+  if (!prune) return;
   const keep = new Set([...files.keys()].map((name) => `${sanitize(name)}.html`));
   for (const entry of await readdir(folder)) {
     if (entry.endsWith(".html") && !keep.has(entry)) {
@@ -221,8 +241,11 @@ async function exportPages(): Promise<string> {
   const nodes = await fetchAll<{ pages: Connection<PageNode> }, PageNode>(PAGES_QUERY, (d) => d.pages);
   nodes.sort((a, b) => compare(a.handle, b.handle));
 
-  await writeJson(
+  // hasBody and the file names match the public version: only pages with text get a file.
+  await writeSourced(
     "pages.json",
+    "admin api",
+    "pages",
     nodes.map((p) => ({
       handle: p.handle,
       title: p.title,
@@ -230,10 +253,24 @@ async function exportPages(): Promise<string> {
       isPublished: p.isPublished,
       publishedAt: p.publishedAt,
       updatedAt: p.updatedAt,
+      hasBody: p.body.length > 0,
       seo: { title: p.seoTitle?.value ?? null, description: p.seoDescription?.value ?? null },
     }))
   );
-  await writeHtmlFiles("pages", new Map(nodes.map((p) => [p.handle, p.body])));
+  // The short list of every page (published or not) that --public-only cannot see.
+  await writeSourced(
+    "pages-admin.json",
+    "admin api",
+    "pages",
+    nodes.map((p) => ({
+      handle: p.handle,
+      title: p.title,
+      isPublished: p.isPublished,
+      templateSuffix: p.templateSuffix,
+      updatedAt: p.updatedAt,
+    }))
+  );
+  await writeHtmlFiles("pages", new Map(nodes.filter((p) => p.body.length > 0).map((p) => [p.handle, p.body])));
   return `${nodes.length} pages`;
 }
 
@@ -463,8 +500,10 @@ async function exportMenus(): Promise<string> {
   const nodes = await fetchAll<{ menus: Connection<MenuNode> }, MenuNode>(MENUS_QUERY, (d) => d.menus);
   nodes.sort((a, b) => compare(a.handle, b.handle));
 
-  await writeJson(
+  await writeSourced(
     "menus.json",
+    "admin api",
+    "menus",
     nodes.map((m) => ({ handle: m.handle, title: m.title, items: saveMenuItems(m.items) }))
   );
   return `${nodes.length} menus`;
@@ -490,8 +529,10 @@ async function exportRedirects(): Promise<string> {
   );
   nodes.sort((a, b) => compare(a.path, b.path) || compare(a.target, b.target));
 
-  await writeJson(
+  await writeSourced(
     "redirects.json",
+    "admin api",
+    "redirects",
     nodes.map((r) => ({ path: r.path, target: r.target }))
   );
   return `${nodes.length} redirects`;
@@ -536,8 +577,10 @@ async function exportBlogs(): Promise<string> {
   }
 
   const articleCount = nodes.reduce((sum, b) => sum + b.articles.nodes.length, 0);
-  await writeJson(
+  await writeSourced(
     "blogs.json",
+    "admin api",
+    "blogs",
     nodes.map((b) => ({
       handle: b.handle,
       title: b.title,
@@ -577,8 +620,12 @@ async function exportPolicies(): Promise<string> {
   const data = await graphql<{ shop: { shopPolicies: PolicyNode[] } }>(POLICIES_QUERY);
   const nodes = [...data.shop.shopPolicies].sort((a, b) => compare(a.type, b.type));
 
-  await writeJson(
+  // With the Admin API the policy text is kept inside this file. The public version
+  // lists which addresses exist and saves each text as policies/<handle>.html instead.
+  await writeSourced(
     "policies.json",
+    "admin api",
+    "policies",
     nodes.map((p) => ({ type: p.type, title: p.title, url: p.url, body: p.body }))
   );
   return `${nodes.length} policies`;
@@ -678,6 +725,169 @@ async function exportCollectionsPublic(): Promise<string> {
   return `${saved.length} collections`;
 }
 
+// ---------------------------------------------------------------- public mode: pages and policies
+//
+// Used only with --public-only (together with the products and collections code above).
+// Only published pages are in the public feed, and unpublished pages are not
+// visible at all. Menus, redirects and blogs have no public source.
+
+type PublicPage = {
+  handle: string;
+  title: string;
+  body_html: string | null;
+  published_at: string | null;
+  updated_at: string;
+};
+
+const hasText = (value: string | null | undefined): value is string =>
+  typeof value === "string" && value.length > 0;
+
+// The public feed gives times in the shop's own time zone (for example -04:00).
+// They are saved in UTC, which is how the Admin API gives them, so both look the same.
+function toUtc(stamp: string | null): string | null {
+  if (!stamp) return null;
+  const time = new Date(stamp);
+  if (Number.isNaN(time.getTime())) {
+    throw new Error(`Unreadable date in the public feed: ${stamp}`);
+  }
+  return time.toISOString().replace(/\.\d{3}Z$/, "Z");
+}
+
+const MAX_PUBLIC_PAGE_REQUESTS = 40;
+
+async function exportPagesPublic(): Promise<string> {
+  const pages: PublicPage[] = [];
+  const seen = new Set<string>();
+  let reachedEnd = false;
+  for (let n = 1; n <= MAX_PUBLIC_PAGE_REQUESTS; n++) {
+    const feed = await publicJson<{ pages: PublicPage[] }>(`/pages.json?limit=250&page=${n}`);
+    if (feed.pages.length === 0) {
+      reachedEnd = true;
+      break;
+    }
+    let added = 0;
+    for (const p of feed.pages) {
+      if (!seen.has(p.handle)) {
+        seen.add(p.handle);
+        pages.push(p);
+        added++;
+      }
+    }
+    if (added === 0) {
+      throw new Error(`The public pages feed repeated page ${n - 1} instead of ending. Nothing was saved.`);
+    }
+  }
+  if (!reachedEnd) {
+    throw new Error(`The public pages feed did not end after ${MAX_PUBLIC_PAGE_REQUESTS} requests. Nothing was saved.`);
+  }
+  pages.sort((a, b) => compare(a.handle, b.handle));
+
+  await writeSourced(
+    "pages.json",
+    "public feed",
+    "pages",
+    pages.map((p) => ({
+      handle: p.handle,
+      title: p.title,
+      publishedAt: toUtc(p.published_at),
+      updatedAt: toUtc(p.updated_at),
+      hasBody: hasText(p.body_html),
+    }))
+  );
+
+  const bodies = new Map<string, string>();
+  for (const p of pages) {
+    if (hasText(p.body_html)) bodies.set(p.handle, p.body_html);
+  }
+  // This mode never deletes files that are not its own output (for example text of
+  // unpublished pages saved by an Admin API run): it only warns about them. It does
+  // remove the file of a published page that no longer has any text.
+  await writeHtmlFiles("pages", bodies, false);
+  const noBody = new Set(pages.filter((p) => !bodies.has(p.handle)).map((p) => `${sanitize(p.handle)}.html`));
+  const written = new Set([...bodies.keys()].map((h) => `${sanitize(h)}.html`));
+  for (const entry of await readdir(path.join(OUT_DIR, "pages"))) {
+    if (!entry.endsWith(".html") || written.has(entry)) continue;
+    if (noBody.has(entry)) {
+      await unlink(path.join(OUT_DIR, "pages", entry));
+      console.log(`  NOTE pages/${entry} removed: that page no longer has any text.`);
+    } else {
+      console.warn(`  WARNING pages/${entry} is not a published page in the public feed. It was left as it is.`);
+    }
+  }
+  return `${pages.length} pages listed, ${bodies.size} with text saved`;
+}
+
+// Shopify's own policy pages (Settings, then Policies) that the shop may have.
+const POLICY_HANDLES = [
+  "privacy-policy",
+  "refund-policy",
+  "shipping-policy",
+  "terms-of-service",
+  "contact-information",
+  "legal-notice",
+];
+
+// Returns the HTML inside the first element whose class list includes className,
+// exactly as it appears in the page, or null if there is no such element.
+function innerHtmlOfClass(html: string, className: string): string | null {
+  const tokens =
+    /<!--[\s\S]*?-->|<(script|style)\b(?:[^>"']|"[^"]*"|'[^']*')*>[\s\S]*?<\/\1\s*>|<(\/?)([a-zA-Z][a-zA-Z0-9-]*)((?:[^>"']|"[^"]*"|'[^']*')*)>/gi;
+  let tag: string | null = null;
+  let depth = 0;
+  let innerStart = 0;
+  for (let m = tokens.exec(html); m !== null; m = tokens.exec(html)) {
+    const name = m[3];
+    if (name === undefined) continue; // a comment, script or style block
+    const closing = m[2] === "/";
+    const attrs = m[4] ?? "";
+    if (tag === null) {
+      if (closing) continue;
+      const cls = /\bclass\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(attrs);
+      if (cls && (cls[1] ?? cls[2] ?? "").split(/\s+/).includes(className)) {
+        tag = name.toLowerCase();
+        depth = 1;
+        innerStart = tokens.lastIndex;
+      }
+    } else if (name.toLowerCase() === tag) {
+      if (closing) depth--;
+      else if (!attrs.trimEnd().endsWith("/")) depth++;
+      if (depth === 0) return html.slice(innerStart, m.index);
+    }
+  }
+  return null;
+}
+
+async function exportPoliciesPublic(): Promise<string> {
+  const entries: { handle: string; address: string; status: number; exists: boolean }[] = [];
+  const bodies = new Map<string, string>();
+  for (const handle of POLICY_HANDLES) {
+    const address = `/policies/${handle}`;
+    // Redirects are not followed, so only a plain 200 counts as "exists".
+    const res = await fetch(`${PUBLIC_SITE}${address}`, { redirect: "manual" });
+    if (res.status !== 200 && res.status !== 404) {
+      throw new Error(`${address} answered HTTP ${res.status}, which is neither 200 nor 404. Nothing was saved.`);
+    }
+    entries.push({ handle, address, status: res.status, exists: res.status === 200 });
+    if (res.status !== 200) {
+      await res.body?.cancel();
+    } else {
+      const inner = innerHtmlOfClass(await res.text(), "shopify-policy__body");
+      if (inner === null) {
+        throw new Error(
+          `${address} has no element with the class "shopify-policy__body", so its text could not be saved. Nothing was saved.`
+        );
+      }
+      bodies.set(handle, inner);
+    }
+  }
+  entries.sort((a, b) => compare(a.handle, b.handle));
+
+  await writeSourced("policies.json", "public feed", "policies", entries);
+  await writeHtmlFiles("policies", bodies);
+  const missing = entries.filter((e) => !e.exists).map((e) => e.handle);
+  return `${bodies.size} of ${entries.length} policy addresses exist and were saved (${[...bodies.keys()].join(", ") || "none"}); not found (404): ${missing.join(", ") || "none"}`;
+}
+
 // Runs the Admin API version. If Shopify refuses access, runs the public version instead.
 function withPublicFallback(
   name: string,
@@ -710,25 +920,36 @@ const SECTION_FILES: Record<string, string> = {
   menus: "menus.json",
   redirects: "redirects.json",
   blogs: "blogs.json (and articles/)",
-  policies: "policies.json",
+  policies: PUBLIC_ONLY ? "policies.json, policies/" : "policies.json",
 };
 
 async function main() {
-  console.log(`Store:    ${STORE}.myshopify.com`);
-  console.log(`Source:   Admin API ${API_VERSION} (read-only queries)`);
+  if (PUBLIC_ONLY) {
+    console.log(`Source:   public pages of ${PUBLIC_SITE} (no Admin API request, no token needed)`);
+  } else {
+    console.log(`Store:    ${STORE}.myshopify.com`);
+    console.log(`Source:   Admin API ${API_VERSION} (read-only queries)`);
+  }
   console.log(`Output:   ${OUT_DIR}/\n`);
 
   await mkdir(OUT_DIR, { recursive: true });
 
-  const sections: [string, () => Promise<string>][] = [
-    ["pages", exportPages],
-    ["products", withPublicFallback("products", exportProducts, exportProductsPublic)],
-    ["collections", withPublicFallback("collections", exportCollections, exportCollectionsPublic)],
-    ["menus", exportMenus],
-    ["redirects", exportRedirects],
-    ["blogs", exportBlogs],
-    ["policies", exportPolicies],
-  ];
+  const sections: [string, () => Promise<string>][] = PUBLIC_ONLY
+    ? [
+        ["pages", exportPagesPublic],
+        ["products", exportProductsPublic],
+        ["collections", exportCollectionsPublic],
+        ["policies", exportPoliciesPublic],
+      ]
+    : [
+        ["pages", exportPages],
+        ["products", withPublicFallback("products", exportProducts, exportProductsPublic)],
+        ["collections", withPublicFallback("collections", exportCollections, exportCollectionsPublic)],
+        ["menus", exportMenus],
+        ["redirects", exportRedirects],
+        ["blogs", exportBlogs],
+        ["policies", exportPolicies],
+      ];
 
   const results: SectionResult[] = [];
   for (const [name, run] of sections) {
@@ -752,6 +973,11 @@ async function main() {
     console.log(`NOT refreshed:  ${notRefreshed.join("; ")} (see the reasons above)`);
     console.log(`Any older copy of those files in ${OUT_DIR}/ is unchanged and may be out of date.`);
     process.exit(1);
+  }
+  if (PUBLIC_ONLY) {
+    console.log(
+      "Not touched by this mode (they need an Admin API token): menus.json, redirects.json, blogs.json, pages-admin.json."
+    );
   }
 }
 
