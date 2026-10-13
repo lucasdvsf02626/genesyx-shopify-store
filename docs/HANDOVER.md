@@ -16,6 +16,9 @@ The commands and branch rules are in [../README.md](../README.md).
 | **The quiz**, shown on the shop's "Personalise Your Conception Journey" page. | An app made with Lovable, hosted at `trygenesyx.lovable.app`. Its code is not in either repository. The shop page contains the quiz inside a frame that points to `trygenesyx.lovable.app/quiz`. | Changes are made in the Lovable project. How they are published was not confirmed. |
 | **The iPhone and Android apps.** | Separate projects. Their code is not in either repository and where it is kept was not confirmed. | Released through App Store Connect (iPhone) and Google Play Console (Android). |
 
+A second Lovable app, `genesyx-journey-guide.lovable.app`, is shown in a frame on the shop page `/pages/journey-guide` (template `page.journey-guide.liquid`).
+That page is still listed in the shop's sitemap (checked today). How that app is published was not confirmed.
+
 **Key addresses**
 
 | What | Address |
@@ -61,7 +64,7 @@ The store also holds 12 other unpublished themes. This document does not say wha
 | Shop (`lucasdvsf02626/genesyx-shopify-store`) | #3, draft | A copy of the waiting draft theme. Do not merge until that theme is published, then refresh `theme/` from it first. |
 | Shop | #1 | An old, documentation-only update to the GEO paste guide (opened 30 September). Merging it changes nothing on the store. Still undecided. |
 | Guides (`FORZA-Industries/genesyx_astro`) | #17 | Search and AI fixes for genesyx.life: sitemap dates, a more accurate `llms.txt`, the Android app, and a redirect from a duplicate address. Open and not merged. |
-| Guides | #18, draft | Adds `hreflang` tags, an IndexNow submission step for Bing, and monitoring notes. |
+| Guides | #18, draft | Adds `hreflang` tags, an IndexNow submission step for Bing, and monitoring notes. It also removes Google Play from the site's schema and says no Android app exists, which disagrees with #17 and the audit checklist. Settle that before merging either. |
 
 Pull request #2 on the shop repository is already merged. It brought the published theme and the README into `main`.
 The pull request that adds this document is also open until it is merged.
@@ -90,18 +93,21 @@ The pull request that adds this document is also open until it is merged.
 - **The strips have no agreed price.**
   Shopify still holds a price that was never agreed, and the site deliberately does not show it.
   It can still be read in Shopify's own data feeds.
-  Only entering the real price fixes that.
+  Until the draft theme is published, it is also in the strips page's hidden tags that search engines read (checked today on the live theme).
+  Only entering the real price fixes the data feeds.
   Do not set it to £0, because that would publish it as free.
 - **Two tags drive "coming soon".**
   `coming-soon` on a product (the strips) makes the button say "Coming soon" and hides the price everywhere.
   `coming-soon-variants` (on XX and XY) makes an unavailable version say "Coming soon" instead of "Sold out", and keeps the price visible.
-  The theme code for both is in `snippets/price.liquid`.
+  The theme code for both is in four places: `snippets/price.liquid`, `snippets/buy-buttons.liquid` (the button label), `sections/genesyx-shop-products.liquid` (the shop card) and `templates/product.json` (a label override).
 - **To launch the kit:** give the kit versions of XX and XY some stock, or stop tracking their stock. **To launch the strips:** remove the `coming-soon` tag, enter the agreed price, and set stock.
 - **Two privacy-policy addresses.**
   `genesyx.co.uk/pages/privacy-policy` is a normal page.
   `genesyx.co.uk/policies/privacy-policy` is Shopify's own policy page.
   Both are live (checked today).
-  The project notes say both must be kept matching for Apple and Google app review.
+  The project notes say both must be kept matching for Apple and Google app review, and that the Android app links to the page while the iPhone app links to the policy page. That was not re-checked.
+  The two texts are not identical. Checked today: the policy page is dated 26 August 2026 and the page 3 September 2026, and they differ in other places too (for example where data is stored and how accounts are deleted). Both mention Apple and Google sign-in.
+  The project notes say the policy page's Apple and Google sign-in wording must be kept when it is edited. The audit checklist advises pasting the September text into the policy page, so compare the two texts first and do not paste one over the other blindly.
   The previous owner could edit the page through the API but not the policy page.
   The policy page is edited in the Shopify admin under Settings, then Policies.
 - **The blog goes to the guides site.**
@@ -119,6 +125,10 @@ The pull request that adds this document is also open until it is merged.
 5. **Publish by hand.** In the Shopify admin go to Online Store, then Themes, and publish the theme. This step is manual on purpose.
 6. **Refresh the repository.** Pull the newly live theme into `theme/`, open a pull request to `main`, and merge it with a merge commit, not "squash". Then update `shopify-live` as the README describes.
 
+**Checking what is really live.** Shopify caches pages. Add `?v=` and any text to the address to skip the cache. The page's `server-timing` response header names the theme that served it, for example `theme;desc="208758374730"` (checked today on the live shop). A plain `curl` is sent a redirect first, so use `curl -sL` with a cookie jar. These tips come from the project notes.
+
+**A caution.** `npm run seo:apply` writes to the live shop and hides six old pages. Run it only after reading the plan from `npm run seo:plan`.
+
 Full commands and the branch rules are in [../README.md](../README.md).
 
 ## 5. Open decisions and known issues
@@ -126,7 +136,9 @@ Full commands and the branch rules are in [../README.md](../README.md).
 These come from the audit on 5 October 2026.
 Some may have changed since.
 Only the items marked "checked today" were re-checked.
-The full list, with the reasons, is in [search-ai-visibility-checklist.md](search-ai-visibility-checklist.md).
+The reasons are in [search-ai-visibility-checklist.md](search-ai-visibility-checklist.md), a copy of the audit's checklist.
+The AI assistant that ran the audit wrote it, speaking to the previous owner, so "I" and "you" in it mean those two.
+It mentions longer health-claim lists (30 items for the shop, 37 for the guides). Those lists are not in this repository. If the previous owner can find them, add them to `docs/` after checking they hold no personal data.
 
 - **Health-claim wording needs review.**
   The audit flagged: the XX and XY product text about "conceiving a female child" and "a male child"; "Over 99% accurate" on the strips; a "4.8 average" rating and placeholder quotes on app pages; and pH ranges that disagree between pages.
@@ -149,18 +161,28 @@ The full list, with the reasons, is in [search-ai-visibility-checklist.md](searc
   Checked today: both are still unreleased.
 - **Other owner decisions.**
   Whether AI training bots stay allowed (they currently are).
-  Clearing four leftover entries from the shop's sitemap.
+  Clearing four leftover entries from the shop's sitemap (checked today: all four are still listed).
   Submitting both sitemaps to Google Search Console and Bing Webmaster Tools.
   The shipping, refund and terms policies in Shopify's policy settings, which the audit found missing.
+- **The home page picture.**
+  A new hero picture was supplied on 5 October and then withdrawn as the wrong one. According to the project notes, the hero has not been changed. Ask the previous owner which picture is meant before swapping it.
+- **An old copy of the guides site.**
+  The audit says `genesyx.pages.dev`, an old Cloudflare Pages copy, should be deleted by whoever owns that project. It still answers (checked today).
 
 ## 6. Access the new owner will need
 
 No passwords or tokens are stored in this repository.
-The helper scripts need an Admin API token. Create your own from a custom app in the Shopify admin (Settings, then Apps and sales channels, then Develop apps).
-Put it in a local `.env` file that is never committed.
-Retire the previous owner's token when you have your own: delete or uninstall the old custom app in that same screen.
+The helper scripts need an Admin API token, a secret code that lets a script talk to the shop. Put it in a local `.env` file that is never committed.
+How to get one has changed. This was checked against Shopify's developer documentation on 13 October 2026:
+
+- If the store already has a custom app (Settings, then Apps and sales channels, then Develop apps), use its token or replace it. Whether the store has one was not checked. Shopify's documentation says new ones can no longer be made there (the cut-off was 1 January 2026).
+- Otherwise, create an app in Shopify's Dev Dashboard, give it the read permissions the scripts need, and install it on the store. Shopify's page "Authenticate an app for stores in your organization" (https://shopify.dev/docs/apps/build/authentication-authorization/client-credentials-grant) explains the steps. That route only works if the app and the store are in the same Shopify organisation. Its tokens expire after 24 hours, so you would need a new one each time you run a script.
+
+If an older custom app exists, remove it once you have your own, so the previous owner's token stops working.
 
 - [ ] Shopify admin staff account, added under Settings, then Users. The admin name is `trygenesyx`.
+- [ ] Shopify store ownership. A staff account is not the same as owning the store. Only the current store owner can change or transfer ownership (see Shopify Help Center, "Change or transfer ownership").
+- [ ] The `hello@genesyx.co.uk` and `info@genesyx.co.uk` mailboxes. Where they are hosted was not confirmed.
 - [ ] GitHub access to both repositories. The shop repository sits under an individual's GitHub account, not an organisation, so consider transferring it.
 - [ ] The Vercel project that hosts the guides site.
 - [ ] The Lovable project for the quiz.
@@ -176,5 +198,5 @@ Retire the previous owner's token when you have your own: delete or uninstall th
 - **Payments.**
 - **Customers and orders.** These are personal data and must never be added to a repository.
 
-A dated copy of some shop content (products and collections so far) is in [../content/README.md](../content/README.md).
+A dated copy of some shop content (products and collections so far) is in `content/`. Its [README.md](../content/README.md) says what is and is not included.
 Shopify remains the source of truth.

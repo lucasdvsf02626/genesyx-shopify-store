@@ -39,7 +39,7 @@ To use them, copy `.env.example` to `.env` and fill it in. Never commit `.env`: 
 
 ## What is not in this repository
 
-- This repository has the shop's theme (its design and code). A dated copy of the shop's pages, products, collections, menus and redirects is kept in `content/` (its `README.md` says what the current copy contains), but Shopify remains the source of truth. The shop's content lives in Shopify itself and is managed in the Shopify admin: products and prices, the text of pages, menus, redirects, uploaded images and videos, store settings, installed apps, customers and orders. (`export-files.ts` can download the uploaded files.)
+- This repository has the shop's theme (its design and code). A dated copy of some shop content (products and collections so far) is kept in `content/`; its `README.md` says what is and is not included. Shopify remains the source of truth. The shop's content lives in Shopify itself and is managed in the Shopify admin: products and prices, the text of pages, menus, redirects, uploaded images and videos, store settings, installed apps, customers and orders. (`export-files.ts` can download the uploaded files.)
 - The guides website, www.genesyx.life, is a separate project with its own repository: `FORZA-Industries/genesyx_astro`. It is built with Astro and published through Vercel.
 - The quiz shown on the shop's "Personalise Your Conception Journey" page is a separate app, hosted at `trygenesyx.lovable.app`. It is embedded in that page. Its code is not here.
 - The Genesyx mobile apps (iPhone and Android) are separate projects and are not in this repository.
