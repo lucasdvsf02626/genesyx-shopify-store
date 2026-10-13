@@ -1,0 +1,37 @@
+{
+  "source": "Shopify admin, read by hand on the date shown; the export script can only refresh this file with an Admin API token",
+  "capturedOn": "2026-10-13",
+  "blogs": [
+    {
+      "handle": "learn-archive",
+      "title": "Learn (archived)",
+      "articles": [
+        {
+          "handle": "evidence",
+          "title": "The evidence behind Genesyx",
+          "isPublished": false
+        },
+        {
+          "handle": "how-to-conceive-a-girl-or-boy",
+          "title": "How to conceive a girl or a boy: what the evidence says",
+          "isPublished": false
+        },
+        {
+          "handle": "ovulation-tests",
+          "title": "Ovulation tests and your fertile window",
+          "isPublished": false
+        },
+        {
+          "handle": "shettles-method",
+          "title": "The Shettles method, explained",
+          "isPublished": false
+        },
+        {
+          "handle": "vaginal-ph",
+          "title": "Vaginal pH and trying to conceive",
+          "isPublished": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "source": "Shopify admin, read by hand on the date shown; the export script can only refresh this file with an Admin API token",
+  "capturedOn": "2026-10-13",
+  "menus": [
+    {
+      "handle": "customer-account-main-menu",
+      "title": "Customer account main menu",
+      "items": [
+        {
+          "title": "Orders",
+          "type": "CUSTOMER_ACCOUNT_PAGE",
+          "url": "https://shopify.com/102765166922/account/orders"
+        },
+        {
+          "title": "Profile",
+          "type": "CUSTOMER_ACCOUNT_PAGE",
+          "url": "https://shopify.com/102765166922/account/profile"
+        }
+      ]
+    },
+    {
+      "handle": "footer",
+      "title": "Footer menu",
+      "items": [
+        {
+          "title": "Search",
+          "type": "SEARCH",
+          "url": "/search"
+        }
+      ]
+    },
+    {
+      "handle": "main-menu",
+      "title": "Main menu",
+      "items": [
+        {
+          "title": "Home",
+          "type": "FRONTPAGE",
+          "url": "/"
+        },
+        {
+          "title": "Shop",
+          "type": "PAGE",
+          "url": "/pages/shop"
+        },
+        {
+          "title": "XX Formula",
+          "type": "PRODUCT",
+          "url": "/products/xx-formula"
+        },
+        {
+          "title": "XY Formula",
+          "type": "PRODUCT",
+          "url": "/products/xy-formula"
+        },
+        {
+          "title": "Learn",
+          "type": "HTTP",
+          "url": "https://www.genesyx.life/learn"
+        },
+        {
+          "title": "Take the Quiz",
+          "type": "PAGE",
+          "url": "/pages/personalise-your-conception-journey"
+        },
+        {
+          "title": "Contact",
+          "type": "PAGE",
+          "url": "/pages/contact"
+        }
+      ]
+    }
+  ]
+}

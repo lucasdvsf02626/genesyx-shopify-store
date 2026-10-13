@@ -172,7 +172,7 @@ It mentions longer health-claim lists (30 items for the shop, 37 for the guides)
 ## 6. Access the new owner will need
 
 No passwords or tokens are stored in this repository.
-The helper scripts need an Admin API token, a secret code that lets a script talk to the shop. Put it in a local `.env` file that is never committed.
+The helper scripts need an Admin API token, a secret code that lets a script talk to the shop. Put it in a local `.env` file that is never committed. The one exception is `npm run export:content:public`, which reads only the public website and needs no token. It refreshes the pages, products, collections and privacy policy in `content/`, but not the menus, redirects or blogs.
 How to get one has changed. This was checked against Shopify's developer documentation on 13 October 2026:
 
 - If the store already has a custom app (Settings, then Apps and sales channels, then Develop apps), use its token or replace it. Whether the store has one was not checked. Shopify's documentation says new ones can no longer be made there (the cut-off was 1 January 2026).
@@ -193,10 +193,10 @@ If an older custom app exists, remove it once you have your own, so the previous
 ## 7. What is not in git at all
 
 - **Uploaded images and videos.** They live in Shopify. `npm run export` downloads them to your computer, but they are not committed.
-- **Store settings**, and Shopify's own policy pages.
+- **Store settings**, and Shopify's own policy pages other than a dated copy of the privacy policy in `content/policies/`.
 - **Installed apps** and their settings.
 - **Payments.**
 - **Customers and orders.** These are personal data and must never be added to a repository.
 
-A dated copy of some shop content (products and collections so far) is in `content/`. Its [README.md](../content/README.md) says what is and is not included.
+A dated copy of the shop's content, taken on 13 October 2026, is in `content/`: the published pages, a list of all pages, the menus, the redirects, the blog (titles only), the products, the collections and the privacy policy. Its [README.md](../content/README.md) says where each part came from and what is not included, for example the text of the six unpublished pages and five unpublished blog articles. The menus, redirects and blog list were read from the Shopify admin by hand and can only be refreshed with an Admin API token.
 Shopify remains the source of truth.
