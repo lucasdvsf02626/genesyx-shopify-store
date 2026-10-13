@@ -361,7 +361,18 @@ type SavedProduct = {
 async function saveProducts(products: SavedProduct[], descriptions: Map<string, string>) {
   products.sort((a, b) => compare(a.handle, b.handle));
   await writeJson("products.json", products);
-  await writeHtmlFiles("products", descriptions);
+  // --public-only never deletes files that are not its own output (for example the text of
+  // draft products saved by an Admin API run): it only warns about them. The Admin API run,
+  // and its fallback to public data, keep the folder matching the store.
+  await writeHtmlFiles("products", descriptions, !PUBLIC_ONLY);
+  if (PUBLIC_ONLY) {
+    const written = new Set([...descriptions.keys()].map((handle) => `${sanitize(handle)}.html`));
+    for (const entry of await readdir(path.join(OUT_DIR, "products"))) {
+      if (entry.endsWith(".html") && !written.has(entry)) {
+        console.warn(`  WARNING products/${entry} is not a product in the public feed. It was left as it is.`);
+      }
+    }
+  }
 }
 
 async function exportProducts(): Promise<string> {
@@ -914,7 +925,7 @@ type SectionResult = { name: string; written: boolean };
 
 // The files each section writes, so the closing summary can say what was and was not refreshed.
 const SECTION_FILES: Record<string, string> = {
-  pages: "pages.json, pages/",
+  pages: PUBLIC_ONLY ? "pages.json, pages/" : "pages.json, pages-admin.json, pages/",
   products: "products.json, products/",
   collections: "collections.json",
   menus: "menus.json",

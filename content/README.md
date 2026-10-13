@@ -24,7 +24,7 @@ It is a copy only. **Shopify stays the source of truth.** Never edit these files
 
 **Shopify admin, read by hand** means the information was read from the Shopify admin on 13 October 2026 through a read-only connection and written into the files by a small one-off script that is not kept in the repository. The export script can only refresh these files with an Admin API token (see "How to refresh"). Until someone does that, they are a picture of 13 October 2026 and can go out of date.
 
-Each list file starts with `source` (where it came from) and `capturedOn` (the date). A refresh always changes `capturedOn`; that line is not a real change.
+`pages.json`, `pages-admin.json`, `menus.json`, `redirects.json`, `blogs.json` and `policies.json` start with `source` (where it came from) and `capturedOn` (the date). `products.json` and `collections.json` are plain lists with no such lines; this copy of them came from the public feed. A refresh always changes `capturedOn`; that line is not a real change.
 
 ### Pages with no text of their own
 
@@ -57,7 +57,8 @@ Both commands only read from Shopify. They cannot change the shop. Run `npm inst
 - Needs no token and no settings file. It makes no Admin API request.
 - Refreshes `pages.json`, `pages/`, `products.json`, `products/`, `collections.json`, `policies.json` and `policies/`.
 - Does not touch `menus.json`, `redirects.json`, `blogs.json` or `pages-admin.json`. They keep their 13 October 2026 contents and may go out of date.
-- Cannot see unpublished pages. It leaves any file in `pages/` it does not recognise as it is and prints a warning. It removes the file of a published page that no longer has any text.
+- Cannot see unpublished pages or draft products. It leaves any file in `pages/` or `products/` it does not recognise as it is and prints a warning (for example the text of an unpublished page, or the description of a draft product, saved by a run with a token). It removes the file of a published page that no longer has any text.
+- If the folder was last refreshed with a token, this command puts the less detailed public versions of `pages.json`, `products.json`, `collections.json` and `policies.json` back: published items only, the template, published state and search-engine fields of pages dropped, and the status, template and search-engine fields of products and collections back to `null`. Check `git diff content/` before committing.
 - If the privacy policy page cannot be found in the expected place, it saves nothing from the policy step and says so.
 
 **With a token: `npm run export:content`**
@@ -74,7 +75,7 @@ Both commands only read from Shopify. They cannot change the shop. Run `npm inst
 
 **This command has not yet been run against the live shop with a real token.** Treat the first real run as its test: all seven sections should print `DONE`. It has only been tried against made-up answers, not against Shopify.
 
-Files are sorted and laid out the same way each time, so apart from the `capturedOn` date a refresh only shows real changes.
+Files are sorted and laid out the same way each time, so when you use the same command as last time, apart from the `capturedOn` date a refresh only shows real changes. Switching between the two commands also changes the `source` lines and the fields that only the Admin API provides, so the first refresh with a token will show a larger difference than later ones.
 
 ## What is deliberately left out
 

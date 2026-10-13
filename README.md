@@ -1,9 +1,11 @@
 # Genesyx Shopify store
 
-This repository holds the code for the Genesyx online shop (genesyx.co.uk). It keeps two things together:
+This repository holds the code for the Genesyx online shop (genesyx.co.uk). It keeps these things together:
 
-- the **Shopify theme**, which is the code that controls how the shop looks, and
-- a few **helper scripts** for jobs outside the theme, such as downloading the store's images and fixing page titles for search engines.
+- the **Shopify theme**, which is the code that controls how the shop looks,
+- a few **helper scripts** for jobs outside the theme, such as downloading the store's images and fixing page titles for search engines,
+- a dated copy of the shop's content (`content/`), and
+- the handover notes (`docs/`).
 
 Store details: Shopify store handle `genesyx1`, admin name `trygenesyx`.
 
