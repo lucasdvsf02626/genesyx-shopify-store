@@ -21,7 +21,8 @@ if (!STORE) {
 if (!TOKEN) {
   console.error(
     "Missing SHOPIFY_ADMIN_TOKEN.\n" +
-      "Create a custom app with the read scopes: read_content, read_products, read_online_store_navigation, read_legal_policies."
+      "The token needs these read permissions: read_content, read_products, read_online_store_navigation, read_legal_policies.\n" +
+      "How to get one is in docs/HANDOVER.md, section 6."
   );
   process.exit(1);
 }
@@ -61,6 +62,10 @@ type Connection<N> = {
   nodes: N[];
 };
 
+// Raised when Shopify says the token is missing, wrong or expired (HTTP 401).
+// It stops the run, so a bad token never causes files to be replaced with lower-detail data.
+class AuthError extends Error {}
+
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function isRetryable(status: number) {
@@ -91,6 +96,9 @@ async function graphql<T>(query: string, variables: Record<string, unknown> = {}
       continue;
     }
 
+    if (res.status === 401) {
+      throw new AuthError("The Admin API token is missing or not valid (Shopify answered HTTP 401). The run was stopped.");
+    }
     if (!res.ok) {
       throw new Error(`GraphQL HTTP ${res.status}: ${await res.text()}`);
     }
@@ -257,11 +265,12 @@ type ProductNode = {
   }>;
 };
 
-// Small pages: each product asks for its variants and media too, and Shopify
-// rejects a single query that costs too much.
+// Small pages: each product asks for up to 50 variants and 50 media, and Shopify
+// rejects a single query that costs more than 1,000 points. By our own estimate
+// 2 products cost about 520 points and 5 would cost about 1,300, so read 2 at a time.
 const PRODUCTS_QUERY = `
   query Products($cursor: String) {
-    products(first: 5, after: $cursor, sortKey: ID) {
+    products(first: 2, after: $cursor, sortKey: ID) {
       pageInfo { hasNextPage endCursor }
       nodes {
         handle
@@ -586,7 +595,7 @@ async function exportPolicies(): Promise<string> {
 const PUBLIC_SITE = "https://genesyx.co.uk";
 
 function isAccessProblem(err: unknown) {
-  return /access denied|required access|access scope|HTTP 40[13]/i.test((err as Error).message);
+  return /access denied|required access|access scope|HTTP 403/i.test((err as Error).message);
 }
 
 async function publicJson<T>(pathAndQuery: string): Promise<T> {
@@ -693,6 +702,17 @@ function withPublicFallback(
 
 type SectionResult = { name: string; written: boolean };
 
+// The files each section writes, so the closing summary can say what was and was not refreshed.
+const SECTION_FILES: Record<string, string> = {
+  pages: "pages.json, pages/",
+  products: "products.json, products/",
+  collections: "collections.json",
+  menus: "menus.json",
+  redirects: "redirects.json",
+  blogs: "blogs.json (and articles/)",
+  policies: "policies.json",
+};
+
 async function main() {
   console.log(`Store:    ${STORE}.myshopify.com`);
   console.log(`Source:   Admin API ${API_VERSION} (read-only queries)`);
@@ -716,19 +736,21 @@ async function main() {
       console.log(`  DONE ${name}: ${await run()}`);
       results.push({ name, written: true });
     } catch (err) {
-      console.log(`  SKIP ${name}: ${(err as Error).message}`);
+      const stop = err instanceof AuthError;
+      console.log(`  ${stop ? "STOP" : "SKIP"} ${name}: ${(err as Error).message}`);
       results.push({ name, written: false });
+      if (stop) break;
     }
   }
 
-  const skipped = results.filter((r) => !r.written).map((r) => r.name);
-  console.log(`\nWritten:  ${results.filter((r) => r.written).length} of ${results.length} sections`);
-  if (skipped.length) {
-    console.log(`Skipped:  ${skipped.join(", ")} (see the reasons above; usually the API token lacks that permission)`);
-  }
-
-  if (!results.find((r) => r.name === "pages")?.written) {
-    console.error("\nPages could not be exported, so nothing useful was saved.");
+  const writtenNames = new Set(results.filter((r) => r.written).map((r) => r.name));
+  const refreshed = sections.filter(([name]) => writtenNames.has(name)).map(([name]) => SECTION_FILES[name]);
+  const notRefreshed = sections.filter(([name]) => !writtenNames.has(name)).map(([name]) => SECTION_FILES[name]);
+  console.log(`\nWritten:        ${refreshed.length} of ${sections.length} sections`);
+  console.log(`Refreshed:      ${refreshed.join("; ") || "nothing"}`);
+  if (notRefreshed.length) {
+    console.log(`NOT refreshed:  ${notRefreshed.join("; ")} (see the reasons above)`);
+    console.log(`Any older copy of those files in ${OUT_DIR}/ is unchanged and may be out of date.`);
     process.exit(1);
   }
 }
