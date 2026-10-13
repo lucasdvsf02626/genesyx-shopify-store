@@ -43,17 +43,21 @@ Bring a Shopify theme's current code into `theme/`:
 shopify theme pull --store genesyx1.myshopify.com --theme <THEME_ID> --path theme
 ```
 
-Send changes to an **unpublished** theme (one file at a time is safest):
+Send changes to an **unpublished** theme (one file at a time is safest). Write the file path relative to `theme/`, for example `sections/header-group.json`:
 
 ```
-shopify theme push --store genesyx1.myshopify.com --theme <THEME_ID> --path theme --nodelete --only <file>
+shopify theme push --store genesyx1.myshopify.com --theme <UNPUBLISHED_THEME_ID> --path theme --nodelete --only sections/header-group.json
 ```
+
+Use the ID of an **unpublished** theme only. Run `shopify theme list --store genesyx1.myshopify.com` first and never use the one marked `[live]` (currently `208758374730`). If the CLI asks whether to push to the live theme, answer **No**.
 
 Rebuild the theme-only `shopify-live` branch from `theme/`:
 
 ```
 git subtree push --prefix=theme origin shopify-live
 ```
+
+Run this only while on `main`, after the pull request has been merged and you have pulled (`git checkout main && git pull`). Never run it from a feature branch: that would send unreviewed code to `shopify-live`. If Git refuses the push, stop and ask a developer. Do not force it.
 
 ## Going live
 
@@ -67,10 +71,12 @@ This lets Shopify read the theme straight from GitHub.
 2. Shopify's GitHub app must be approved for this repository.
 3. Choose this repository and the `shopify-live` branch.
 
-Once connected, Shopify saves changes made in the theme editor to the `shopify-live` branch. Bring those back into `main` with:
+Once connected, `shopify-live` is **one-way: from `main` to Shopify**. Every `git subtree push` updates the connected theme, and if that theme is published, the change goes live on the shop straight away. So only push to `shopify-live` from `main`, after review (see above).
+
+Do not save edits in the theme editor of the connected theme. Shopify would commit them to `shopify-live`, which is not built to be merged back into `main`, and the next `git subtree push` would then be refused. If editor changes were made anyway, bring them into the repository the usual way: on a new feature branch run
 
 ```
-git subtree pull --prefix=theme origin shopify-live
+shopify theme pull --store genesyx1.myshopify.com --theme <CONNECTED_THEME_ID> --path theme
 ```
 
-Do that before the next `git subtree push`, otherwise Git will refuse the push because the two branches have drifted apart.
+and open a pull request. If Git then refuses the next `git subtree push`, stop and ask a developer. Do not force it.
