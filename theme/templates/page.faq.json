@@ -1,0 +1,113 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "genesyx-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What is Genesyx?",
+            "answer": "<p>Genesyx is a UK fertility companion app for people trying to conceive. It brings cycle awareness, your estimated fertile window, at-home vaginal pH logging, daily wellbeing check-ins, hydration and sleep logging, and cycle-aware nutrition guidance into one private space.</p><p>Genesyx is made by Genesyx Ltd, a company registered in England and Wales and based in Ashford, Kent.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Is the Genesyx app free?",
+            "answer": "<p>Yes. Genesyx is free to download on iPhone from the App Store and on Android from Google Play. <a href=\"/pages/download\" title=\"Download the Genesyx app\">Download the app</a>.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I track my vaginal pH in an app?",
+            "answer": "<p>Yes. With Genesyx you test at home with a vaginal pH strip, then log the reading in a couple of taps. The app shows each reading against the typical range and alongside your cycle phase and symptoms, so you can notice patterns over time. <a href=\"/pages/ph-tracking\" title=\"Vaginal pH tracking in Genesyx\">See how pH tracking works</a>.</p><p>Genesyx is educational and does not diagnose or treat any condition. If you have symptoms, or a reading that worries you, speak to your GP, a sexual health clinic or a pharmacist.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "What can I track with Genesyx?",
+            "answer": "<p>You can log your period dates and cycle length, see your current cycle phase and estimated fertile window, record vaginal pH readings, check in on mood, energy and symptoms, and log hydration, sleep, food groups and the supplements you take. Your history appears in My Logs so patterns become easier to spot.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "How does Genesyx estimate my fertile window?",
+            "answer": "<p>Genesyx uses the period dates and cycle length you log to estimate your current cycle phase and fertile window. These are estimates based on your own data, not a guarantee of when you ovulate. Ovulation (LH) tests can help you confirm timing.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Does the Shettles method work?",
+            "answer": "<p>The Shettles method suggests that timing intercourse around ovulation can influence a baby's sex. Published research has not shown it to be reliable. A 1991 meta-analysis did not support timing intercourse as a practical method of sex selection, and a 1985 study of a modified Shettles technique found no statistically significant difference from uncontrolled intercourse.</p><p>Read our summary of the published studies on the <a href=\"/pages/shettles-method-research-evidence\" title=\"The Shettles Method: research and evidence\">Shettles Method research page</a>.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "What are the Genesyx XX Formula and XY Formula?",
+            "answer": "<p>They are Genesyx food supplements for women preparing for conception, formulated by Formulation Biochemist Gabriel Isaic. Each pack contains 60 capsules (a one-month supply at two capsules a day), is suitable for vegetarians and vegans, and is made in the UK. <a href=\"/pages/shop\" title=\"Shop Genesyx\">Visit the shop</a>.</p><p>Food supplements are not a substitute for a varied, balanced diet and a healthy lifestyle.</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Is my data private?",
+            "answer": "<p>Yes. You can use Genesyx without signing in, in which case your data stays on your device. If you create an account, your data is stored on servers in Europe and encrypted in transit. The app shows no ads, and you can delete your account and data at any time, in the app or on our <a href=\"/pages/delete-account\" title=\"Delete your Genesyx account\">delete account page</a>. See our <a href=\"/policies/privacy-policy\" title=\"Genesyx privacy policy\">privacy policy</a> for full details.</p>"
+          }
+        },
+        "q9": {
+          "type": "question",
+          "settings": {
+            "question": "Is Genesyx a medical device?",
+            "answer": "<p>No. Genesyx is an educational wellness tool. It does not provide medical advice, diagnosis or treatment. Always speak to a qualified healthcare professional about your health or fertility.</p>"
+          }
+        },
+        "q10": {
+          "type": "question",
+          "settings": {
+            "question": "How do I contact Genesyx?",
+            "answer": "<p>Email us at <a href=\"mailto:info@genesyx.co.uk\">info@genesyx.co.uk</a> or use our <a href=\"/pages/contact\" title=\"Contact Genesyx\">contact form</a>. Genesyx Ltd, Unit 8 Axiom, Orbital Park, Ashford, Kent TN24 0AA.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10"
+      ],
+      "settings": {
+        "eyebrow": "Help centre",
+        "heading": "Genesyx FAQs",
+        "intro": "<p>Answers to common questions about the Genesyx fertility app, vaginal pH tracking, our supplements and your privacy.</p>",
+        "open_first": true,
+        "disclaimer": "Genesyx is an educational wellness tool. It does not provide medical advice, diagnosis or treatment.",
+        "background": "#fffefb",
+        "text_color": "#252238",
+        "accent": "#6650c7"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

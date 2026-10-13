@@ -1,0 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "genesyx-shop-products",
+      "settings": {
+        "badge": "",
+        "heading": "Shop Genesyx",
+        "body": "<p>XX and XY Formula, formulated by Formulation Biochemist Gabriel Isaic, and our Ovulation Test Strips. Track it all in the free Genesyx app.</p><p>Pair your formula with ovulation testing and the free app, and plan your timing with calm, daily guidance.</p>",
+        "show_all": false,
+        "products": [
+          "xx-formula",
+          "xy-formula",
+          "ovulation-test-strips"
+        ],
+        "button_label": "Add to basket",
+        "sold_out_label": "Coming soon",
+        "details_label": "View details",
+        "trust_1": "Made in the UK",
+        "trust_2": "Free Genesyx app",
+        "trust_3": "Secure checkout",
+        "disclaimer": "Food supplements are not a substitute for a varied, balanced diet and a healthy lifestyle. The Genesyx app is an educational wellness tool. It does not provide medical advice, diagnosis or treatment."
+      },
+      "custom_css": [
+        "@media (max-width: 749px) {#shop {padding-top: 24px;} #shop .gx-shop-copy p + p {display: none;} #shop .gx-shop-grid {margin-top: 28px;}}"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,139 @@
+{%- comment -%}
+  Genesyx entity structured data for search engines and AI assistants.
+  - Organization + WebSite on every page (one shared @id so all pages point at the same entity)
+  - MobileApplication on the homepage and the download page
+  Product JSON-LD is still output by Shopify's `structured_data` filter in main-product.
+  FAQPage JSON-LD is output by sections/genesyx-faq.liquid.
+  Rendered from snippets/meta-tags.liquid (inside <head>).
+{%- endcomment -%}
+{%- liquid
+  assign origin = request.origin
+  assign org_id = origin | append: '/#organization'
+  assign site_id = origin | append: '/#website'
+  assign app_id = origin | append: '/#app'
+  assign search_template = origin | append: routes.search_url | append: '?q={search_term_string}'
+
+  assign app_store_url = 'https://apps.apple.com/gb/app/genesyx/id6787682466'
+  assign play_store_url = 'https://play.google.com/store/apps/details?id=com.genesyx.app'
+  assign companies_house_url = 'https://find-and-update.company-information.service.gov.uk/company/16913651'
+
+  if settings.logo != blank
+    assign logo_url = settings.logo | image_url: width: 600 | prepend: 'https:'
+  elsif shop.brand.logo != blank
+    assign logo_url = shop.brand.logo | image_url: width: 600 | prepend: 'https:'
+  else
+    assign logo_url = 'genesyx-favicon.png' | asset_url | prepend: 'https:'
+  endif
+
+  assign same_as = companies_house_url
+  if settings.social_instagram_link != blank
+    assign same_as = same_as | append: '|' | append: settings.social_instagram_link
+  endif
+  if settings.social_tiktok_link != blank
+    assign same_as = same_as | append: '|' | append: settings.social_tiktok_link
+  endif
+  if settings.social_facebook_link != blank
+    assign same_as = same_as | append: '|' | append: settings.social_facebook_link
+  endif
+  if settings.social_youtube_link != blank
+    assign same_as = same_as | append: '|' | append: settings.social_youtube_link
+  endif
+  if settings.social_twitter_link != blank
+    assign same_as = same_as | append: '|' | append: settings.social_twitter_link
+  endif
+  if settings.social_pinterest_link != blank
+    assign same_as = same_as | append: '|' | append: settings.social_pinterest_link
+  endif
+  assign same_as_list = same_as | split: '|'
+
+  assign brand_description = 'Genesyx is a UK fertility companion app for people trying to conceive. It brings cycle awareness, fertile-window tracking, at-home vaginal pH logging, daily wellbeing check-ins and cycle-aware nutrition guidance into one private space. Genesyx is an educational wellness tool and does not diagnose or treat any condition.'
+
+  assign show_app = false
+  if request.page_type == 'index'
+    assign show_app = true
+  elsif request.page_type == 'page' and page.handle == 'download'
+    assign show_app = true
+  endif
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": {{ org_id | json }},
+        "name": "Genesyx",
+        "legalName": "Genesyx Ltd",
+        "url": {{ origin | json }},
+        "logo": {
+          "@type": "ImageObject",
+          "url": {{ logo_url | json }}
+        },
+        "description": {{ brand_description | json }},
+        "email": "info@genesyx.co.uk",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Unit 8 Axiom, Orbital Park",
+          "addressLocality": "Ashford",
+          "addressRegion": "Kent",
+          "postalCode": "TN24 0AA",
+          "addressCountry": "GB"
+        },
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "UK Companies House company number",
+          "value": "16913651"
+        },
+        "areaServed": ["GB", "US", "EU"],
+        "knowsAbout": ["Fertility awareness", "Menstrual cycle tracking", "Vaginal pH", "Trying to conceive", "Cycle-aware nutrition"],
+        "sameAs": {{ same_as_list | json }}
+      },
+      {
+        "@type": "WebSite",
+        "@id": {{ site_id | json }},
+        "url": {{ origin | json }},
+        "name": "Genesyx",
+        "inLanguage": "en-GB",
+        "publisher": { "@id": {{ org_id | json }} },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": {{ search_template | json }}
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+      {%- if show_app -%}
+      ,
+      {
+        "@type": "MobileApplication",
+        "@id": {{ app_id | json }},
+        "name": "Genesyx",
+        "alternateName": "Genesyx: fertility and cycle tracking",
+        "description": {{ brand_description | json }},
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "HealthApplication",
+        "url": {{ origin | append: '/pages/download' | json }},
+        "installUrl": [{{ app_store_url | json }}, {{ play_store_url | json }}],
+        "sameAs": [{{ app_store_url | json }}, {{ play_store_url | json }}],
+        "image": {{ logo_url | json }},
+        "inLanguage": "en-GB",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "GBP"
+        },
+        "featureList": [
+          "Cycle phase and fertile window tracking",
+          "At-home vaginal pH logging with cycle context",
+          "Daily mood, energy and symptom check-ins",
+          "Hydration and sleep logging",
+          "Cycle-aware nutrition guidance"
+        ],
+        "publisher": { "@id": {{ org_id | json }} }
+      }
+      {%- endif -%}
+    ]
+  }
+</script>

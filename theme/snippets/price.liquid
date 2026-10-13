@@ -38,6 +38,14 @@
   if target == product and product.price_varies
     assign money_price = 'products.product.price.from_price_html' | t: price: money_price
   endif
+
+  comment
+    Products tagged coming-soon have no agreed price yet: show only the "Coming soon" badge.
+  endcomment
+  assign hide_price = false
+  if product.tags contains 'coming-soon'
+    assign hide_price = true
+  endif
 -%}
 
 {%- unless target == null and placeholder == null -%}
@@ -52,6 +60,7 @@
       {%- if show_badges %} price--show-badge{% endif -%}
     "
   >
+    {%- unless hide_price -%}
     <div class="price__container">
       {%- comment -%}
         Explanation of description list:
@@ -112,13 +121,18 @@
         {% render 'unit-price', price: product.selected_or_first_available_variant.unit_price, measurement: product.selected_or_first_available_variant.unit_price_measurement %}
       {%- endif -%}
     </div>
+    {%- endunless -%}
     {%- if show_badges -%}
       <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
         {{ 'products.product.on_sale' | t }}
       </span>
 
       <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
-        {{ 'products.product.sold_out' | t }}
+        {%- if product.tags contains 'coming-soon' or product.tags contains 'coming-soon-variants' -%}
+          Coming soon
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
       </span>
     {%- endif -%}
   </div>

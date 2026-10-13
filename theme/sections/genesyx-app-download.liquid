@@ -1,0 +1,201 @@
+{%- comment -%} Genesyx app download page — hero with both store badges and app screens, feature tiles, three steps, closing CTA.
+  Sizing lives in this style block: the theme's precompiled Tailwind has no new arbitrary values, and the root
+  font-size is 10px, so everything here is px. Badge markup reuses the classes the old download section used. {%- endcomment -%}
+{%- liquid
+  assign sid = 'gx-dl-' | append: section.id
+  assign apple_link = section.settings.apple_link | strip | default: 'https://apps.apple.com/us/app/genesyx/id6787682466'
+  assign gp_link = section.settings.googleplay_link | strip | default: 'https://play.google.com/store/apps/details?id=com.genesyx.app'
+-%}
+<style>
+  #{{ sid }} { padding-bottom: 80px; background: linear-gradient(180deg, rgba(110, 114, 216, 0.07) 0%, rgba(255, 255, 255, 0) 520px); }
+  @media (min-width: 750px) { #{{ sid }} { padding-bottom: 112px; } }
+  #{{ sid }} .gx-dl-inner { margin: 0 auto; max-width: 1120px; }
+  #{{ sid }} .gx-dl-hero { display: flex; flex-direction: column; align-items: center; gap: 48px; padding: 56px 0 24px; text-align: center; }
+  #{{ sid }} .gx-dl-copy { max-width: 560px; }
+  #{{ sid }} .gx-dl-eyebrow { display: inline-block; margin-bottom: 16px; padding: 6px 14px; border-radius: 999px; background: rgba(110, 114, 216, 0.14); color: #4d4daa; font-size: 13px; font-weight: 500; }
+  #{{ sid }} .gx-dl-sub { margin-top: 16px; font-size: 18px; line-height: 1.5; }
+  #{{ sid }} .gx-dl-badges { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-top: 32px; }
+  #{{ sid }} .gx-dl-badges a { display: inline-block; line-height: 0; transition: transform 0.15s ease; }
+  #{{ sid }} .gx-dl-badges a:hover { transform: translateY(-2px); }
+  #{{ sid }} .gx-dl-badges img { display: block; height: 48px; width: auto; }
+  #{{ sid }} .gx-dl-note { margin-top: 14px; font-size: 14px; }
+  #{{ sid }} .gx-dl-phones { position: relative; display: flex; justify-content: center; align-items: flex-start; gap: 0; width: 100%; max-width: 440px; }
+  #{{ sid }} .gx-phone { flex: 0 0 auto; width: 46%; max-width: 230px; padding: 8px; border-radius: 34px; background: #16161d; box-shadow: 0 28px 60px rgba(41, 37, 34, 0.18); }
+  #{{ sid }} .gx-phone img { display: block; width: 100%; height: auto; border-radius: 27px; }
+  #{{ sid }} .gx-phone--back { margin-top: 48px; margin-left: -6%; transform: rotate(4deg); }
+  #{{ sid }} .gx-phone--front { position: relative; z-index: 1; transform: rotate(-3deg); }
+  #{{ sid }} .gx-dl-h2 { font-size: 28px; line-height: 1.15; letter-spacing: -0.02em; text-align: center; }
+  #{{ sid }} .gx-dl-features { padding: 64px 0 16px; }
+  #{{ sid }} .gx-dl-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 32px; }
+  #{{ sid }} .gx-dl-tile { flex: 1 1 240px; max-width: 270px; box-sizing: border-box; padding: 24px; border: 1px solid rgba(41, 37, 34, 0.1); border-radius: 20px; background: #fff; text-align: left; }
+  #{{ sid }} .gx-dl-tile-label { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: #4d4daa; }
+  #{{ sid }} .gx-dl-tile h3 { margin-top: 10px; font-size: 19px; line-height: 1.25; }
+  #{{ sid }} .gx-dl-tile p { margin-top: 8px; font-size: 15px; line-height: 1.5; }
+  #{{ sid }} .gx-dl-steps { padding: 56px 0 16px; }
+  #{{ sid }} .gx-dl-steplist { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 32px 0 0; padding: 0; list-style: none; }
+  #{{ sid }} .gx-dl-step { flex: 1 1 240px; max-width: 340px; display: flex; gap: 14px; align-items: flex-start; text-align: left; }
+  #{{ sid }} .gx-dl-num { flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; background: #4d4daa; color: #fff; font-size: 16px; font-weight: 500; line-height: 36px; text-align: center; }
+  #{{ sid }} .gx-dl-step h3 { font-size: 17px; line-height: 1.3; }
+  #{{ sid }} .gx-dl-step p { margin-top: 4px; font-size: 15px; line-height: 1.5; }
+  #{{ sid }} .gx-dl-cta { margin: 64px auto 0; padding: 40px 24px; max-width: 760px; border-radius: 24px; background: rgba(110, 114, 216, 0.08); text-align: center; }
+  #{{ sid }} .gx-dl-privacy { margin-top: 18px; font-size: 14px; line-height: 1.5; }
+  #{{ sid }} .gx-dl-disclaimer { margin: 28px auto 0; max-width: 680px; font-size: 12px; line-height: 1.6; text-align: center; }
+  @media (min-width: 990px) {
+    #{{ sid }} .gx-dl-hero { flex-direction: row; justify-content: space-between; gap: 64px; padding: 80px 0 32px; text-align: left; }
+    #{{ sid }} .gx-dl-copy { flex: 1 1 0; max-width: 540px; }
+    #{{ sid }} .gx-dl-badges { justify-content: flex-start; }
+    #{{ sid }} .gx-dl-phones { flex: 0 0 440px; }
+    #{{ sid }} .gx-dl-h2 { font-size: 34px; }
+  }
+</style>
+
+<section id="{{ sid }}" class="wi-scope">
+  <div class="wi-container">
+    <div class="gx-dl-inner">
+      <div class="gx-dl-hero">
+        <div class="gx-dl-copy">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="gx-dl-eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          <h1 class="text-[30px] leading-[1.08] tracking-[-0.02em] sm:text-[40px] md:text-[48px]">{{ section.settings.heading }}</h1>
+          {%- if section.settings.subtitle != blank -%}
+            <p class="gx-dl-sub text-ink-soft">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+          <div class="gx-dl-badges">
+            <a href="{{ apple_link }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
+              {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store', class: 'h-12 w-auto', eager: true %}
+            </a>
+            <a href="{{ gp_link }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+              {% render 'wi-image', image: section.settings.googleplay_image, fallback: 'google-play.png', alt: 'Get it on Google Play', class: 'h-12 w-auto', eager: true %}
+            </a>
+          </div>
+          {%- if section.settings.note != blank -%}
+            <p class="gx-dl-note text-ink-soft">{{ section.settings.note }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="gx-dl-phones" aria-hidden="true">
+          <div class="gx-phone gx-phone--front">
+            {%- if section.settings.screen_1 != blank -%}
+              <img src="{{ section.settings.screen_1 | image_url: width: 600 }}" alt="" width="600" height="1304" loading="eager">
+            {%- else -%}
+              <img src="{{ 'genesyx-app-home.png' | asset_img_url: '600x' }}" alt="" width="600" height="1304" loading="eager">
+            {%- endif -%}
+          </div>
+          <div class="gx-phone gx-phone--back">
+            {%- if section.settings.screen_2 != blank -%}
+              <img src="{{ section.settings.screen_2 | image_url: width: 600 }}" alt="" width="600" height="1304" loading="eager">
+            {%- else -%}
+              <img src="{{ 'genesyx-app-insights.png' | asset_img_url: '600x' }}" alt="" width="600" height="1304" loading="eager">
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      {%- assign features = section.blocks | where: 'type', 'feature' -%}
+      {%- if features.size > 0 -%}
+        <div class="gx-dl-features">
+          {%- if section.settings.features_heading != blank -%}
+            <h2 class="gx-dl-h2">{{ section.settings.features_heading }}</h2>
+          {%- endif -%}
+          <div class="gx-dl-grid">
+            {%- for block in features -%}
+              <div class="gx-dl-tile" {{ block.shopify_attributes }}>
+                {%- if block.settings.label != blank -%}<p class="gx-dl-tile-label">{{ block.settings.label }}</p>{%- endif -%}
+                <h3>{{ block.settings.title }}</h3>
+                {%- if block.settings.body != blank -%}<p class="text-ink-soft">{{ block.settings.body }}</p>{%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- assign steps = section.blocks | where: 'type', 'step' -%}
+      {%- if steps.size > 0 -%}
+        <div class="gx-dl-steps">
+          {%- if section.settings.steps_heading != blank -%}
+            <h2 class="gx-dl-h2">{{ section.settings.steps_heading }}</h2>
+          {%- endif -%}
+          <ol class="gx-dl-steplist">
+            {%- for block in steps -%}
+              <li class="gx-dl-step" {{ block.shopify_attributes }}>
+                <span class="gx-dl-num" aria-hidden="true">{{ forloop.index }}</span>
+                <div>
+                  <h3>{{ block.settings.title }}</h3>
+                  {%- if block.settings.body != blank -%}<p class="text-ink-soft">{{ block.settings.body }}</p>{%- endif -%}
+                </div>
+              </li>
+            {%- endfor -%}
+          </ol>
+        </div>
+      {%- endif -%}
+
+      <div class="gx-dl-cta">
+        {%- if section.settings.cta_heading != blank -%}
+          <h2 class="gx-dl-h2">{{ section.settings.cta_heading }}</h2>
+        {%- endif -%}
+        <div class="gx-dl-badges" style="justify-content: center;">
+          <a href="{{ apple_link }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
+            {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store', class: 'h-12 w-auto' %}
+          </a>
+          <a href="{{ gp_link }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+            {% render 'wi-image', image: section.settings.googleplay_image, fallback: 'google-play.png', alt: 'Get it on Google Play', class: 'h-12 w-auto' %}
+          </a>
+        </div>
+        {%- if section.settings.privacy != blank -%}
+          <p class="gx-dl-privacy text-ink-soft">{{ section.settings.privacy }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.disclaimer != blank -%}
+        <p class="gx-dl-disclaimer text-ink-soft">{{ section.settings.disclaimer }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Genesyx app download",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Badge", "default": "Free on iPhone and Android" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Download the Genesyx app" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle" },
+    { "type": "text", "id": "note", "label": "Note under badges" },
+    { "type": "header", "content": "Store links" },
+    { "type": "text", "id": "apple_link", "label": "App Store link", "default": "https://apps.apple.com/us/app/genesyx/id6787682466" },
+    { "type": "image_picker", "id": "appstore_image", "label": "App Store badge (optional override)" },
+    { "type": "text", "id": "googleplay_link", "label": "Google Play link", "default": "https://play.google.com/store/apps/details?id=com.genesyx.app" },
+    { "type": "image_picker", "id": "googleplay_image", "label": "Google Play badge (optional override)" },
+    { "type": "header", "content": "App screens", "info": "Leave blank to use the built-in Today and Insights screens." },
+    { "type": "image_picker", "id": "screen_1", "label": "Front screen" },
+    { "type": "image_picker", "id": "screen_2", "label": "Back screen" },
+    { "type": "header", "content": "Sections" },
+    { "type": "text", "id": "features_heading", "label": "Features heading", "default": "Everything in one calm, private space" },
+    { "type": "text", "id": "steps_heading", "label": "Steps heading", "default": "Get started in three steps" },
+    { "type": "text", "id": "cta_heading", "label": "Closing heading", "default": "Free on iPhone and Android" },
+    { "type": "textarea", "id": "privacy", "label": "Privacy line" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Feature" },
+        { "type": "textarea", "id": "body", "label": "Text" }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Step" },
+        { "type": "textarea", "id": "body", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Genesyx app download" }]
+}
+{% endschema %}

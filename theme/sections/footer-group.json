@@ -18,14 +18,14 @@
           "type": "column",
           "settings": {
             "heading": "Experience",
-            "links": "Private & secure | /pages/privacy-policy\nDownload Genesyx | /pages/download"
+            "links": "Shop | /pages/shop\nPrivate & secure | /pages/privacy-policy\nDownload Genesyx | /pages/download"
           }
         },
         "company": {
           "type": "column",
           "settings": {
             "heading": "Company",
-            "links": "Blog | /blogs/news\nhello@genesyx.co.uk | mailto:hello@genesyx.co.uk"
+            "links": "Blog | /blogs/news"
           }
         },
         "support": {
