@@ -1,0 +1,22 @@
+[
+  {
+    "handle": "fertility",
+    "title": "Fertility",
+    "templateSuffix": null,
+    "descriptionHtml": "<p>The Genesyx fertility range: XX and XY Formula, formulated by Formulation Biochemist Gabriel Isaic, and Ovulation Test Strips. Track it all in the free Genesyx app.</p>",
+    "products": [
+      "ovulation-test-strips",
+      "xx-formula",
+      "xy-formula"
+    ]
+  },
+  {
+    "handle": "frontpage",
+    "title": "Home page",
+    "templateSuffix": null,
+    "descriptionHtml": "",
+    "products": [
+      "xy-formula"
+    ]
+  }
+]
