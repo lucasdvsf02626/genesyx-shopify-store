@@ -53,13 +53,37 @@
                 {%- elsif block.settings.image != blank -%}
                   {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900, 1000', sizes: '(min-width: 990px) 420px, 78vw', class: 'genesyx-marquee__image', alt: block.settings.image_alt }}
                 {%- elsif block.settings.external_image_url != blank -%}
+                  {%- comment -%}
+                    A URL that points at a file on the Shopify CDN can be resized with a width parameter, so it
+                    gets a srcset instead of the full-size original. Any other host is served as-is.
+                    The sizes value mirrors the .genesyx-marquee__card width rules in the stylesheet below.
+                  {%- endcomment -%}
+                  {%- liquid
+                    assign external_src = block.settings.external_image_url
+                    assign external_resizable = false
+                    if external_src contains 'cdn.shopify.com/s/files/' or external_src contains '/cdn/shop/files/'
+                      unless external_src contains 'width='
+                        assign external_resizable = true
+                        assign external_joiner = '?'
+                        if external_src contains '?'
+                          assign external_joiner = '&'
+                        endif
+                        assign external_widths = '300,450,600,900' | split: ','
+                      endunless
+                    endif
+                  -%}
                   <img
                     class="genesyx-marquee__image"
-                    src="{{ block.settings.external_image_url | escape }}"
+                    src="{{ external_src | escape }}"
+                    {% if external_resizable -%}
+                      srcset="{% for width in external_widths %}{{ external_src | append: external_joiner | append: 'width=' | append: width | escape }} {{ width }}w{% unless forloop.last %}, {% endunless %}{% endfor %}"
+                      sizes="(min-width: 1572px) 440px, (min-width: 1000px) 28vw, (min-width: 750px) 280px, (min-width: 424px) 330px, 78vw"
+                    {%- endif %}
                     alt="{{ block.settings.image_alt | escape }}"
                     width="900"
                     height="1200"
                     loading="lazy"
+                    decoding="async"
                   >
                 {%- else -%}
                   {{ 'lifestyle-1' | placeholder_svg_tag: 'genesyx-marquee__image genesyx-marquee__placeholder' }}

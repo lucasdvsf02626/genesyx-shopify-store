@@ -132,6 +132,7 @@
     },
     "social": {
       "type": "withings-ph-social",
+      "disabled": true,
       "blocks": {
         "t1": {
           "type": "testimonial",

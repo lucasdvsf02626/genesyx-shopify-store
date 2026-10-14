@@ -746,9 +746,15 @@
         endif
       -%}
 
-      <script type="application/ld+json">
-        {{ product | structured_data }}
-      </script>
+      {%- comment -%}
+        Shopify's product schema always carries an Offer with the stored price. Products tagged coming-soon have no
+        agreed price, and Product schema without an offer is invalid, so the block is left out for them.
+      {%- endcomment -%}
+      {%- unless product.tags contains 'coming-soon' -%}
+        <script type="application/ld+json">
+          {{ product | structured_data }}
+        </script>
+      {%- endunless -%}
     </div>
   </product-component>
 </product-info>

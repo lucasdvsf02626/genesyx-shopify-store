@@ -30,6 +30,21 @@
 {%- endunless -%}
 {%- if card_product and card_product != empty -%}
   {%- liquid
+    comment
+      A whole-product price mixes variants: the lowest price and the lowest compare-at price can come from different
+      variants. Only flag a sale when the cheapest variant itself is discounted (matches snippets/price.liquid).
+      Products tagged coming-soon read "Coming soon" rather than "Sold out".
+    endcomment
+    assign card_cheapest_variant = card_product.variants | sort: 'price' | first
+    assign card_on_sale = false
+    if card_cheapest_variant.compare_at_price > card_cheapest_variant.price
+      assign card_on_sale = true
+    endif
+    assign card_sold_out_label = 'products.product.sold_out' | t
+    if card_product.tags contains 'coming-soon' or card_product.tags contains 'coming-soon-variants'
+      assign card_sold_out_label = 'Coming soon'
+    endif
+
     assign ratio = 1
     if card_product.featured_media and media_aspect_ratio == 'portrait'
       assign ratio = 0.8
@@ -120,7 +135,7 @@
                   href="{{ card_product.url }}"
                   id="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}"
                   class="full-unstyled-link"
-                  aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}{% if card_product.available == false or card_product.compare_at_price > card_product.price %} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}{% endif %}"
+                  aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}{% if card_product.available == false or card_on_sale %} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}{% endif %}"
                 >
                   {{ card_product.title | escape }}
                 </a>
@@ -132,9 +147,9 @@
                   id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
                   class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
                 >
-                  {{- 'products.product.sold_out' | t -}}
+                  {{- card_sold_out_label -}}
                 </span>
-              {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+              {%- elsif card_on_sale and card_product.available -%}
                 <span
                   id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
                   class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
@@ -157,7 +172,7 @@
                 href="{{ card_product.url }}"
                 id="CardLink-{{ section_id }}-{{ card_product.id }}"
                 class="full-unstyled-link"
-                aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }}{% if card_product.available == false or card_product.compare_at_price > card_product.price %} Badge-{{ section_id }}-{{ card_product.id }}{% endif %}"
+                aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }}{% if card_product.available == false or card_on_sale %} Badge-{{ section_id }}-{{ card_product.id }}{% endif %}"
               >
                 {{ card_product.title | escape }}
               </a>
@@ -373,11 +388,11 @@
                         {%- if card_product.selected_or_first_available_variant.available -%}
                           {{ 'products.product.add_to_cart' | t }}
                         {%- else -%}
-                          {{ 'products.product.sold_out' | t }}
+                          {{ card_sold_out_label }}
                         {%- endif -%}
                       </span>
                       <span class="sold-out-message hidden">
-                        {{ 'products.product.sold_out' | t }}
+                        {{ card_sold_out_label }}
                       </span>
                       {%- if horizontal_quick_add -%}
                         <span class="icon-wrap">
@@ -408,9 +423,9 @@
                     data-sold-out-message="true"
                     disabled
                   >
-                    <span>{{ 'products.product.sold_out' | t }}</span>
+                    <span>{{ card_sold_out_label }}</span>
                     <span class="sold-out-message hidden">
-                      {{ 'products.product.sold_out' | t }}
+                      {{ card_sold_out_label }}
                     </span>
                   </button>
                 {% else %}
@@ -556,9 +571,9 @@
                 id="Badge-{{ section_id }}-{{ card_product.id }}"
                 class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
               >
-                {{- 'products.product.sold_out' | t -}}
+                {{- card_sold_out_label -}}
               </span>
-            {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+            {%- elsif card_on_sale and card_product.available -%}
               <span
                 id="Badge-{{ section_id }}-{{ card_product.id }}"
                 class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"

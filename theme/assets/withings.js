@@ -93,14 +93,27 @@
   function initInViewVideos() {
     var vids = document.querySelectorAll(".js-inview-video");
     if (!vids.length) return;
-    if (!("IntersectionObserver" in window)) return;
+    /* Some of these videos carry no autoplay attribute (see below), so this call is the only
+       thing that starts them. If the browser refuses to play without a gesture (e.g. iOS Low
+       Power Mode), show the native controls so the visitor can start the clip; with the
+       attribute Safari offers its own start button. */
+    function play(v) {
+      var p = v.play();
+      if (!p || !p.catch) return;
+      p.catch(function (err) {
+        if (!v.autoplay && err && err.name === "NotAllowedError") v.controls = true;
+      });
+    }
+    if (!("IntersectionObserver" in window)) {
+      vids.forEach(function (v) { play(v); });
+      return;
+    }
     var vio = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (e) {
           var v = e.target;
           if (e.isIntersecting) {
-            var p = v.play();
-            if (p && p.catch) p.catch(function () {});
+            play(v);
           } else if (!v.paused) {
             v.pause();
           }
@@ -108,7 +121,24 @@
       },
       { threshold: 0.25 }
     );
-    vids.forEach(function (v) { vio.observe(v); });
+    /* Videos without the autoplay attribute are preload="none", so they download nothing on
+       page load. Without a poster they also have no real size until their metadata arrives,
+       so fetch just that from well ahead (2000px) to let the box settle before it scrolls
+       into view; vio's play() loads the rest. */
+    var warm = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.preload = "metadata";
+          warm.unobserve(e.target);
+        });
+      },
+      { rootMargin: "2000px 0px" }
+    );
+    vids.forEach(function (v) {
+      vio.observe(v);
+      if (!v.autoplay) warm.observe(v);
+    });
   }
 
   function initImageFade() {

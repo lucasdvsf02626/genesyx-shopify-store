@@ -1,11 +1,25 @@
 <!doctype html>
-<html class="js" lang="{{ request.locale.iso_code }}">
+{%- liquid
+  comment
+    Shopify's locale for this store is plain "en"; the store is UK-only, so declare British English.
+  endcomment
+  assign html_lang = request.locale.iso_code
+  if html_lang == 'en'
+    assign html_lang = 'en-GB'
+  endif
+-%}
+<html class="js" lang="{{ html_lang }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
-    <link rel="canonical" href="{{ canonical_url }}">
+    {%- comment -%} The privacy policy is published at two URLs; /pages/privacy-policy is the maintained copy. {%- endcomment -%}
+    {%- if request.path == '/policies/privacy-policy' -%}
+      <link rel="canonical" href="{{ shop.url }}/pages/privacy-policy">
+    {%- else -%}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -327,9 +341,11 @@
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
       {% comment %}theme-check-enable AssetPreload{% endcomment %}
     {%- endunless -%}
-    {%- unless settings.type_header_font.system? -%}
+    {%- assign header_font_url = settings.type_header_font | font_url -%}
+    {%- assign body_font_url = settings.type_body_font | font_url -%}
+    {%- unless settings.type_header_font.system? or header_font_url == body_font_url -%}
       {% comment %}theme-check-disable AssetPreload{% endcomment %}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+      <link rel="preload" as="font" href="{{ header_font_url }}" type="font/woff2" crossorigin>
       {% comment %}theme-check-enable AssetPreload{% endcomment %}
     {%- endunless -%}
 

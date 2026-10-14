@@ -17,8 +17,8 @@
           {% render 'wi-image', image: section.settings.googleplay_image, fallback: 'google-play.png', alt: 'Get it on Google Play', class: 'h-12 w-auto', eager: true %}
         </a>
 
-        {%- comment -%} Apple App Store — links when a URL is set, otherwise shows ‘Coming soon’ {%- endcomment -%}
-        {%- assign apple_link = section.settings.apple_link | strip -%}
+        {%- comment -%} Apple App Store — links to the listing by default; a link of # shows ‘Coming soon’ {%- endcomment -%}
+        {%- assign apple_link = section.settings.apple_link | strip | default: 'https://apps.apple.com/app/genesyx/id6787682466' -%}
         {%- if apple_link != blank and apple_link != '#' -%}
           <a href="{{ apple_link }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
             {% render 'wi-image', image: section.settings.appstore_image, fallback: 'app-store.png', alt: 'Download on the App Store', class: 'h-12 w-auto', eager: true %}
@@ -47,7 +47,7 @@
     { "type": "text", "id": "googleplay_link", "label": "Google Play link", "default": "https://play.google.com/store/apps/details?id=com.genesyx.app" },
     { "type": "image_picker", "id": "googleplay_image", "label": "Google Play badge (optional override)" },
     { "type": "header", "content": "Apple App Store" },
-    { "type": "text", "id": "apple_link", "label": "App Store link — leave blank to show ‘Coming soon’" },
+    { "type": "text", "id": "apple_link", "label": "App Store link — enter # to show ‘Coming soon’" },
     { "type": "image_picker", "id": "appstore_image", "label": "App Store badge (optional override)" }
   ],
   "presets": [{ "name": "Withings download" }]
